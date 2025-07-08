@@ -16,6 +16,7 @@ from qdrant_client.http.models import (
     FieldCondition, MatchValue, UpdateStatus
 )
 from dotenv import load_dotenv
+import time
 
 # Load environment variables
 load_dotenv()
@@ -46,9 +47,13 @@ class QdrantManager:
         qdrant_api_key="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2Nlc3MiOiJtIn0.I_PwJY6RlIjELLItx4FyZyF6tLORWcW0Mh9lJwehL8w"
 
         # Setup Qdrant connection details
-        self.qdrant_url = qdrant_url or os.getenv("QDRANT_URL", "http://localhost:6333").rstrip("/")
-        if self.qdrant_url.startswith("https://") and self.qdrant_url.endswith(":6333"):
+        self.qdrant_url = qdrant_url or os.getenv("QDRANT_URL", "http://localhost:6333")
+        # Clean up URL format
+        self.qdrant_url = self.qdrant_url.rstrip("/")
+        # For cloud instances, don't add port numbers
+        if "cloud.qdrant.io" in self.qdrant_url and ":6333" in self.qdrant_url:
             self.qdrant_url = self.qdrant_url.replace(":6333", "")
+
 
         self.qdrant_api_key = qdrant_api_key or os.getenv("QDRANT_API_KEY")
 
@@ -66,7 +71,7 @@ class QdrantManager:
                 self.client = QdrantClient(
                     url=self.qdrant_url,
                     api_key=self.qdrant_api_key,
-                    timeout=30.0,  # Add timeout
+                    timeout=300.0,  # Add timeout
                     prefer_grpc=False  # Use HTTP instead of gRPC
                 )
             else:
