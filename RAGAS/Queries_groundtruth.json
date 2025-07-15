@@ -1,0 +1,1617 @@
+[
+  {
+    "query": "What is the primary focus of EIE-II Module 1?",
+    "ground_truth": "The primary focus of EIE-II Module 1 is **Why Startups Fail and What You Can Do About It**. It introduces common startup challenges and failure points, emphasizing the importance of focusing on customers and markets from the start, and begins to introduce methodologies like the Lean Startup Method to address these issues."
+  },
+  {
+    "query": "What is the overall goal of the Essentials of Innovation & Entrepreneurship (EIE) program?",
+    "ground_truth": "The overall goal of the Essentials of Innovation & Entrepreneurship (EIE) program is to **prepare students for and kickstart their Entrepreneurship journey**.\n\nThis involves:\n*   Helping them discover their \"True North,\" interests, and passion.\n*   Enabling them to identify and pursue ideas/opportunities (tech, business, startup, research).\n*   Facilitating the finding of collaborators, teammates, and potential co-founders.\n*   Providing support (funding, prototyping, mentoring) to build out their ideas and teams.\n*   Equipping them with tech, business, and soft skills, including applying principles like Lean Startup and Customer Development to safely create startups and solve real-world problems.\n*   Offering a platform (like CIE Ignite) to apply their innovation and entreprenuership skills and gain exposure to the startup ecosystem."
+  },
+  {
+    "query": "Who is the Lead Instructor for CIE@RR, and what is their contact email?",
+    "ground_truth": "The Lead Instructor for CIE@RR is **Prof. Sathya Prasad**, and their contact email is **sathya.prasad@pes.edu**."
+  },
+  {
+    "query": "Who is the CIE Program Manager, and how can students contact them for course-related assistance?",
+    "ground_truth": "The CIE Program Manager is **Mr. Madhukar Narasimha**.\n\nStudents can contact him for course-related assistance by reaching out to **cieoffice@pes.edu**."
+  },
+  {
+    "query": "Who are the EIE Teaching Assistants for EIE-II?",
+    "ground_truth": "The EIE Teaching Assistants (TA) for EIE-II are:\n\n*   Chirag C Shekar\n*   Arpan Mascarenhas\n*   Dhruv Tandon\n*   Ajay Rao\n*   Chinmay D"
+  },
+  {
+    "query": "What is the core vision behind the EIE course, beyond being just a course?",
+    "ground_truth": "The core vision behind the EIE course, is to be a platform that helps students:\n\n*   **Discover their 'True North,' interests, or passion.**\n*   **Identify ideas and opportunities** they consider worth pursuing (whether in tech, business, startups, or research).\n*   **Find potential collaborators, teammates, startup founders, or innovators.**\n*   **Receive support** for funding, prototyping, and mentoring to build out their ideas and teams."
+  },
+  {
+    "query": "How does EIE help students discover their 'True North' or passions?",
+    "ground_truth": "EIE (Essentials of Innovation & Entrepreneurship) helps students discover their 'True North' or passions by:\n\n*  \"\n*   **Encouraging idea identification:** It guides students to \"Identify ideas/opportunities that you consider worth pursuing (tech / biz / startup / research / etc).\"\n*   **Developing skills:** It helps students \"Build Tech, Business and Soft skills; Discover their ‘True North’/passion, Teammates and more."
+  },
+  {
+    "query": "What kind of ideas or opportunities are students encouraged to identify and pursue in EIE?",
+    "ground_truth": "In EIE, students are encouraged to identify and pursue **ideas or opportunities that they consider worth pursuing**.\n\nThese opportunities can span various fields, including:\n*   **Tech** (Technology)\n*   **Biz** (Business)\n*   **Startup**\n*   **Research**\n*   More broadly, they are encouraged to create a startup by picking a **real-world problem (opportunity) and solving it** using proven principles."
+  },
+  {
+    "query": "What types of support (e.g., funding, prototyping, mentoring) are available for students to build out their ideas?",
+    "ground_truth": "Students have access to the following types of support to build out their ideas:\n\n*   **Funding:** This includes direct \"funding\" and \"grants\" (e.g., through the CIE PESU -IIT x Co-Innovation-Center).\n*   **Prototyping:** Support for \"prototyping\" is available, including the ability to \"build prototype/minimum-viable-product\" and access to the \"CIE Makerspace\" for building prototypes.\n*   **Mentoring:** Students can receive \"mentoring\" from general sources and specifically \"mentorship from CIE Industry Mentors\" for their team projects.\n\nAdditionally, the program helps students discover potential collaborators/teammates and build essential tech, business, and soft skills."
+  },
+  {
+    "query": "How does EIE-II build upon the concepts and learnings from EIE-I?",
+    "ground_truth": "EIE-II directly builds upon the concepts and learnings from EIE-I by shifting from foundational discovery and ideation to the practical application of those principles.\n\nSpecifically:\n*   **Application of Learned Concepts:** EIE-II's core objective is **\"Applying what you learned in EIE-1 (BMC, Design Thinking, etc).\"** This means taking the theoretical knowledge and frameworks introduced in EIE-I (like the Business Model Canvas and Design Thinking) and putting them into practice.\n*   **Transition from Idea to Startup Creation:** While EIE-I focuses on helping students \"Discover your ‘True North’ / Interests / Passion,\" \"Identify ideas/opportunities,\" and \"Find potential collaborators,\" EIE-II provides the opportunity to **\"safely create a startup\"** by picking a real-world problem and solving it using proven principles.\n*   **Validation and Execution:** EIE-II introduces and utilizes methodologies like **Lean Startup and Customer Development principles** for ideas, moving towards \"Evidence-based\" versus \"faith-based\" entrepreneurship. This builds on the initial idea identification from EIE-I by guiding students through the process of validating those ideas in the market.\n*   **Continued Team Building:** EIE-II continues the emphasis on team formation by encouraging students to \"Discover great teammates –potential/future Co-Founders!\" building on the initial search for collaborators in EIE-I."
+  },
+  {
+    "query": "Can EIE lead to internship opportunities like CIE/CoE Internships?",
+    "ground_truth": "Yes, EIE (Essentials of Innovation & Entrepreneurship) can lead to internship opportunities like CIE/CoE Internships.\n\nThe provided material states under \"EIE -II How to Get the Best Out of this Course?\":\n*   \"Based on your efforts/results, apply for CIE Summer Internship\"\n\nAdditionally, the \"How Can EIE Help You in Your Education/Career?\" section illustrates a sample path where EIE-I and EIE-II are followed by \"CIE / CoE Internship\" opportunities in the summer semesters."
+  },
+  {
+    "query": "What skills will students build through the EIE-II course?",
+    "ground_truth": "Through the EIE-II course, students will build a variety of skills, including:\n\n*   **Tech, Business, and Soft skills**\n*   **Innovation & Entrepreneurship (I&E) skills**, including applying what they learned in EIE-1 (such as Business Model Canvas and Design Thinking)\n*   **Startup Creation skills**, by picking real-world problems and solving them using proven principles\n*   **Lean Startup and Customer Development principles** application skills\n*   **Evidence-based entrepreneurship** (vs. faith-based)\n*   **Teamwork and collaboration skills** (discovering and working with teammates/potential co-founders)\n*   **Prototyping skills** (building prototypes/minimum-viable-products)\n*   **Validation skills** for ideas/products\n*   **Business acumen**\n*   **Interviewing skills** (specifically in Customer Discovery)\n*   **Hypothesis building skills** (testable/measurable)\n*   **Startup Finance and Marketing fundamentals**\n*   **Digital Business Models and Digital Marketing** (including use of GenAI for innovation)\n*   **Startup Pitching skills**\n*   **Developing an Entrepreneurial Action Plan**"
+  },
+  {
+    "query": "What platform does EIE-II provide for applying innovation and entrepreneurship skills?",
+    "ground_truth": "EIE-II provides **CIE Ignite** as a platform to apply innovation and entrepreneurship skills, which exposes students to transformative technology-driven innovations while allowing them to interact with Founders/VCs/Startup Ecosystem experts and have a deeper awareness and understanding of business acumen."
+  },
+  {
+    "query": "Will students have exposure to transformative technology-driven innovations in EIE-II?",
+    "ground_truth": "Yes, students will have \"Exposure to transformative technology-driven innovations along with interactions with Founders/VCs/Startup Ecosystem experts, especially through  the CIE Ignite Hackathon.\""
+  },
+  {
+    "query": "What are the main objectives of the EIE-II course?",
+    "ground_truth": "The main objectives of the EIE-II course are:\n\n*   To provide a fun way to prepare students for an exciting and impactful 3rd/4th year journey at PESU.\n*   To enable students to apply what they learned in EIE-I (such as Business Model Canvas, Design Thinking, etc.).\n*   To offer an opportunity for students to safely create a startup by picking a real-world problem (opportunity) and solving it using proven principles.\n*   To teach students how to use Lean Startup and Customer Development principles for their ideas.\n*   To promote \"Evidence-based\" entrepreneurship over \"faith-based\" entrepreneurship.\n*   To help students discover great teammates who could be potential future Co-Founders."
+  },
+  {
+    "query": "How does EIE-II offer an opportunity for students to safely create a startup?",
+    "ground_truth": "EIE-II offers students the opportunity to safely create a startup by:\n\n1.  **Applying Proven Principles:** Students learn and apply established methodologies like Lean Startup and Customer Development. This emphasizes \"evidence-based\" entrepreneurship over \"faith-based,\" encouraging validation of ideas through customer discovery before significant investment.\n2.  **Focusing on Real-World Problems:** The course guides students in identifying and solving real-world problems or opportunities, providing a practical foundation for their startup.\n3.  **Providing Mentorship and Resources:** Students can leverage mentorship from CIE Industry Mentors for their team projects and utilize resources like the CIE Makerspace to build prototypes.\n4.  **Structured Application:** The course provides a platform, CIE Ignite, to apply their innovation and entrepreneurship skills in a structured environment."
+  },
+  {
+    "query": "Which proven principles are students encouraged to use for solving real-world problems in EIE-II?",
+    "ground_truth": "In EIE-II, students are encouraged to use **Lean Startup & Customer Development principles** for solving real-world problems while also focusing on empathy as a core value every entreprenuer must embrace."
+  },
+  {
+    "query": "What is the difference between \"evidence-based\" and \"faith-based\" entrepreneurship as taught in this course?",
+    "ground_truth": "The difference between \"evidence-based\" and \"faith-based\" entrepreneurship in this course can be understood as follows:\n\n*   **\"Faith-based\" entrepreneurship** aligns with the **Conventional Approach / Product Development Model**. This approach operates on the \"BIG assumption: Customers + Market available/ready\" and involves building a business plan and the product first, often driven by technology, before fully validating the market need or customer interest. It's based on the entrepreneur's belief or assumption that their product will find a market, rather than validated evidence. This often leads to failure due to a lack of customers.\n\n*   **\"Evidence-based\" entrepreneurship** aligns with the **Lean Startup Method**. This approach emphasizes focusing on \"Customers and Markets from ‘Day 0’\" through **Customer Development**. It seeks to prevent failure by validating ideas and assumptions with real-world evidence and feedback from potential customers, rather than relying on internal assumptions. This method involves testing hypotheses and adapting based on what is learned from the market."
+  },
+  {
+    "query": "How does the course help students find potential co-founders?",
+    "ground_truth": "The course, \"Essentials of Innovation & Entrepreneurship (EIE)\", helps students find potential co-founders by providing practical opportunities for students to identify and work with potential co-founders while promoting team activities such as the CIE Ignite Hackathon."
+  },
+  {
+    "query": "How are the learnings from EIE expected to be applied with other courses or projects?",
+    "ground_truth": "The learnings from EIE (Essentials of Innovation & Entrepreneurship) are expected to be applied in other courses, projects, or gigs in the following ways:\n\n*   **Applying EIE-1 Concepts:** Students will apply principles learned in EIE-1, such as Business Model Canvas (BMC) and Design Thinking.\n*   **Startup Creation:** The course provides an opportunity to safely create a startup by identifying and solving real-world problems using proven entrepreneurial principles.\n*   **Lean Startup & Customer Development:** Students will utilize Lean Startup and Customer Development principles for their ideas.\n*   **Evidence-Based Entrepreneurship:** The course promotes an \"evidence-based\" approach to entrepreneurship over a \"faith-based\" one.\n*   **Team Formation:** It helps in discovering potential teammates who could become future co-founders."
+  },
+  {
+    "query": "What are the key themes or topics covered in the EIE-II course outline?",
+    "ground_truth": "The EIE-II course outline covers the following key themes and topics:\n\n*   **Introduction to Startup Challenges/Failure:** Understanding why startups fail and what actions can be taken to prevent it.\n*   **Customer Discovery (CD):** In-depth exploration of why, what, and how to conduct customer discovery, including interviewing skills and building testable/measurable hypotheses.\n*   **Startup Finance Fundamentals II:** Advanced principles of startup finance.\n*   **Startup Marketing Fundamentals II:** Advanced principles of startup marketing.\n*   **Digital Business Models:** Understanding various digital business models.\n*   **Digital Marketing and use of GenAI for Innovation:** Applying digital marketing strategies and leveraging Generative AI for innovation.\n*   **Startup Pitching II:** Developing and refining startup pitching skills.\n*   **Startup Legal Fundamentals:** Basic legal aspects relevant to startups.\n*   **Developing your Entrepreneurial Action Plan:** Creating a practical plan for entrepreneurial endeavors."
+  },
+  {
+    "query": "What are the \"CIE-Ignite Milestones\" mentioned in the course outline, and how do they relate to the themes?",
+    "ground_truth": "The \"CIE-Ignite Milestones\" are distinct stages (Stage0 (S0), Stage1 (S1), Stage2 (S2), and Stage3 (S3)) outlined within the EIE-II course curriculum.\n\nHere's how they relate to the course themes:\n\n*   **CIE-Ignite Milestones** serve as integration points or checkpoints within the course, grouping related themes and topics together.\n*   **Relationship to Themes:**\n    *   **Stage0 (S0):** Corresponds to foundational themes focused on **Introduction to Startup Challenges/Failure** and in-depth **Customer Discovery** (Why/What/How, Interviewing Skills, Building Testable/Measurable Hypotheses, Best Practices).\n    *   **Stage1 (S1):** Aligns with themes covering **Startup Finance Fundamentals II** and **Startup Marketing Fundamentals II**.\n    *   **Stage2 (S2):** Relates to themes on **Digital Business Models** and the application of **Digital Marketing and GenAI for Innovation**.\n    *   **Stage3 (S3):** Encompasses themes dedicated to **Startup Pitching II**, **Startup Legal Fundamentals**, and **Developing your Entrepreneurial Action Plan**.\n\nIn a broader sense, \"CIE-Ignite\" is mentioned as a platform where students can **apply their Innovation & Entrepreneurship (I&E) skills** and practice the frameworks and tools learned in the course. It's also a component of the course assessment, accounting for 10% of the total grade."
+  },
+  {
+    "query": "Which modules are primarily dedicated to Customer Discovery (CD) skills?",
+    "ground_truth": "Based on the provided EIE -II Course Outline, the modules primarily dedicated to Customer Discovery (CD) skills are:\n\n*   **M2 Customer Discovery – Why/What/How**\n*   **M3 Customer Discovery Deep-dive: Interviewing Skills**\n*   **M4 Customer Discovery Deep-dive: Build your Testable/Measurable Hypotheses**\n*   **M5 Customer Discovery Deep-dive: Best practices**"
+  },
+  {
+    "query": "When are Startup Finance Fundamentals covered in the course outline?",
+    "ground_truth": "Startup Finance Fundamentals are covered in **Module 6 (M6)**."
+  },
+  {
+    "query": "What is the topic of Module 9 concerning marketing and innovation?",
+    "ground_truth": "The topic of Module 9 concerning marketing and innovation is ** Digital Business Models, Digital Marketing and use of GenAI for Innovation**."
+  },
+  {
+    "query": "What legal aspects of startups are covered in the course?",
+    "ground_truth": "The course covers \"Startup Legal Fundamentals\" as part of its curriculum, specifically in Module 11 (M11) of the \"EIE -II Course Outline.\""
+  },
+  {
+    "query": "Is the EIE-II course outline final, or is it subject to modification?",
+    "ground_truth": "The EIE-II course outline is **proposed** and **subject to modification**."
+  },
+  {
+    "query": "How many credits is the EIE-II course worth?",
+    "ground_truth": "The EIE-II course is worth **2 Credits**."
+  },
+  {
+    "query": "What is the weekly time commitment (in hours) for the EIE-II course?",
+    "ground_truth": "The weekly time commitment for the EIE-II course is **2 hours**."
+  },
+  {
+    "query": "Will all EIE-II sessions be online, or will there be in-person sessions?",
+    "ground_truth": "The EIE-II sessions will be **mostly online**, but **some sessions will be in-person (F2F) with advance notice such as the CIE Ignite pitch that each team will be required to do**."
+  },
+  {
+    "query": "Who are the typical guest speakers invited to give talks during EIE-II sessions?",
+    "ground_truth": "During EIE-II sessions, typical guest speakers invited to give talks include **Startup Founders, Industry Experts, and PESU Faculty**."
+  },
+  {
+    "query": "What is the grading scale used for EIE-II (e.g., S, A, B, C, D, E, F percentages)?",
+    "ground_truth": "Based on the provided material, the grading scale used for EIE-II is as follows:\n\n*   **S:** 90 – 100%\n*   **A:** 80 – 89%\n*   **B:** 70 – 79%\n*   **C:** 60 – 69%\n*   **D:** 50 – 59%\n*   **E:** 40 – 49%\n*   **F:** 39% & below"
+  },
+  {
+    "query": "What are the different assessment components (e.g., CIE Ignite/ideathon, CBT, ESA) and their respective weightages in EIE-II?",
+    "ground_truth": "In EIE-II, the assessment components and their respective weightages are as follows:\n\n*   **CIE Ignite/ideathon:** 10%\n*   **CBT-2 ISAs:** 20% each (totaling 40%)\n*   **1 ESA:** 50%"
+  },
+  {
+    "query": "What is the minimum attendance requirement for the course?",
+    "ground_truth": "The minimum attendance requirement for the course is 75%+, which is the same as the university requirements."
+  },
+  {
+    "query": "What are the recommended references or resources for the EIE-II course?",
+    "ground_truth": "For the EIE-II course, the recommended references and resources include:\n\n**General References:**\n*   **Books/Courses:**\n    *   *Technology Ventures: From Idea to Enterprise*, McGraw Hill\n    *   PES University ‘CIE Level 1’ Course - *Getting Started With Entrepreneurship*\n    *   VentureLab (Entrepreneurial Skillset and Mindset)\n    *   European Union (EU) Entrepreneurship Competencies\n\n**Specific Required/Recommended Reading/Viewing (primarily on Lean Startup Method):**\n*   **Required:**\n    *   \"The Lean Approach –Introduction\" (Steve Blank, 1:05 mins) - https://youtu.be/vyR1JjS1Duc\n    *   \"The Lean Method\" (Steve Blank, 5:20 mins) - https://youtu.be/GPQExuB-lWw\n    *   \"Customer vs Product Development - How to Build a Startup\" (Steve Blank) - https://www.youtube.com/watch?v=f_LNNnNfpp4&feature=youtu.be\n    *   \"Why the Lean Startup Changes Everything\" (Harvard Business Review Article, 9 mins) - https://hbr.org/video/5712986167001/why-the-Lean-startup-changes-everything\n*   **Recommended:**\n    *   \"Cracking the Code: Link\" (Kauffman Sketchbook)\n    *   \"Visionaries: Link\" (Kauffman Sketchbook)"
+  },
+  {
+    "query": "What are the key ingredients for a successful entrepreneur highlighted in the course?",
+    "ground_truth": "The course highlights the following as key ingredients for a successful entrepreneur:\n\n*   **Discipline**\n*   **Perseverance**\n*   **Commitment**"
+  },
+  {
+    "query": "How can students leverage CIE-Ignite to get the best out of this course?",
+    "ground_truth": "Students can leverage CIE-Ignite to get the best out of the course primarily by **practicing the frameworks and tools** learned.\n\nCIE-Ignite serves as a platform to apply their Innovation and Entrepreneurship (I&E) skills, with specific milestones integrated into the course outline (Stage 0, Stage 1, Stage 2, Stage 3). This hands-on application in a team setting is crucial for developing skills and discovering what works best for them."
+  },
+  {
+    "query": "What resources are available for building prototypes for team projects?",
+    "ground_truth": "The following resources are available for building prototypes for team projects:\n\n*   **Prototyping support** is available as part of the EIE program to help build out ideas/teams.\n*   The **CIE Makerspace** can be used to build prototypes."
+  },
+  {
+    "query": "How is attendance recorded for online sessions, especially regarding quizzes?",
+    "ground_truth": "For online sessions, attendance is recorded via the **Session Quiz on PESU Academy**."
+  },
+  {
+    "query": "What is Steve Blank's definition of a startup, as presented in the material?",
+    "ground_truth": "According to the provided material, Steve Blank defines a startup as:\n\n\"**A temporary organization designed to search for a repeatable and scalable business model.**\""
+  },
+  {
+    "query": "What is the full form of EIE?",
+    "ground_truth": "The full form of EIE is **Essentials of Innovation & Entrepreneurship**."
+  },
+  {
+    "query": "What is the purpose of Module 1 in EIE-I?",
+    "ground_truth": "The purpose of Module 1 in EIE-I is \"Introduction to Innovation & Entrepreneurship.\""
+  },
+  {
+    "query": "What does the CIE Reel video showcase?",
+    "ground_truth": "The **CIE Reel video** likely showcases the **CIE Startup Journey**, detailing its evolution from starting in a small office to its new operational space since May 2018, possibly with the help of a student team in its design. It serves as an introductory component for the \"Essentials of Innovation & Entrepreneurship (EIE -I)\" module."
+  },
+  {
+    "query": "What interactive tool is used for the icebreaker session?",
+    "ground_truth": "The interactive tool used for the icebreaker session is an **Interactive Poll (Mentimeter)**."
+  },
+  {
+    "query": "What is the website address for joining the interactive poll?",
+    "ground_truth": "To join the interactive poll, the website address is **www.menti.com**."
+  },
+  {
+    "query": "What is the specific code to join the Mentimeter session?",
+    "ground_truth": "To join the Mentimeter session, you need to go to **www.menti.com** and use the code **as provided by the faculty in the meeting**."
+  },
+  {
+    "query": "When did the CIE Startup Journey officially begin?",
+    "ground_truth": "The CIE Startup Journey officially began between **December 2017 and January 2018**. During this time, CIE started in a small office, and a student team helped with its design."
+  },
+  
+  {
+    "query": "Who helped in the design of CIE's initial setup?",
+    "ground_truth": "A **student team** helped in the design of CIE's initial setup."
+  },
+  {
+    "query": "When did CIE's new space become operational?",
+    "ground_truth": "CIE's new space became operational in **May 2018**."
+  },
+  {
+    "query": "What is the purpose of the \"Welcome to CIE!\" video?",
+    "ground_truth": "The \"Welcome to CIE!\" video serves as an **introduction to the Centre for Innovation and Entrepreneurship (CIE)** for the students of the \"Essentials of Innovation & Entrepreneurship\" course. It is placed early in the introductory module, likely to welcome students to the center and provide an initial overview."
+  },
+  
+  {
+    "query": "What is Prof. Sathya Prasad's email address?",
+    "ground_truth": "Prof. Sathya Prasad's email address is **sathya.prasad@pes.edu**."
+  },
+  
+  {
+    "query": "What is Mr. Madhukar Narasimha's email address?",
+    "ground_truth": "Mr. Madhukar Narasimha's email address is **cieoffice@pes.edu**."
+  },
+  {
+    "query": "What is E-Cell?",
+    "ground_truth": "E-Cell is a student body operating across the EC and RR campuses."
+  },
+  {
+    "query": "On which campuses does E-Cell have a presence?",
+    "ground_truth": "E-Cell has a presence on both the EC and RR campuses."
+  },
+  {
+    "query": "Who is the Lead Instructor for CIE@EC?",
+    "ground_truth": "Prof. Lakshmeesha is the Lead Instructor for CIE@EC."
+  },
+  {
+    "query": "Who are the Department Coordinators for EIE-II?",
+    "ground_truth": "AIML - Prof. Shwetha \nBA-Performing Arts - Dr. Sushma S V \n BCA _ Prof. Santosh Katti \nBioTech - Dr.Jhinuk Chatterjee \nBBA - Prof. Sangeetha Kumar \nBBA-Sport Management - Prof. Sangeetha Kumar \nBBA-HEM - Prof. Sangeetha Kumar \nBSc Pscychology - likitha@pes.edu \nBSc Economics - Prof. Sangeetha Kumar \nIntl Accts and Finance - Prof. Sangeetha Kumar \nBCom - Prof. Sangeetha Kumar \nBDes - Prof. Smriti Haritz \nBA, BBA LLB - Prof. Sangeetha Kumar \n CS - Dr. Prafullata \nECE - Dr. Sudeendra \nEEE - Dr. Sangeeta Modi \nMech - Dr. Kiran M" 
+  },
+  
+  {
+    "query": "What is the Instagram handle for the CIE social media community?",
+    "ground_truth": "The Instagram handle for the CIE social media community is **@cie.pesu**."
+  },
+  {
+    "query": "What is the LinkedIn page for the CIE social media community?",
+    "ground_truth": "The LinkedIn page for the CIE social media community is **Center for Innovation and Entrepreneurship @ PES University**."
+  },
+  {
+    "query": "What are the core objectives of the EIE-I course?",
+    "ground_truth": "The core objectives of the EIE-I course are:\n\n*   I&E Mindset Awareness\n*   Idea-to-Market Process Familiarity\n*   Technology Transformation Awareness\n*   Business Fundamentals Understanding\n*   Find like-minded fellow students & build a network"
+  },
+  {
+    "query": "What is the first objective related to mindset in EIE-I?",
+    "ground_truth": "The first objective related to mindset in EIE-I is **I&E Mindset Awareness**."
+  },
+  {
+    "query": "How does the course aim to prepare students for post-university life?",
+    "ground_truth": "The course aims to prepare students for post-university life by including \"Prepare for Your Post-University Journey\" as one of its core objectives."
+  },
+  {
+    "query": "What are the key learning outcomes of the EIE-I course?",
+    "ground_truth": "The EIE-I course aims for the following key learning outcomes:\n\n*   Embrace I&E Mindset (Innovation & Entrepreneurship Mindset)\n*   Kick Start Your I&E Journey\n*   Understanding Transformative Tech-led Changes\n*   Developing Business Acumen\n*   Prepare for Your Post-University Journey"
+  },
+  {
+    "query": "What specific mindset awareness is a learning outcome?",
+    "ground_truth": "A specific mindset awareness that is a learning outcome is **I&E Mindset Awareness**."
+  },
+  {
+    "query": "What process familiarity is expected as a learning outcome?",
+    "ground_truth": "As a learning outcome, students are expected to gain **Idea-to-Market Process Familiarity**."
+  },
+  {
+    "query": "What type of transformation awareness is a learning outcome?",
+    "ground_truth": "Based on the provided material, the type of transformation awareness that is a learning outcome is **Technology Transformation Awareness**."
+  },
+  {
+    "query": "What fundamental understanding is a learning outcome?",
+    "ground_truth": "Based on the provided material, the slide titled \"Learning Outcomes\" is blank.\n\nHowever, if we refer to the \"Course Objectives,\" which are closely related to what students are expected to understand and achieve, one fundamental understanding listed is:\n\n*   **Business Fundamentals Understanding**"
+  },
+  {
+    "query": "How does the course help in building a network?",
+    "ground_truth": "The course helps in building a network in several ways:\n\n*   **Connecting with Like-Minded Peers:** A key learning outcome is to \"Find like-minded fellow students & build a network,\" with the specific mention that students \"may find your co-founders for your startup!\"\n*   **Team-Based Learning:** The course involves \"lots of 'doing' in a Team setting,\" fostering collaboration and connections among participants.\n*   **Digital Collaboration:** It encourages engagement through digital platforms like MS Teams for discussions and file sharing, and via the CIE community on LinkedIn and Instagram.\n*   **Exposure to Experts:** The course includes talks by Startup Founders, Industry Experts, and PESU Faculty, providing opportunities to connect with professionals in the field."
+  },
+  {
+    "query": "What is the topic of Module 1 (M1)?",
+    "ground_truth": "The topic of Module 1 (M1) is \"Introduction to Innovation & Entrepreneurship.\""
+  },
+  {
+    "query": "What is the focus of Module 2 (M2)?",
+    "ground_truth": "Based on the \"Course Outline\" provided in the material, the focus of Module 2 (M2) is **Cultivating an Entrepreneurial Mindset**."
+  },
+  {
+    "query": "What innovation concept is covered in Module 3 (M3)?",
+    "ground_truth": "Module 3 (M3) covers the innovation concept of **Human-Centred Innovation**."
+  },
+  {
+    "query": "What topics are addressed in Module 4 (M4)?",
+    "ground_truth": "Module 4 (M4) addresses the topics of **Idea to Market, Opportunity Identification, and Ethics**."
+  },
+  {
+    "query": "What is Module 5 (M5) about in the course outline?",
+    "ground_truth": "Module 5 (M5) in the course outline is about **Building/Leading Teams in Startups**."
+  },
+  {
+    "query": "What two key concepts are covered in Module 6 (M6)?",
+    "ground_truth": "Module 6 (M6) covers:\n1.  **Value Proposition**\n2.  **Protecting your IP** (Intellectual Property)"
+  },
+  {
+    "query": "What business framework is detailed in Module 7 (M7)?",
+    "ground_truth": "Module 7 (M7) details the **Business Model Canvas**."
+  },
+  {
+    "query": "How does Module 8 (M8) relate to innovation?",
+    "ground_truth": "Module 8 (M8) relates to innovation through its focus on \"AI: Reimagining How We Innovate.\" This indicates that M8 explores how Artificial Intelligence can be used to rethink and transform the innovation process."
+  },
+  {
+    "query": "What skills are taught in Module 9 (M9)?",
+    "ground_truth": "Module 9 (M9) teaches skills related to **selling your idea/product and pitching**."
+  },
+  {
+    "query": "What financial aspects are covered in Module 10 (M10)?",
+    "ground_truth": "According to the \"Course Outline\" in the provided material, Module 10 (M10) covers **Finance for Startups**."
+  },
+  {
+    "query": "What is the final module (M11) designed for?",
+    "ground_truth": "The final module (M11) is designed for **Developing your Entrepreneurial Action Plan**."
+  },
+  {
+    "query": "How many credits is the EIE-I course worth?",
+    "ground_truth": "The EIE-I course is worth **2 credits**."
+  },
+  {
+    "query": "How many hours per week is the EIE-I course?",
+    "ground_truth": "The EIE-I course is 2 hours per week."
+  },
+  {
+    "query": "What is the primary mode of engagement for the course?",
+    "ground_truth": "The primary mode of engagement for the course is **Online**."
+  },
+  {
+    "query": "What types of experts will deliver talks in the course?",
+    "ground_truth": "The course will include talks delivered by **Startup Founders, Industry Experts,** and **PESU Faculty**."
+  },
+  {
+    "query": "What is the grading scale for EIE-I (e.g., S, A, B)?",
+    "ground_truth": "The grading scale for EIE-I is as follows:\n\n*   **S:** 90 – 100\n*   **A:** 80 – 89\n*   **B:** 70 – 79\n*   **C:** 60 – 69\n*   **D:** 50 – 59\n*   **E:** 40 – 49\n*   **F:** 39 & below"
+  },
+  {
+    "query": "What percentage range corresponds to an 'S' grade?",
+    "ground_truth": "Based on the provided material, an 'S' grade corresponds to a percentage range of **90 – 100**."
+  },
+  {
+    "query": "What percentage range corresponds to an 'A' grade?",
+    "ground_truth": "An 'A' grade corresponds to a percentage range of 80 – 89."
+  },
+  {
+    "query": "What percentage range corresponds to an 'F' grade?",
+    "ground_truth": "An 'F' grade corresponds to a percentage of **39% and below**."
+  },
+  {
+    "query": "What are the components of assessment for EIE-I?",
+    "ground_truth": "Based on the provided material, the components of assessment for EIE-I are:\n\n*   **2 ISAs (Internal Sessional Assessments)**: Each contributes 25% of the total grade.\n*   **1 ESA (End Sessional Assessment)**: Contributes 50% of the total grade.\n\nThese assessments are stated to be CBT (Computer Based Test), and the material notes that this structure is \"Proposed, may be tweaked.\""
+  },
+  {
+    "query": "What is the weightage of CBT-2 ISAs in the final assessment?",
+    "ground_truth": "The weightage of CBT-2 ISAs in the final assessment is **25% each**."
+  },
+  {
+    "query": "What is the weightage of the ESA in the final assessment?",
+    "ground_truth": "The ESA (End Semester Assessment) has a weightage of **50%** in the final assessment."
+  },
+  {
+    "query": "Are the grading and assessment mechanics subject to change?",
+    "ground_truth": "Yes, the grading and assessment mechanics are subject to change, as indicated by the note \"* Proposed, may be tweaked\" in the \"Course Mechanics\" section."
+  },
+  {
+    "query": "What is the primary reference book recommended for the course?",
+    "ground_truth": "The primary reference book recommended for the course is:\n\n*   **Technology Ventures: From Idea to Enterprise, McGraw Hill**"
+  },
+  {
+    "query": "What PES University course is listed as a reference?",
+    "ground_truth": "The PES University course listed as a reference is **PES University ‘CIE Level 1’ Course - Getting Started With Entrepreneurship**."
+  },
+  {
+    "query": "What is VentureLab known for in the context of course references?",
+    "ground_truth": "In the context of the course references, **VentureLab** is known for **Entrepreneurial Skillset and Mindset**."
+  },
+  {
+    "query": "Which international framework is mentioned as a reference?",
+    "ground_truth": "The **European Union (EU) Entrepreneurship Competencies** (also referred to as the **EU Entrepreneur Competence Framework**) is mentioned as a reference."
+  },
+  {
+    "query": "What are the \"key ingredients of a successful entrepreneur\"?",
+    "ground_truth": "Based on the provided material, the \"key ingredients of a successful entrepreneur\" are:\n\n*   **Discipline**\n*   **Perseverance**\n*   **Commitment**"
+  },
+  {
+    "query": "How can students get the best out of the EIE-I course?",
+    "ground_truth": "To get the best out of the EIE-I course, students should:\n\n*   **Embrace Discipline, Perseverance, and Commitment:** These are highlighted as key ingredients for success.\n*   **Practice the Frameworks and Tools Learned:** Actively apply the concepts and tools taught in the course to develop skills and discover what works best for them.\n*   **Engage in Team-Based \"Doing\":** Participate actively in team settings, as success in a team can lead to individual success.\n*   **Utilize Digital Collaboration Tools:** Make full use of platforms like MS Teams for chat, discussion, and file sharing, and follow CIE on LinkedIn and Instagram for relevant information and news.\n*   **Find Like-Minded Peers:** Collaborate with fellow students, as this can potentially lead to finding co-founders for future startups.\n*   **Master Digital Interaction Platforms:** Become proficient in using various tools and platforms for interaction, engagement, and learning."
+  },
+  {
+    "query": "Why is \"doing\" in a team setting emphasized in the course?",
+    "ground_truth": "\"Doing\" in a team setting is emphasized in the course primarily because **\"if Team succeeds, you succeed.\"**\n\nAdditionally, it is highlighted as a way to **\"develop skills to use the ‘tools’\"** and to **\"find out what works best for you/team.\"**"
+  },
+  {
+    "query": "What kind of skills will students develop by practicing frameworks and tools?",
+    "ground_truth": "By practicing the frameworks and tools, students will develop the skills to use these tools and learn to find out what works best for them and their team."
+  },
+  {
+    "query": "What tools are used for digital collaboration in the course?",
+    "ground_truth": "Based on the provided material, the tools used for digital collaboration in the course are:\n\n*   **MS Teams** (for chat/discussion and file sharing)\n*   **LinkedIn** (specifically CIE's page, for info/articles/relevant news)\n*   **Instagram** (@cie.pesu, for info/articles/relevant news)"
+  },
+  {
+    "query": "How are Q&A sessions moderated on MS Teams?",
+    "ground_truth": "Q&A sessions on MS Teams are moderated by CIE Teaching Assistants (TAs)."
+  },
+  {
+    "query": "What is the importance of session quizzes on PESU Academy?",
+    "ground_truth": "The provided material states that **Session Quizzes on PESU Academy are \"Important!\"** It does not elaborate further on *why* they are important, only emphasizing their significance."
+  },
+  {
+    "query": "Who is the offline point of contact for students regarding the course?",
+    "ground_truth": "The offline point of contact for students regarding the course is the **Department Coordinator (DC) in their respective Department**."
+  },
+  {
+    "query": "What is the benefit of finding like-minded peers in this course?",
+    "ground_truth": "The benefit of finding like-minded peers in this course is that you may find your **co-founders for your startup!**"
+  },
+  {
+    "query": "What is the Stanford University definition of entrepreneurship?",
+    "ground_truth": "According to the provided material, the Stanford University definition of entrepreneurship is:\n\n\"The capacity and willingness to develop, organize and manage a business venture along with any of its risks in order to make a profit.\""
+  },
+  {
+    "query": "How does the EU Entrepreneur Competence Framework define entrepreneurship?",
+    "ground_truth": "According to the provided material, which cites the EU Entrepreneur Competence Framework, entrepreneurship is defined as:\n\n\"**when you act upon opportunities and ideas and transform them into value for others. Value created can be financial, cultural, or social.**\""
+  },
+  {
+    "query": "What is the fundamental difference between being \"entrepreneurial\" and being an \"entrepreneur\"?",
+    "ground_truth": "The provided material illustrates the fundamental difference using an example:\n\n*   **Entrepreneurial** refers to a **mindset or set of behaviors** where an individual uses creativity, looks for new solutions, helps build new ideas, and takes risks **within an existing company or structure** to benefit that organization. (e.g., Alex, who is \"Entrepreneurial\" within his project manager role).\n\n*   An **Entrepreneur** is an **individual who starts a new business venture**, often by leaving an existing job to pursue their passion and create value by establishing a new company. (e.g., Sarah, who quits her job to start a new fitness product company and becomes an \"Entrepreneur\").\n\nIn essence, being \"entrepreneurial\" is about an *approach* to work and problem-solving, while being an \"entrepreneur\" signifies the *action of founding and running a new business*."
+  },
+  {
+    "query": "What does SME stand for?",
+    "ground_truth": "Based on the provided material, SME stands for **Small Medium Enterprises**."
+  },
+  {
+    "query": "What does MSME stand for?",
+    "ground_truth": "Based on the provided material, MSME stands for **Micro/Small/Medium Enterprises**."
+  },
+  {
+    "query": "What are the various post-university journey paths mentioned in the study material?",
+    "ground_truth": "Based on the study material, the various post-university journey paths mentioned are:\n\n*   Join Startup\n*   Education Employment\n*   Higher Studies\n*   Family-Biz (Start) Startup\n*   Self-Employed"
+  },
+  {
+    "query": "How does the course cultivate an entrepreneurial mindset?",
+    "ground_truth": "The course cultivates an entrepreneurial mindset through several approaches:\n\n*   **Dedicated Module:** It includes a specific module titled \"M2 Cultivating an Entrepreneurial Mindset.\"\n*   **Core Objective:** One of the primary course objectives is to help students \"Embrace I&E Mindset\" and achieve \"I&E Mindset Awareness.\"\n*   **Practical Application:** It emphasizes \"lots of ‘doing’ in a Team setting\" and encourages students to \"Practice the framework/tools you learn\" to develop essential skills.\n*   **Key Traits:** It highlights \"Discipline, Perseverance & Commitment\" as key ingredients of a successful entrepreneur, implying these are fostered throughout the course.\n*   **Networking:** Students are encouraged to \"Find like-minded fellow students & build a network,\" which could lead to finding co-founders for future startups.\n*   **Content Coverage:** The course delves into the \"Building Blocks of Entrepreneurship\" (Imagination, Creativity, Innovation) and explores \"Common Entrepreneurial Traits\" that are essential for developing this mindset."
+  },
+  {
+    "query": "What kind of \"Business Acumen\" does the course aim to develop?",
+    "ground_truth": "The course aims to develop \"Business Acumen\" by focusing on **Business Fundamentals Understanding**."
+  },
+  {
+    "query": "What is the relevance of \"Technology Transformation Awareness\" as a learning outcome?",
+    "ground_truth": "\"Technology Transformation Awareness\" is a key **learning outcome** of the Essentials of Innovation & Entrepreneurship (EIE) course.\n\nIts relevance stems from its role in equipping students with:\n*   An understanding of how **transformative technology-led changes** impact the world, which is also stated as a core **course objective**.\n*   The ability to recognize and adapt to the shifts brought about by new technologies (such as AI, which is specifically covered in Module 8), which is crucial for identifying new opportunities and developing effective business strategies in an entrepreneurial context.\n*   The necessary knowledge to \"Kick Start Your I&E Journey\" and \"Prepare for Your Post-University Journey,\" as innovation and entrepreneurship are increasingly driven by technological advancements."
+  },
+  {
+    "query": "How does the course help students prepare for their post-university journey?",
+    "ground_truth": "The \"Essentials of Innovation & Entrepreneurship (EIE)\" course helps students prepare for their post-university journey by:\n\n*   **Explicitly stating this as a course objective.**\n*   Enabling them to **embrace an Innovation & Entrepreneurship (I&E) Mindset** and **kick-start their I&E journey.**\n*   Providing an **understanding of transformative technology-led changes.**\n*   **Developing business acumen** and **familiarity with business fundamentals.**\n*   Helping students **find like-minded fellow students and build a network.**"
+  },
+  {
+    "query": "What is the scope of \"Opportunity Identification and Ethics\" in Module 4?",
+    "ground_truth": "Module 4, titled \"Idea to Market, Opportunity Identification and Ethics,\" covers the following scope:\n\n*   **Idea to Market**\n*   **Opportunity Identification**\n*   **Ethics**"
+  },
+  {
+    "query": "What does \"Protecting your IP\" in Module 6 refer to?",
+    "ground_truth": "\"Protecting your IP\" is part of **Module 6: Value Proposition and Protecting your IP** in the \"Essentials of Innovation & Entrepreneurship (EIE) -I\" course.\n\nThe material does not provide a specific definition or explanation of what \"IP\" refers to in this context."
+  },
+  
+  {
+    "query": "How does the course support students in developing their entrepreneurial action plan?",
+    "ground_truth": "The course supports students in developing their entrepreneurial action plan through:\n\n*   **A dedicated module:** Module 11 of the course outline is specifically titled \"Developing your Entrepreneurial Action Plan.\"\n*   **Practical application:** Students are encouraged to \"Practice the framework/tools they learn\" and engage in \"Lots of ‘doing’ in a Team setting\" to develop the skills needed to use the tools effectively.\n*   **Teamwork and networking:** The course emphasizes working in teams and finding \"like-minded peers\" who could potentially become co-founders, which is crucial for real-world entrepreneurial endeavors."
+  },
+  {
+    "query": "What types of value can be created through entrepreneurship, according to the EU definition?",
+    "ground_truth": "According to the EU definition provided in the material, the types of value that can be created through entrepreneurship are:\n\n*   **Financial**\n*   **Cultural**\n*   **Social**"
+  },
+  {
+    "query": "What is the main message from Bill Aulet of MIT quoted in the material?",
+    "ground_truth": "The main message from Bill Aulet of MIT, as quoted in the material, is:\n\n**Innovation = Invention multiplied by Commercialization**"
+  },
+  {
+    "query": "How does the course encourage discipline, perseverance, and commitment?",
+    "ground_truth": "The course highlights \"Discipline, Perseverance & Commitment\" as **key ingredients of a successful entrepreneur**.\n\nWhile the material emphasizes that these traits are crucial, it **does not explicitly detail the specific course mechanisms or activities** that are designed to encourage or develop them. It presents them as essential qualities for students to embrace in order to get the most out of the course and their entrepreneurial journey."
+  },
+  {
+    "query": "What is a startup?",
+    "ground_truth": "A startup is a temporary organisation designed to search for a repeatable and scalable business model ."
+  },
+  {
+    "query": "What specific aspect of \"Idea-to-Market\" is highlighted in the learning outcomes?",
+    "ground_truth": "The provided material lists \"Learning Outcomes\" but the section itself is blank. Therefore, no specific aspect of \"Idea-to-Market\" is highlighted in the learning outcomes.\n\nHowever, \"Idea-to-Market\" is mentioned in the **Course Objectives** as:\n*   \"Idea-to-Market Process Familiarity\"\n\nAnd in the **Course Outline** as:\n*   \"M4 Idea to Market, Opportunity Identification and Ethics\""
+  },
+  {
+    "query": "What is the significance of the \"Interactive Poll (Mentimeter)\" at the beginning of the course?",
+    "ground_truth": "The \"Interactive Poll (Mentimeter)\" at the beginning of the course is explicitly labeled as an **\"Icebreaker!!\"**.\n\nIts significance is to serve as an initial activity to engage participants and help kick off the module in an interactive way."
+  },
+  {
+    "query": "How does the course address the development of skills for using entrepreneurial tools?",
+    "ground_truth": "The course addresses the development of skills for using entrepreneurial tools primarily through **practice** and **application**.\n\nSpecifically, the material states that students should:\n*   **Practice the framework/tools they learn.**\n*   Engage in **lots of 'doing' in a Team setting**.\n*   Understand that the process is **not formulaic**, encouraging them to find out what works best for them/their team."
+  },
+  {
+    "query": "What is meant by \"Transformative Tech-led Changes\" in the course objectives?",
+    "ground_truth": "Based on the provided material, \"Transformative Tech-led Changes\" refers to the significant and fundamental shifts driven by advancements in technology.\n\nThis is indicated by:\n*   Its inclusion as a \"Course Objective\": \"Understanding Transformative Tech-led Changes\".\n*   The corresponding \"Learning Outcome\": \"Technology Transformation Awareness\".\n\nThis suggests the course aims for students to grasp how technology is bringing about profound changes in various domains relevant to innovation and entrepreneurship."
+  },
+  {
+    "query": "How does the course encourage a \"doing\" approach rather than a \"formulaic\" one?",
+    "ground_truth": "The course encourages a \"doing\" approach by emphasizing \"Lots of 'doing' in a Team setting.\" Students are expected to \"Practice the framework/tools they learn\" to \"develop skills to use the ‘tools’\" and \"find out what works best for you/team,\" explicitly stating that the method is \"not formulaic.\""
+  },
+  {
+    "query": "What is the primary purpose of the EIE-I course?",
+    "ground_truth": "The primary purpose of the EIE-I (Essentials of Innovation & Entrepreneurship - I) course is to introduce students to the fundamentals of innovation and entrepreneurship. It aims to help them:\n\n*   **Embrace and develop an Innovation & Entrepreneurship (I&E) mindset.**\n*   **Kick start their I&E journey.**\n*   **Understand transformative technology-led changes.**\n*   **Develop business acumen and familiarize themselves with the idea-to-market process.**\n*   **Prepare for their post-university journey** within the innovation and entrepreneurship landscape."
+  },
+  {
+    "query": "What is the main benefit of attending talks by startup founders and industry experts?",
+    "ground_truth": "Based on the provided material, the document states that the course \"Will include talks by Startup Founders, Industry Experts, PESU Faculty, etc.\" However, it does not explicitly outline the *main benefit* of attending these specific talks.\n\nThe talks are presented as a component of the course, which broadly aims to:\n*   Embrace an Innovation & Entrepreneurship (I&E) Mindset.\n*   Kick Start an I&E Journey.\n*   Understand Transformative Tech-led Changes.\n*   Develop Business Acumen.\n*   Prepare for Post-University Journey."
+  },
+ 
+  {
+    "query": "What kind of support does CIE offer students looking to start a venture?",
+    "ground_truth": "Based on the provided material, CIE primarily supports students looking to start a venture through **educational programs and networking opportunities**.\n\nSpecifically, this includes:\n*   **Structured Learning:** Offering courses like \"Essentials of Innovation & Entrepreneurship (EIE) -I\" which cover topics such as \"Idea -to-Market,\" \"Business Model Canvas,\" and \"Finance for Startups.\"\n*   **Networking:** Facilitating an environment where students can \"find like-minded fellow students & build a network,\" potentially leading to finding co-founders for their startups.\n*   **Exposure:** Arranging talks by \"Startup Founders, Industry Experts, PESU Faculty, etc.\" to provide insights and inspiration."
+  },
+  
+  {
+    "query": "Who are you?",
+    "ground_truth": "Out of context. Not related to EIE."
+  },
+  {
+    "query": "Tell me a joke.",
+    "ground_truth": "Out of context. Not related to EIE."
+  },
+  {
+    "query": "What is your name?",
+    "ground_truth": "Out of context. Not related to EIE."
+  },
+  {
+    "query": "Do you love me?",
+    "ground_truth": "Out of context. Not related to EIE."
+  },
+  {
+    "query": "Who created you?",
+    "ground_truth": "Out of context. Not related to EIE."
+  },
+  {
+    "query": "Are you conscious?",
+    "ground_truth": "Out of context. Not related to EIE."
+  },
+  {
+    "query": "Write a poem about cats.",
+    "ground_truth": "Out of context. Not related to EIE."
+  }, 
+  {
+    "query": "What is the primary definition of entrepreneurship as presented in the course?",
+    "ground_truth": "Entrepreneurship is defined as acting upon opportunities and ideas and transforming them into value for others, which can be financial, cultural, or social [1]."
+  },
+  {
+    "query": "List the three fundamental building blocks of entrepreneurship.",
+    "ground_truth": "The three building blocks are Imagination, Creativity, and Innovation [2]."
+  },
+  {
+    "query": "What is one of the key objectives for participants taking the Essentials of Innovation & Entrepreneurship (EIE) - I course?",
+    "ground_truth": "One key objective is to embrace an Innovation & Entrepreneurship (I&E) mindset [3, 4]."
+  },
+  {
+    "query": "According to the course, what is a core belief about the entrepreneurial mindset related to its learnability?",
+    "ground_truth": "The entrepreneurial mindset (EM) is learnable and can be cultivated through practice and time [5]."
+  },
+  {
+    "query": "Name two key aspects that contribute to cultivating an entrepreneurial mindset.",
+    "ground_truth": "Key aspects include developing creativity and fostering teamwork [6]."
+  },
+  {
+    "query": "According to Elon Musk, what does it imply if things are not failing enough in the context of innovation?",
+    "ground_truth": "Elon Musk states, 'Failure is an option here. If things are not failing, you are not innovating enough' [7]."
+  },
+  {
+    "query": "What are the three key principles of Design Thinking?",
+    "ground_truth": "The three key principles are Empathy, Ideation, and Experimentation [8]."
+  },
+  {
+    "query": "Who is credited with coining the term 'Design Thinking' and founding d.school at Stanford University?",
+    "ground_truth": "David Kelley, founder of IDEO, coined the term Design Thinking and founded d.school [9]."
+  },
+  {
+    "query": "Name one of the five core principles of Effectuation.",
+    "ground_truth": "One principle is the Bird-in-Hand Principle [10]."
+  },
+  {
+    "query": "What is the primary distinction between an 'Idea' and an 'Opportunity' in entrepreneurial terms?",
+    "ground_truth": "An Idea is a flash of inspiration, while an Opportunity is an open door or a pathway to creating value [11]."
+  },
+  {
+    "query": "According to Vinod Khosla, what should entrepreneurs view every problem as?",
+    "ground_truth": "Vinod Khosla states, 'Every Problem is an Opportunity' [12]."
+  },
+  {
+    "query": "What framework is recommended by the course to narrow down attractive opportunities?",
+    "ground_truth": "The TIPSC framework (Timely, Important, Profitable, Solvable, Context) is used to narrow down opportunities [13]."
+  },
+  {
+    "query": "What is identified as one of the top three reasons for startups to fail, related to teams?",
+    "ground_truth": "One of the top reasons is 'Not the Right Team' [14]."
+  },
+  {
+    "query": "List two characteristics that define an effective team.",
+    "ground_truth": "Effective teams have good communication and most decisions by consensus [15]."
+  },
+  {
+    "query": "In a founding team, who is typically responsible for bringing order and creating 'Comfort in Chaos'?",
+    "ground_truth": "The Founding CEO brings order and creates 'Comfort in Chaos' [16]."
+  },
+  {
+    "query": "What is the definition of 'Value Proposition' in a business context?",
+    "ground_truth": "Value Proposition is a bundle of products and/or services that create value for a specific customer segment [17]."
+  },
+  {
+    "query": "In the context of Customer Value, is its definition limited solely to money?",
+    "ground_truth": "No, the definition of value is not limited to money [17]."
+  },
+  {
+    "query": "Name two sources from which a Value Proposition can be derived.",
+    "ground_truth": "Two sources are 'Newness' and 'Performance' [18]."
+  },
+  {
+    "query": "Who is associated with the development of the Business Model Canvas (BMC)?",
+    "ground_truth": "The Business Model Canvas is based on Business Model Generation by Alexander Osterwalder & Yves Pigneur [19]."
+  },
+  {
+    "query": "Name one of the key elements or building blocks of the Business Model Canvas.",
+    "ground_truth": "One key element is Customer Segments [20]."
+  },
+  {
+    "query": "List two common types of revenue streams for a business.",
+    "ground_truth": "Two types are Product Sale and Subscription fee [21]."
+  },
+  {
+    "query": "What is the role of AI in enhancing innovation as mentioned in the course objectives?",
+    "ground_truth": "AI is presented as a tool to disrupt traditional models and enhance innovation [22]."
+  },
+  {
+    "query": "What are the two primary roles within any market?",
+    "ground_truth": "The two roles are Buyers and Sellers [23]."
+  },
+  {
+    "query": "Name one distinct type of market that a startup might operate in.",
+    "ground_truth": "One type is an Existing Market [24]."
+  },
+  {
+    "query": "What does the acronym 'TAM' stand for in market sizing?",
+    "ground_truth": "TAM stands for Total Addressable Market [25]."
+  },
+  {
+    "query": "What is explicitly identified as one of the top reasons why startups often fail, related to finance?",
+    "ground_truth": "One of the top reasons is 'Ran out of Cash' [26, 27]."
+  },
+  {
+    "query": "What is the general objective of developing an Entrepreneurial Action Plan (EAP) at the end of the course?",
+    "ground_truth": "The objective is to compile learnings into a structured plan with clear goals and timelines for turning an idea into reality [28]."
+  },
+  {
+    "query": "What is the overall aim of the EIE-I course regarding a participant's mindset?",
+    "ground_truth": "The overall aim is to help participants embrace an Innovation & Entrepreneurship (I&E) mindset [3, 4]."
+  },
+  {
+    "query": "What is the definition of 'Revenue' in the context of startup finance?",
+    "ground_truth": "Revenue is the money a company earns from selling its products before any expenses are deducted [29]."
+  },
+  {
+    "query": "Name two distinct sources of funding available for startups.",
+    "ground_truth": "Two sources are Bootstrapping (personal savings) and Crowdfunding [30, 31]."
+  },
+  {
+    "query": "Differentiate between Small Medium Enterprises (SMEs) and Innovation Driven Enterprises (IDEs) based on their scale and risk characteristics.",
+    "ground_truth": "SMEs are often local, have less cash flow and risk, and become profitable faster. IDEs are typically global, involve more cash flow and risk, and take longer to become profitable [32]."
+  },
+  {
+    "query": "Explain how the concept of 'Innovation = Invention multiplied by Commercialization' contributes to the building blocks of entrepreneurship.",
+    "ground_truth": "Innovation is the application of creativity to address a challenge, and it becomes a building block of entrepreneurship when invention is successfully commercialized to create value [2, 33]."
+  },
+  {
+    "query": "Describe how embracing a 'Growth Mindset' is a key component of the entrepreneurial journey.",
+    "ground_truth": "A growth mindset is crucial because it allows individuals to develop creativity, foster teamwork, enhance adaptability, and learn from failure, which are all essential for navigating the entrepreneurial path [5, 6]."
+  },
+  {
+    "query": "Explain the significance of 'Adaptability' for entrepreneurs in managing their startup journey.",
+    "ground_truth": "Adaptability is the capacity to adjust and change in response to new circumstances, challenges, or opportunities, which is vital for entrepreneurs in the dynamic startup environment [34]."
+  },
+  {
+    "query": "Describe the 'NABC Approach' as a framework for capturing a problem/idea/opportunity statement.",
+    "ground_truth": "The NABC Approach (Need, Approach, Benefit, Competition) focuses on identifying an important client need, a unique approach to address it, compelling benefits, and comparing against competition or alternatives [35, 36]."
+  },
+  {
+    "query": "Explain how Design Thinking helps startups surface unmet customer needs and reduce the risk associated with launching new ideas.",
+    "ground_truth": "Design Thinking, through its principles of empathy, ideation, and experimentation, allows startups to deeply understand customer problems, generate revolutionary solutions, and test them rapidly, thereby reducing launch risks [8]."
+  },
+  {
+    "query": "Differentiate between 'Causal' and 'Effectual' reasoning using the provided analogy related to preparing dinner.",
+    "ground_truth": "Causal reasoning is like having a specific menu, shopping for ingredients, and following a recipe (given goal, pre-existing pathway). Effectual reasoning is like looking in the fridge to see what's available and making dinner accordingly (given means, imagining new possibilities) [37, 38]."
+  },
+  {
+    "query": "Describe the 'Bird-in-Hand Principle' of Effectuation and how it guides expert entrepreneurs.",
+    "ground_truth": "The Bird-in-Hand Principle states that expert entrepreneurs start with their given means: who they are, what they know, and whom they know, and then imagine possibilities originating from these means [39]."
+  },
+  {
+    "query": "Identify and explain two distinct sources from which a startup opportunity can arise.",
+    "ground_truth": "Opportunities can arise from customers' changing needs or personal experiences of a need/problem. They can also emerge from market-driven or technology-driven changes, or even serendipity [12]."
+  },
+  {
+    "query": "Describe at least three characteristics that make an opportunity 'attractive' for an entrepreneur.",
+    "ground_truth": "Attractive opportunities address a current, real, and important problem/need, for which customers are willing to pay, are profitable, and are solvable in the near future with available resources [40, 41]."
+  },
+  {
+    "query": "Why is establishing an ethical culture particularly important for startup founders, beyond general business success?",
+    "ground_truth": "For startups, success depends on winning against competitors, and competitive pressure can tempt founders to make unethical decisions. A single ethical misstep can bring down the entire effort, making an ethical culture critical for long-term success [42, 43]."
+  },
+  {
+    "query": "Explain the significance of 'Diversity and Inclusion' in startup teams, referencing the provided quote.",
+    "ground_truth": "The quote 'Diversity is being invited to the party, Inclusion is being asked to dance' highlights that diversity brings different types of expertise, opinions, and backgrounds, while inclusion ensures these diverse members are actively involved and empowered, leading to higher-performing teams [44]."
+  },
+  {
+    "query": "Describe how high-performing teams are characterised by 'Energy, Engagement, and Exploration'.",
+    "ground_truth": "High-performing teams exhibit high levels of energy in their interactions, deep engagement with tasks and each other, and a constant drive for exploration of new ideas and solutions, which is correlated with success [44, 45]."
+  },
+  {
+    "query": "What are some common early signs of a dysfunctional team-member relationship that entrepreneurs should be aware of?",
+    "ground_truth": "Early signs of dysfunctional relationships include criticism, contempt, defensiveness, and stonewalling (refusing to communicate) [45]."
+  },
+  {
+    "query": "Explain how to construct a Value Proposition by identifying customer problems, needs, and the value delivered.",
+    "ground_truth": "To construct a Value Proposition, one must identify which customer problems are being solved, which customer needs are being satisfied, what value is delivered, and why customers should choose their solution [18, 46]."
+  },
+  {
+    "query": "Describe the purpose of the 'Value Proposition Canvas' (VPC) and its two main components.",
+    "ground_truth": "The VPC is a tool to create and analyze value propositions. Its two main components are the 'Customer Profile' (right side), which describes customer jobs, pains, and gains, and the 'Value Map' (left side), which details pain relievers, gain creators, and products/services offered [46-48]."
+  },
+  {
+    "query": "Using the 'Positioning Statement' template, identify the key sections involved in articulating a product's differentiation.",
+    "ground_truth": "The key sections include: 'For target customer' (who), 'Who (statement of need or opportunity)', '(Product name) is a (product category)', 'That (Statement of benefits)', 'Unlike (Primary competitive alternative)', and 'Our Product (statement of primary differentiation)' [48-50]."
+  },
+  {
+    "query": "Differentiate between the Business Model Canvas (BMC) and a traditional Business Plan (BP) based on their level of detail and purpose.",
+    "ground_truth": "The BMC provides a '10,000ft-level view' that is dynamic and easier to iterate, serving as a visual tool for creating and analyzing business models. A Business Plan is more detailed, covering strategic, financial, and other aspects, and is typically used for more formal documentation [19, 51]."
+  },
+  {
+    "query": "Explain the role of 'Customer Segments' and 'Customer Relationships' as key elements in the Business Model Canvas.",
+    "ground_truth": "Customer Segments define the specific groups of people or organizations a company aims to serve. Customer Relationships describe the types of relationships a company establishes with specific customer segments, ranging from personal assistance to self-service or co-creation [20]."
+  },
+  {
+    "query": "Describe the 'Key Resources' and 'Key Activities' components within the Business Model Canvas.",
+    "ground_truth": "Key Resources are the assets required to offer and deliver a value proposition (physical, intellectual, human, financial). Key Activities are the most important things a company must do to operate successfully (production, services, platform/network management) [21]."
+  },
+  {
+    "query": "How can AI be strategically leveraged by startups to disrupt traditional business models?",
+    "ground_truth": "AI can be leveraged by providing new ways to analyze data, automate processes, create personalized experiences, and enable predictive capabilities, thereby reimagining how industries operate and creating new value propositions [22]."
+  },
+  {
+    "query": "Explain the difference between an 'Existing Market' and a 'New Market' for a startup, providing an example for each.",
+    "ground_truth": "An Existing Market involves offering an existing product (perhaps with new features), like a new sedan car. A New Market involves creating an innovative product or service that never existed before, like electric or autonomous cars, often creating a new class of customers [24, 52]."
+  },
+  {
+    "query": "Differentiate between 'Total Addressable Market (TAM),' 'Served Addressable Market (SAM),' and 'Target Market' in the context of market sizing.",
+    "ground_truth": "TAM quantifies the entire buyer/seller chain in a market (broadest). SAM is the portion of TAM that a specific value proposition applies to (sharpened focus). Target Market is a further refinement, often a demographic or specific niche within SAM [25, 53]."
+  },
+  {
+    "query": "What are the 'three parts' of an impactful presentation or pitch, according to a common technique suggested in the course?",
+    "ground_truth": "The technique suggests 'Tell people what you’re going to say, Tell them, Tell them what you’ve said' [54, 55]."
+  },
+  {
+    "query": "Explain the difference between 'Cost', 'Price', and 'Value' in startup finance, as highlighted by Warren Buffett.",
+    "ground_truth": "Cost is the money value of resources required to produce something. Price is the money to be paid to acquire a product/service. Value is the utility or benefit obtained from a product/service, and as Warren Buffett states, 'Price is what you pay; Value is what you get' [56]."
+  },
+  {
+    "query": "Describe what a 'Convertible Note (CN)' and a 'SAFE Note (SAFE)' are, and their primary use in early-stage startup funding.",
+    "ground_truth": "A Convertible Note is a hybrid instrument that starts as a loan but can convert into equity under certain conditions, used when precise valuation is difficult. A SAFE Note (Simple Agreement for Future Equity) is a contract allowing capital raising with an option for investors to convert to equity later, without being a debt instrument [57, 58]."
+  },
+  {
+    "query": "Define 'Vesting' and 'Dilution' in the context of startup equity.",
+    "ground_truth": "Vesting ensures that founders, investors, and employees earn their equity over time or upon achieving specific milestones. Dilution occurs when the percentage of equity held by existing shareholders decreases due to the issuance of new shares during additional funding rounds [59, 60]."
+  },
+  {
+    "query": "How does the EIE-I course encourage participants to find like-minded fellow students and build a network for their entrepreneurial journey?",
+    "ground_truth": "The course's learning outcomes explicitly include 'Find like-minded fellow students & build a network' [4, 61], and engagement suggestions mention finding 'like-minded peers to work with' and potentially co-founders [62]."
+  },
+  {
+    "query": "In the context of the EIE-I course, how does the 'Idea-to-Market Process' guide participants through the entrepreneurial journey?",
+    "ground_truth": "The Idea-to-Market Process involves stages of Formation, Validation, and Growth, providing a structured pathway for developing and launching a startup [11]."
+  },
+  {
+    "query": "How can the Entrepreneurial Action Plan serve as a consolidation of learnings from various modules of the course?",
+    "ground_truth": "The Entrepreneurial Action Plan synthesizes knowledge from identifying problems, understanding audiences, brainstorming ideas, validating solutions, building business models, forming teams, planning financials, and leveraging technology, culminating in a concrete plan for action [22, 28, 63-67]."
+  },
+  {
+    "query": "Discuss how technology, innovation, and entrepreneurship synergistically combine to create 'game-changers' in the market, providing examples from the Indian startup landscape.",
+    "ground_truth": "Game-changers arise when imagination and creativity lead to innovation (invention + commercialization), which is then applied by entrepreneurs to create value. In India, this is evident in its position as the 3rd largest startup ecosystem, with deep-tech areas like AI, Big Data & Analytics, and IoT driving significant transformation and commercialization of new products [2, 33, 68-70]."
+  },
+  {
+    "query": "Analyse the significance of the 'COP' Canvas and 'Ikigai' as post-session activities in fostering a foundational entrepreneurial mindset.",
+    "ground_truth": "The 'COP' Canvas (Capabilities, Opportunities, Passions) prompts self-reflection on personal strengths, interests, and problems to solve, guiding individuals toward relevant opportunities. 'Ikigai' (passion that gives value and joy to life) encourages a deeper understanding of one's purpose, aligning personal fulfillment with entrepreneurial pursuits, thereby laying a strong self-aware foundation for the I&E journey [70-72]."
+  },
+  {
+    "query": "Elaborate on how entrepreneurs can effectively 'deal with failure' by learning from it, and what practical activity is suggested in the course to facilitate this learning process.",
+    "ground_truth": "Entrepreneurs are encouraged to view failure not as an end but as a 'catalyst for growth, the spark that ignites resilience and adaptability' [73]. The course suggests creating a 'Failure Resume' to capture personal failures across different areas, reflect on what was learned, how behavior changed, and how to approach future failures, fostering a growth mindset [7, 74]."
+  },
+  {
+    "query": "Discuss the advice 'Don't Look for Ideas, Look for Problems' in the context of identifying entrepreneurial opportunities, and suggest how a structured thinking approach can leverage this.",
+    "ground_truth": "This advice, championed by figures like Vinod Khosla, emphasizes that every problem is an opportunity [12, 75]. Instead of brainstorming abstract ideas, entrepreneurs should observe unmet needs or challenges. A structured approach like 'How Might We…' helps reframe problems into actionable questions, fostering creative solutions that address real pain points and are therefore more likely to create value [35, 75, 76]."
+  },
+  {
+    "query": "Discuss how the 'Pilot-in-the-Plane Principle' of effectuation empowers entrepreneurs to co-create the future rather than simply predicting it.",
+    "ground_truth": "The Pilot-in-the-Plane Principle states that by focusing on activities within their control, expert entrepreneurs believe their actions will result in desired outcomes, rather than being at the mercy of unpredictable external forces. This effectual worldview is rooted in the belief that the future is 'CREATED', not found or predicted, enabling entrepreneurs to actively shape their venture's path [10, 77]."
+  },
+  {
+    "query": "Analyse how Design Thinking's three core principles – Empathy, Ideation, and Experimentation – collectively contribute to human-centred innovation.",
+    "ground_truth": "Design Thinking is a process for creative problem-solving that puts humans at the centre. Empathy ensures unmet user needs are deeply understood. Ideation generates revolutionary solutions by applying creativity. Experimentation (through rapid prototyping and testing) reduces risk by validating ideas with users, ensuring solutions are desirable, feasible, and viable for the people they are designed for [8, 9, 78]."
+  },
+  {
+    "query": "Explain the 'Crazy Quilt Principle' and 'Lemonade Principle' of effectuation and how they support venture building in ambiguous or uncertain settings.",
+    "ground_truth": "The Crazy Quilt Principle advocates for building a network of self-selected stakeholders by obtaining pre-commitments, which reduces uncertainty and co-creates new markets with interested participants [10, 79]. The Lemonade Principle encourages embracing and leveraging surprises, interpreting 'bad news' or contingencies as clues to create new markets or opportunities, rather than avoiding them [10, 79]. Both principles emphasize proactive engagement with uncertainty, characteristic of effectual reasoning [80]."
+  },
+  {
+    "query": "Discuss how real-world examples like Airbnb or Stripe exemplify the concept of 'Opportunity Identification' by effectively addressing customer pain points or market inefficiencies.",
+    "ground_truth": "Airbnb founders identified the pain point of expensive/scarce hotel rooms during a conference and leveraged the untapped resource of spare rooms, disrupting the traditional hospitality industry [13, 81]. Stripe founders recognized the major inefficiency of complex online payment processing for internet businesses, creating a simpler solution that became a vast financial services company. Both illustrate that great opportunities are often disguised as difficult problems, addressed by focusing on customer needs and market gaps [12, 76, 81, 82]."
+  },
+  {
+    "query": "Analyse how overlooking ethical considerations can lead to severe negative consequences for startups, citing examples of 'fallen unicorns'.",
+    "ground_truth": "While profitability is important, ethical values are even more crucial for long-term business success, especially for startups where a single misstep can unravel the entire effort [42, 43]. Examples like Theranos and GoMechanic are cited as 'fallen unicorns' whose ethical lapses (e.g., misrepresentation, fraud) led to their downfall, demonstrating that integrity and reputation are paramount and their loss can bring down even highly valued ventures [83]."
+  },
+  {
+    "query": "Explain the concept of 'Ethical Leadership Mindset' by detailing two of its key attributes and their importance for startup founders.",
+    "ground_truth": "An Ethical Leadership Mindset involves consistently demonstrating integrity (honesty, trustworthiness, strong moral compass), which is fundamental for building reputation and trust. Another attribute is fairness & justice, treating all individuals impartially, crucial for fostering a positive internal culture and external stakeholder relations. These attributes establish an ethical culture from the outset, guiding decision-making and ensuring long-term success [43]."
+  },
+  {
+    "query": "Discuss the concept of a 'Balanced' Founding Team and the complementary skills typically associated with it to bring an idea to life.",
+    "ground_truth": "A balanced founding team is crucial for success, as 'Not the Right Team' is a top reason for startup failure [14, 84]. It ideally comprises members with complementary skills, often described as a 'key driver' (inspiring the team, bringing idea to life), a 'product/solution builder' (hacker), and someone who 'helps sell the product/solution' (hustler), and a 'visionary' [16, 85, 86]. This diversity in expertise and roles ensures all critical aspects of venture building are covered [44]."
+  },
+  {
+    "query": "Analyse the importance of 'Emotional Intelligence' for a leader in a startup context, arguing why it might be more crucial than IQ or tech savviness.",
+    "ground_truth": "The course highlights that Emotional Intelligence (EQ) is more important than IQ and tech savviness for a great leader [87]. EQ encompasses elements like self-awareness, self-regulation, motivation, empathy, and social skills [84]. In a startup's volatile environment, leaders with high EQ can foster trust, manage team dynamics, inspire commitment, and adapt to change, which are critical for navigating uncertainty and building a resilient, collaborative team, unlike purely intellectual or technical prowess [15, 87]."
+  },
+  {
+    "query": "Propose how a startup team can proactively address potential conflicts and ensure effective collaboration, as suggested by Kevin Hale.",
+    "ground_truth": "Kevin Hale suggests that all teams will 'fight,' so a plan is essential. To ensure effective collaboration, teams should proactively 'figure out roles, goals, and a process before emotions get involved.' This includes having 'hard conversations now,' communicating to share honest feedback without criticism, and regularly 'paying down emotional debt.' This disciplined approach helps manage inevitable disagreements constructively [45, 85]."
+  },
+  {
+    "query": "Discuss how the 'Value Map' (left side of VPC) and 'Customer Profile' (right side of VPC) interact to ensure a product truly addresses customer pains and creates gains.",
+    "ground_truth": "The Customer Profile identifies what customers are trying to get done (jobs), their problems (pains), and desired outcomes (gains) [46, 47]. The Value Map outlines how the startup's products/services, pain relievers, and gain creators address these. The interaction ensures alignment: pain relievers must specifically alleviate identified customer pains, and gain creators must deliver the precise benefits customers seek. This 'fit' between the two sides confirms the product truly creates value and solves real customer problems [47, 48, 88]."
+  },
+  {
+    "query": "Analyse how market fluctuations might change the cost and price of a product or service but leave its underlying value unaffected for the customer.",
+    "ground_truth": "The course defines value as the utility of a product or service, which goes beyond its price [56]. While market fluctuations can cause changes in the cost of producing something or its selling price, the inherent usefulness or benefits a customer derives from the product (its value) may remain constant. For instance, a basic need fulfilled by a product retains its utility regardless of economic shifts affecting its production or market price [17, 56, 89]."
+  },
+  {
+    "query": "Evaluate how a 'Positioning Map' helps a startup visually represent its product's competitive landscape along two key dimensions, aiding strategic differentiation.",
+    "ground_truth": "A Positioning Map visually plots a product and its competitors along two chosen dimensions or attributes (e.g., price vs. quality, innovation vs. ease-of-use) [88, 90]. This helps a startup identify white spaces in the market, understand its current position relative to rivals, and strategize its differentiation [48, 88]. By clearly mapping its unique selling points, a startup can articulate its value proposition more effectively and target specific customer segments [48, 49]."
+  },
+  {
+    "query": "Analyse how the Business Model Canvas comprehensively integrates 'desirability' (customer development), 'viability', and 'feasibility' aspects of a business idea within a single framework.",
+    "ground_truth": "The BMC integrates desirability (Is it wanted by customers?) through Customer Segments, Value Propositions, Customer Relationships, and Channels [20, 51]. Viability (Is it profitable?) is covered by Revenue Streams and Cost Structure [21]. Feasibility (Can we build it?) is addressed by Key Resources, Key Activities, and Key Partnerships [21, 91]. By visually connecting these nine blocks, the BMC provides a holistic view, ensuring the business idea is not only appealing to customers but also financially sustainable and operationally achievable [19, 51]."
+  },
+  {
+    "query": "Evaluate the significance of understanding 'Cost Structure' types (Cost-driven vs. Value-driven) for a startup, as depicted in the Business Model Canvas.",
+    "ground_truth": "Understanding cost structures (fixed, variable, economies of scale/scope) is crucial for a startup's viability. A cost-driven model focuses on minimizing expenses, offering low prices (e.g., budget airlines). A value-driven model prioritizes creating premium value, allowing for higher prices despite higher costs (e.g., luxury brands). Knowing which approach aligns with the value proposition and target market helps founders make informed financial decisions, manage profitability, and plan for growth [21, 56, 89, 92]."
+  },
+  {
+    "query": "Discuss the broader implications of AI for innovation in the context of the course's emphasis on transformative technology-led changes.",
+    "ground_truth": "The course highlights AI as a transformative technology [3, 4] that can 'reimagine how we innovate' and disrupt traditional models [22]. This implies that AI is not just a tool but a fundamental force driving change across industries, requiring entrepreneurs to understand its potential to enhance solutions, automate processes, create new products/services, and redefine competitive landscapes, aligning with the course's focus on technology-led transformation in the entrepreneurial journey [3, 4, 22]."
+  },
+  {
+    "query": "Discuss why 'Market Size' is crucial for startups, especially concerning financial potential and refining Business Model Canvas hypotheses.",
+    "ground_truth": "Market size is crucial because it quantifies the financial potential of the business and helps determine if the effort and risk of a startup are worthwhile [25, 93]. A very small market might not justify the investment, while a very large one might pose traction challenges. Understanding TAM, SAM, and Target Market allows founders to refine their BMC hypotheses, ensuring their value proposition is directed at a segment with sufficient scale and growth potential for profitability and long-term sustainability [25, 93, 94]."
+  },
+  {
+    "query": "Analyse how understanding 'Types of Market' (Existing, Resegmented, New, Clone) influences a startup's sales, marketing, and business development strategies.",
+    "ground_truth": "Each market type demands distinct strategies. In an Existing Market, differentiation comes from features or price. A Resegmented Market requires redrawing segments to address unmet needs. A New Market needs significant education and creates new customer classes. A Clone Market involves adapting existing models to new geographies. The course states that the 'Type of Market changes EVERYTHING' [24], significantly altering sales models, marketing approaches, and competitive barriers [23, 24, 52], thus influencing resource allocation and growth trajectory."
+  },
+  {
+    "query": "Provide a comprehensive overview of effective pitching techniques, including preparation, delivery, and common pitfalls to avoid.",
+    "ground_truth": "Effective pitching requires thorough preparation, including clarifying purpose, understanding the audience, making notes without writing word-for-word, and practicing timing [54]. Delivery should involve varying pace and pitch, using body language, smiling, and projecting personality [55]. Common pitfalls to avoid include rushing, reading verbatim, fiddling, using inappropriate language, and panicking. The goal is to 'make an impactful presentation with storytelling' by telling people what you'll say, saying it, and then telling them what you've said [55, 95]."
+  },
+  {
+    "query": "Discuss why understanding key finance terms and metrics is critical for founders to make informed decisions and avoid cash shortages.",
+    "ground_truth": "Founders must understand finance because 'The biggest mistake founders make is ignoring their finances' [96]. Without a solid grasp of terms like revenue, COGS, gross profit, and operating expenses, or metrics like burn rate and runway, founders cannot track performance, forecast future needs, manage resources effectively, or avoid the common startup failure of 'running out of cash' [26, 29, 97, 98]. Financial savviness helps plan new ventures, grow business, and manage operations profitably [92]."
+  },
+  {
+    "query": "Analyse how financial statements (Income Statement, Balance Sheet, Cash Flow Statement) collectively provide a holistic view of a company's financial health.",
+    "ground_truth": "The Income Statement (Profit and Loss) shows revenues, expenses, and profit/loss over a period, indicating profitability [99]. The Balance Sheet provides a snapshot of assets, liabilities, and equity at a specific time, showing financial health and structure [99]. The Cash Flow Statement tracks cash movement in/out, revealing liquidity and cash available for operations, investing, and financing [100]. Together, these statements offer a comprehensive picture of a company's past performance, current financial position, and liquidity, crucial for informed decision-making [26]."
+  },
+  {
+    "query": "Evaluate the significance of 'Customer acquisition cost (CAC),' 'Lifetime value (LTV),' and their 'ratio' as a 'golden metric' for a startup's sustainability.",
+    "ground_truth": "CAC is the cost to acquire a new customer, while LTV measures the net value a customer brings over their relationship with the business [101, 102]. The CAC to LTV ratio is a 'golden metric' because it indicates the sustainability and profitability of the business model. A healthy ratio (e.g., LTV significantly higher than CAC) signifies that the cost of acquiring customers is justified by the long-term revenue they generate, essential for growth and avoiding cash burn [98, 102]."
+  },
+  {
+    "query": "Discuss the iterative nature of building a startup and how developing a concrete Entrepreneurial Action Plan facilitates the journey from idea to reality, incorporating learning from potential failures and validations.",
+    "ground_truth": "The startup journey is iterative, involving continuous cycles of identifying problems, understanding the audience, brainstorming, validating solutions, and building models [63-66]. The Entrepreneurial Action Plan (EAP) consolidates these learnings into a structured roadmap [28], allowing founders to track progress, adapt based on feedback and validation (e.g., from pitching or testing), and incorporate lessons from inevitable failures, ultimately guiding the transformation of an idea into a viable reality with clear goals and timelines [7, 28, 65, 73]."
+  },
+  {
+    "query": "Summarize the interconnectedness of key modules in the EIE-I course by outlining the typical flow from identifying a problem to planning financials.",
+    "ground_truth": "The course starts with identifying a problem/opportunity (M1, M4) [63, 103], then understanding the audience through human-centred innovation (M3) [64, 104]. This leads to brainstorming and refining ideas (M2, M3) [65, 104, 105], validating the solution (M4) [65, 103], and building a business model (M7) [19, 66]. A crucial step is forming a team (M5) [66, 106] and subsequently planning financials and funding (M9, M10) [27, 67, 96]. All these are tied together by cultivating an entrepreneurial mindset (M2) [5, 105] and culminate in an Entrepreneurial Action Plan (M11) [28]."
+  },
+  {
+    "query": "What is the full form of EIE?",
+    "ground_truth": "EIE stands for Essentials of Innovation & Entrepreneurship [1]."
+  },
+  {
+    "query": "Who is the Lead Instructor for CIE@RR?",
+    "ground_truth": "Prof. Sathya Prasad is the Lead Instructor for CIE@RR [1]."
+  },
+  {
+    "query": "Name one social media handle for CIE.",
+    "ground_truth": "One social media handle for CIE is @cie.pesu (Instagram) [2] or @CIECommunity [2]."
+  },
+  {
+    "query": "According to Paul Graham, what is a big mistake founders make regarding finances?",
+    "ground_truth": "Paul Graham states that 'The biggest mistake founders make is ignoring their finances, thinking they can focus on it later. By then, it’s often too late' [3]."
+  },
+  {
+    "query": "What is the #2 reason startups fail, according to CB Insights?",
+    "ground_truth": "According to CB Insights, the #2 reason startups fail is 'Ran out of Cash' [4, 5]."
+  },
+  {
+    "query": "Define 'Cost' in the context of startup finance.",
+    "ground_truth": "Cost is the money value of resources required to produce something [6]."
+  },
+  {
+    "query": "What does Warren Buffett say about Price and Value?",
+    "ground_truth": "Warren Buffett states: 'Price is what you pay; Value is what you get' [6]."
+  },
+  {
+    "query": "What is the Fundamental Accounting Equation?",
+    "ground_truth": "The Fundamental Accounting Equation is Assets – Liability = Owner’s Equity [7]."
+  },
+  {
+    "query": "What does COGS stand for?",
+    "ground_truth": "COGS stands for Cost of Goods Sold [8]."
+  },
+  {
+    "query": "What is an Income Statement also known as?",
+    "ground_truth": "An Income Statement is also known as the Profit and Loss Statement [9]."
+  },
+  {
+    "query": "Name one example of a Revenue Model.",
+    "ground_truth": "Examples of Revenue Models include Product sales, Subscription, Advertising, or Transaction fee [10]."
+  },
+  {
+    "query": "What are the two broad categories of funding sources for startups?",
+    "ground_truth": "The two broad categories of funding sources for startups are Bootstrapping and external funding from sources like Crowdfunding, Angel Investors, Venture Capital firms, Incubators/Accelerators, and Government Grants [11-14]."
+  },
+  {
+    "query": "What is 'Bootstrapping'?",
+    "ground_truth": "Bootstrapping is when entrepreneurs initially use their personal savings/assets to fund their startup, allowing them to maintain control/ownership [11, 12]."
+  },
+  {
+    "query": "What type of investors are high-net-worth individuals who provide capital to startups in exchange for equity or convertible debt?",
+    "ground_truth": "High-net-worth individuals who provide capital to startups in exchange for equity or convertible debt are called Angel Investors [12, 13]."
+  },
+  {
+    "query": "What does SAFE Note stand for?",
+    "ground_truth": "SAFE Note stands for Simple Agreement for Future Equity [15]."
+  },
+  {
+    "query": "What is 'Equity' in a startup context?",
+    "ground_truth": "Equity in a startup refers to ownership or shares of the company held by its founders, investors, employees, or other stakeholders [16]."
+  },
+  {
+    "query": "Define 'Vesting' in terms of startup equity.",
+    "ground_truth": "Vesting is a mechanism that ensures founders, investors, and employees earn their equity over time or upon achieving specific milestones [17]."
+  },
+  {
+    "query": "What does CAC stand for?",
+    "ground_truth": "CAC stands for Customer Acquisition Cost [18]."
+  },
+  {
+    "query": "What does NPS measure?",
+    "ground_truth": "NPS (Net Promoter Score) is a measure of customer satisfaction [19]."
+  },
+  {
+    "query": "Which two modules are relevant for identifying a problem or opportunity?",
+    "ground_truth": "Module 1 (Introduction to Innovation and Entrepreneurship) and Module 4 (Idea to Market, Opportunity Identification and Ethics) are relevant for identifying a problem or opportunity [20]."
+  },
+  {
+    "query": "What does the 'Idea to Market' process involve in its three main stages?",
+    "ground_truth": "The 'Idea to Market' process involves Formation, Validation, and Growth [21]."
+  },
+  {
+    "query": "Is an 'Idea' the same as an 'Opportunity'?",
+    "ground_truth": "No, an Idea is a flash of inspiration, while an Opportunity is an open door or a pathway to creating value [21, 22]."
+  },
+  {
+    "query": "Name two things entrepreneurs do with 'much less than seems possible.'",
+    "ground_truth": "Entrepreneurs do much more than imaginable with much less than seems possible [23]."
+  },
+  {
+    "query": "What is the definition of 'Entrepreneurship' as per the EU Entrepreneur Competence Framework?",
+    "ground_truth": "As per the EU Entrepreneur Competence Framework, 'Entrepreneurship is when you act upon opportunities and ideas and transform them into value for others. Value created can be financial, cultural, or social' [24]."
+  },
+  {
+    "query": "Who coined the term 'Design Thinking'?",
+    "ground_truth": "David Kelley, founder of IDEO, coined the term Design Thinking [25]."
+  },
+  {
+    "query": "Name one of the 3 key principles of Design Thinking.",
+    "ground_truth": "One of the 3 key principles of Design Thinking is Empathy, Ideation, or Experimentation [26]."
+  },
+  {
+    "query": "Who is the originator of the Effectuation theory?",
+    "ground_truth": "The originator of the Effectuation theory is Dr. Saras Sarasvathy [27]."
+  },
+  {
+    "query": "What are the three powerful words suggested for framing problems as opportunities?",
+    "ground_truth": "The three powerful words suggested are 'How Might We…' [28]."
+  },
+  {
+    "query": "What is the #3 reason startups fail, according to CB Insights?",
+    "ground_truth": "According to CB Insights, the #3 reason startups fail is 'Not the Right Team' [29]."
+  },
+  {
+    "query": "Name one element of emotional intelligence for a leader.",
+    "ground_truth": "One element of Emotional Intelligence for a leader is Self-awareness, Self-regulation, Motivation, Empathy, or Social Skill [30]."
+  },
+  {
+    "query": "How many credits is the EIE - I course, and what is its weekly duration?",
+    "ground_truth": "The EIE - I course is 2 Credits with a weekly duration of 2 hours [31, 32]."
+  },
+  {
+    "query": "List two ways students can engage with the EIE - I course online.",
+    "ground_truth": "Students can engage online through MS Teams (chat/discussion, file sharing, Q/A moderated by TAs) and by participating in Polls or Session Quizzes on PESU Academy [33-35]."
+  },
+  {
+    "query": "Why is understanding finance important for startup founders, according to the sources?",
+    "ground_truth": "Understanding key finance terms and metrics helps founders make informed decisions, plan for growth, manage resources effectively, track performance, forecast future needs, and avoid cash shortages [4, 6]."
+  },
+  {
+    "query": "Explain the difference between 'Price' and 'Value' using Warren Buffett's quote.",
+    "ground_truth": "Warren Buffett states: 'Price is what you pay; Value is what you get' [6]. This implies that price is the monetary cost, while value is the utility or benefit derived, which can extend beyond monetary terms [6]."
+  },
+  {
+    "query": "Distinguish between 'Gross Profit' and 'Operating Profit'.",
+    "ground_truth": "Gross Profit is the sales revenue less the Cost of Goods Sold (COGS) [8]. Operating Profit is Gross Profit minus Operating Expenses, which are the ongoing costs of running operations (excluding COGS) [36]."
+  },
+  {
+    "query": "Describe the purpose of a Balance Sheet.",
+    "ground_truth": "A Balance Sheet is a financial statement that shows a company’s assets, liabilities, and equity at a specific point in time, providing a snapshot of its financial health [9]."
+  },
+  {
+    "query": "What is the primary difference between a Convertible Note and a SAFE Note?",
+    "ground_truth": "A Convertible Note starts as a loan (debt) that can convert into equity later and may have interest [14, 15]. A SAFE Note is not a debt instrument, so it does not accrue interest, and is a contract allowing capital to convert to equity without immediate valuation [15, 16]."
+  },
+  {
+    "query": "How does 'Dilution' affect existing shareholders in a startup?",
+    "ground_truth": "Dilution occurs when a startup raises additional funding by issuing new shares, which decreases the percentage of equity held by existing shareholders [17, 18]."
+  },
+  {
+    "query": "Explain the concept of 'Runway' for a startup and how it is computed.",
+    "ground_truth": "Runway is a measure of the amount of time (in months) until a company runs out of cash. It is computed by dividing the remaining cash by the monthly burn rate [19]."
+  },
+  {
+    "query": "What is the 'golden metric' for startup sustainability and why is it important?",
+    "ground_truth": "The ratio of Customer Acquisition Cost (CAC) to Lifetime Value (LTV) is considered a 'golden metric' because it indicates the sustainability of a company [37]."
+  },
+  {
+    "query": "How can students get the best out of the EIE - I course, particularly in a team setting?",
+    "ground_truth": "To get the best out of the course, students should practice frameworks/tools, engage in lots of 'doing' in a Team setting, recognizing that if the team succeeds, the individual succeeds, and develop skills to use the tools [34, 38]."
+  },
+  {
+    "query": "Provide an example of someone who is 'Entrepreneurial' versus an 'Entrepreneur' based on the given definitions.",
+    "ground_truth": "Alex, who uses creativity and takes risks to build new ideas within a company, is entrepreneurial. Sarah, who quits her job to start a new company to build fitness products, is an entrepreneur [23, 39]."
+  },
+  {
+    "query": "Compare and contrast a Small Medium Enterprise (SME) and an Innovation Driven Enterprise (IDE) based on their characteristics.",
+    "ground_truth": "SMEs are typically local, have less cash flow and risk, and take less time to get profitable [39]. IDEs are global, have more cash flow and risk, take more time to get profitable, and are more clustered [39]."
+  },
+  {
+    "query": "What is the significance of 'Invention multiplied by Commercialization' in the context of innovation?",
+    "ground_truth": "Innovation is defined as Invention multiplied by Commercialization [40]. This signifies that for an invention to be considered true innovation, it must not only be a novel solution (invention) but also successfully brought to market and generate value (commercialization) [40, 41]."
+  },
+  {
+    "query": "List three common entrepreneurial traits mentioned in the sources.",
+    "ground_truth": "Three common entrepreneurial traits are Creativity, Vision, Identifying opportunities, Passion, Leadership, Influence, Network Building, Ability to excite others by vision, Self-challenging, Goal oriented, Comfortable with uncertainty, and Rarely satisfied [42, 43]."
+  },
+  {
+    "query": "According to the sources, why are problems considered 'an Entrepreneur’s Best Friend'?",
+    "ground_truth": "Problems are considered an Entrepreneur’s Best Friend because great opportunities are often disguised as difficult problems, and customers' pain is a source for entrepreneur's value creation [22, 44]."
+  },
+  {
+    "query": "Explain the core idea behind the 'How Might We...' approach for problem-solving.",
+    "ground_truth": "The 'How Might We...' approach transforms problems into opportunities by reframing them as questions that invite creative solutions, such as 'How might we design a reusable rocket to reduce cost of the space program?' [28]."
+  },
+  {
+    "query": "What are the three components that make up Design Thinking, represented by the intersection of three circles?",
+    "ground_truth": "The three components of Design Thinking are Desirability (User), Feasibility (Tech), and Viability (Business) [25, 26]."
+  },
+  {
+    "query": "How does Design Thinking help in reducing risk associated with launching new ideas?",
+    "ground_truth": "Design Thinking helps reduce risk by facilitating the surfacing of unmet needs, generating revolutionary, not just incremental, solutions, and encouraging experimentation to validate ideas with potential users through prototypes, surveys, or interviews [26, 45]."
+  },
+  {
+    "query": "In Effectuation, what is the key difference between Causal and Effectual reasoning when preparing dinner?",
+    "ground_truth": "In Causal reasoning, one starts with a specific menu (goal), shops for ingredients (means), and follows a recipe. In Effectual reasoning, one starts by looking in the fridge (means), sees what's available, and then makes dinner accordingly (imagines possibilities from means) [27, 46]."
+  },
+  {
+    "query": "What is the 'Bird-in-Hand Principle' of Effectuation?",
+    "ground_truth": "The 'Bird-in-Hand Principle' states that expert entrepreneurs start with their means: Who they are, What they know, and Whom they know, and then imagine possibilities originating from these means [47, 48]."
+  },
+  {
+    "query": "How does the 'Affordable Loss Principle' guide expert entrepreneurs in risk management?",
+    "ground_truth": "The 'Affordable Loss Principle' guides expert entrepreneurs to limit risk by understanding what they can afford to lose at each step, rather than seeking large all-or-nothing opportunities. They choose goals where there is an upside even if the downside occurs [47-49]."
+  },
+  {
+    "query": "What are the four main components of a startup venture, according to Thomas Byers?",
+    "ground_truth": "According to Thomas Byers, the four main components of a startup venture are Product or Service, Market, Resources & Capital, and People & Organization [21]."
+  },
+  {
+    "query": "List three sources of startup opportunity.",
+    "ground_truth": "Three sources of startup opportunity include Customers’ needs (or changing needs), Personal (experience of) need or problem, Market-driven changes, Technology-driven changes, Discontinuities (social, technological, market), and the Role of Chance/Luck [50]."
+  },
+  {
+    "query": "Explain why ethical values are considered more important than profitability for startup founders.",
+    "ground_truth": "Ethical values are more important because they form a solid foundation for integrity and reputation, which are crucial for long-term business success. Unethical decisions, even driven by competitive pressure, can have big negative consequences and 'bring down the entire effort' [51-53]."
+  },
+  {
+    "query": "According to Verna Myers, what is the distinction between 'Diversity' and 'Inclusion'?",
+    "ground_truth": "According to Verna Myers, 'Diversity is being invited to the party, Inclusion is being asked to dance' [54]. This implies diversity is about representation, while inclusion is about active participation and feeling valued."
+  },
+  {
+    "query": "What are the three types of diversity dimensions mentioned for entrepreneurial teams, and what are their optimal levels?",
+    "ground_truth": "The three types of diversity dimensions are Expertise, Opinion, and Power. Optimal levels are High for Expertise, Moderate for Opinion, and Low for Power [54]."
+  },
+  {
+    "query": "Identify two early signs of a dysfunctional team-member relationship.",
+    "ground_truth": "Two early signs of a dysfunctional team-member relationship are Criticism, Contempt, Defensiveness, or Stonewalling (refusing to communicate) [55]."
+  },
+  {
+    "query": "Describe the roles of a 'Hacker' and a 'Hustler' in a 'Balanced' Founding Team.",
+    "ground_truth": "In a balanced founding team, the 'Hacker' is primarily responsible for building the product/solution and anything else needed along the way [56]. The 'Hustler' helps sell the product/solution, characterized by attitude rather than a specific title [56]."
+  },
+  {
+    "query": "What is 'Customer Value' and how can it vary?",
+    "ground_truth": "Customer Value is the usefulness of a product/service to a customer [57]. It is not limited to money and can vary from customer to customer, meaning the same product/service can have different value for different people [57]."
+  },
+  {
+    "query": "The EIE course objectives include 'Understanding Transformative Tech-led Changes' and 'Technology Transformation Awareness.' How do these align with the 'Gamechanger' concept of combining Technology, Innovation, and Entrepreneurship?",
+    "ground_truth": "These objectives directly align by emphasizing the importance of staying aware of and leveraging technological advancements [2, 58]. The 'Gamechanger' concept explicitly calls for combining Technology, Innovation, and Entrepreneurship to create significant impact, suggesting that understanding tech-led changes is foundational for innovative entrepreneurial ventures [59]."
+  },
+  {
+    "query": "If a startup consistently has a negative 'Monthly Burn Rate', what does this imply about its financial health, and what key metric should a founder monitor as a result?",
+    "ground_truth": "A consistently negative 'Monthly Burn Rate' means the company's net cash flow is negative, indicating it is losing cash each month [60]. As a result, a founder must closely monitor their 'Runway', which is the measure of how much time they have left until they run out of cash [19]."
+  },
+  {
+    "query": "A founder has developed an excellent product but has ignored financial planning. Based on the sources, what famous quotes and top reasons for startup failure underscore the potential consequences?",
+    "ground_truth": "Paul Graham warns that 'The biggest mistake founders make is ignoring their finances,' stating it's often too late by the time they focus on it [3]. Warren Buffett highlights that 'Accounting is the language of business. If you are going to succeed in business, you have to understand the numbers' [3]. These resonate with the CB Insights finding that 'Ran out of Cash' is the #2 reason startups fail [4]. Without financial grasp, even a great product can fail [4]."
+  },
+  {
+    "query": "Why might a startup choose to use a Convertible Note or SAFE Note in early funding rounds instead of traditional equity?",
+    "ground_truth": "Startups might choose Convertible Notes or SAFE Notes in early funding rounds because it's often difficult to determine a precise startup valuation at that stage [15, 16]. SAFE Notes, in particular, offer a quick and easy way to raise capital without immediate valuation and are not debt instruments, avoiding interest payments [16]. Convertible Notes also provide flexibility by starting as a loan that converts to equity later [15]."
+  },
+  {
+    "query": "Imagine you are advising a startup on its initial financial model. Besides revenue and cost, what other critical knowledge would you emphasize for effective decision-making and growth?",
+    "ground_truth": "Beyond just revenue and cost, I would emphasize the critical knowledge to 'Decide with data', 'Manage Profitably', and 'Chart your startup’s Growth' [61]. This involves understanding how numbers associate with the business model and extending financial knowledge beyond basics [7]."
+  },
+  {
+    "query": "How do the 'Course Objectives' and 'Learning Outcomes' of EIE-I prepare students for their 'Post-University Journey,' particularly in the context of innovation and entrepreneurship?",
+    "ground_truth": "The course objectives directly aim to 'Prepare for Your Post-University Journey' [2]. Learning outcomes contribute by fostering 'I&E Mindset Awareness,' 'Idea-to-Market Process Familiarity,' 'Technology Transformation Awareness,' and 'Business Fundamentals Understanding' [58]. This equips students with essential knowledge and a mindset to navigate careers, start ventures, or join existing innovative enterprises post-graduation [2, 23, 24]."
+  },
+  {
+    "query": "The sources state that 'Entrepreneurial Mindset (EM) is learnable.' How is this statement reinforced by the post-session activity of creating a 'Failure Resume'?",
+    "ground_truth": "The statement 'EM is learnable' is reinforced by the 'Failure Resume' activity because it encourages reflection on past failures, identifying what they taught, how behavior changed, and how to approach future failures [62, 63]. This process cultivates resilience, adaptability, and a growth mindset, which are key components of the entrepreneurial mindset and are learned through practice and time [62, 64]."
+  },
+  {
+    "query": "How does the IDEO 'Shopping Cart Project' case study illustrate the practical application of Design Thinking principles?",
+    "ground_truth": "The IDEO 'Shopping Cart Project' case study illustrates Design Thinking by demonstrating their process for coming up with innovative products, including effective brainstorming, jotting down observations, and rapid prototyping and iterating to arrive at an improved solution [65]. This showcases the core principles of empathy, ideation, and experimentation in action [26]."
+  },
+  {
+    "query": "The 'Pilot-in-the-Plane Principle' of Effectuation states that the future is 'created, not found or predicted.' Connect this principle with the notion of 'Non-Predictive Control' as described in the sources.",
+    "ground_truth": "The 'Pilot-in-the-Plane Principle' emphasizes that by focusing on activities within their control, expert entrepreneurs know their actions will lead to desired outcomes, thus actively creating the future [48, 66]. This directly relates to 'Non-Predictive Control,' which asserts that to the extent one can control the future, predicting it becomes less necessary. Instead of relying on predictions, entrepreneurs proactively shape the future through their means and actions [67]."
+  },
+  {
+    "query": "A startup is evaluating a new market opportunity. Beyond identifying the 'problem' and 'need', what five criteria does the TIPSC framework provide to filter and narrow down on attractive opportunities?",
+    "ground_truth": "Beyond identifying the problem and need, the TIPSC framework provides five criteria to filter and narrow down attractive opportunities: Timely, Important, Profitable, Solvable, and Context [68]."
+  },
+  {
+    "query": "How does the example of Airbnb's origin story exemplify the concept that 'Great opportunities are often disguised as difficult problems'?",
+    "ground_truth": "Airbnb's origin story exemplifies this by showing how founders Brian Chesky and Joe Gebbia identified an opportunity from the 'difficult problem' of expensive and scarce hotel rooms during a conference [68, 69]. They realized people had spare rooms, turning a problem into a valuable solution (Airbnb) that disrupted the traditional hotel industry [22, 69]."
+  },
+  {
+    "query": "Why is it particularly important for startup founders to establish an ethical culture from the outset, rather than focusing solely on profitability?",
+    "ground_truth": "It is crucial for startup founders to establish an ethical culture from the outset because integrity and reputation are fundamental for long-term business success. Unethical decisions, even driven by competitive pressure, can have big negative consequences and 'bring down the entire effort' [51, 52]. While competitive pressure might tempt unethical decisions, such missteps, exemplified by cases like Theranos, can 'bring down the entire effort' and lead to severe negative consequences, highlighting that ethical values are more important than just profitability [52, 53, 70]."
+  },
+  {
+    "query": "Explain how 'Self-Delusion' and 'Survival Mentality' can act as obstacles to ethical decision-making in a startup.",
+    "ground_truth": "'Self-Delusion' is an obstacle because it causes individuals to judge themselves by their intentions rather than their actions, leading them to overlook ethical missteps [71]. 'Survival Mentality' creates an obstacle by convincing founders that ethical missteps are necessary for the startup's very existence, prioritizing short-term survival over long-term ethical integrity [71]."
+  },
+  {
+    "query": "Why is 'face-to-face communication' considered the 'most valuable form of communication' for high-performing teams, and what challenge does this pose for cross-campus or remote teams?",
+    "ground_truth": "'Face-to-face communication' is considered most valuable because sociometric data suggests it's key to high energy, engagement, and exploration in teams, which predict success [54, 55]. This poses a challenge for cross-campus or remote teams as they must actively plan how to overcome the lack of physical presence to maintain this vital communication effectiveness [55]."
+  },
+  {
+    "query": "The sources mention that 'Leadership behavior demonstrated by all team members in a startup can make all the difference.' How does this idea challenge the traditional view of a single 'leader' and align with concepts like 'trust' and 'taking care of team members'?",
+    "ground_truth": "This idea challenges the traditional view by suggesting that leadership is not confined to a single individual (e.g., Founding CEO) but is a collective responsibility [72, 73]. It aligns with concepts like 'trust' and 'taking care of team members' because such behaviors, when demonstrated by all, foster a collaborative environment where every member contributes to inspiring, supporting, and ensuring the team's success, building stronger collective leadership [74]."
+  },
+  {
+    "query": "How does the 'Value Proposition Canvas' help a startup in constructing its value proposition by bridging the 'Customer Profile' and the 'Value Map'?",
+    "ground_truth": "The 'Value Proposition Canvas' helps by systematically linking the 'Customer Profile' (describing customer jobs, pains, and gains) with the 'Value Map' (describing how a startup's products/services, pain relievers, and gain creators address these customer aspects) [75-77]. This ensures the proposed solution is directly aligned with customer needs and creates value [78]."
+  },
+  {
+    "query": "A startup wants to position its new product. Describe the key components of a 'Positioning Statement' template and how it helps articulate differentiation.",
+    "ground_truth": "A 'Positioning Statement' template includes: identifying the target customer and their need or opportunity; stating the product name and product category; and outlining the benefits it delivers [77]. It articulates differentiation by specifying the primary competitive alternative and then detailing the primary differentiation of the startup's product compared to it [77, 79]."
+  },
+  {
+    "query": "Explain how the Business Model Canvas (BMC) and a traditional Business Plan (BP) can be complementary, rather than mutually exclusive, tools for a startup.",
+    "ground_truth": "The BMC offers a 10,000-foot, dynamic, and visual overview for easier iteration, while a traditional BP is more strategic and detailed, including financials [80]. They are complementary because BMC can be used for quick analysis and ideation, and its hypotheses can then be validated and elaborated upon in the more detailed Business Plan, making their use 'situational' depending on the need and audience [80, 81]."
+  },
+  {
+    "query": "When defining 'Customer Segments' for a Business Model Canvas, what are the four different market types a startup might target?",
+    "ground_truth": "When defining 'Customer Segments' for a Business Model Canvas, a startup might target a Mass market, Niche market, Segmented market, or a Diversified market [82]."
+  },
+  {
+    "query": "Why is understanding the 'Type of Market' crucial for a startup, and how does it influence various aspects like sales and marketing?",
+    "ground_truth": "Understanding the 'Type of Market' is crucial because it 'changes EVERYTHING' for a startup [83]. It radically influences strategies for Sales, Marketing, and Business development, as approaches for an Existing Market differ significantly from those for a New Market, Resegmented Market, or Clone Market [83, 84]."
+  },
+  {
+    "query": "A startup is estimating its market size. Explain the hierarchy and relationship between TAM, SAM, and Target Market, providing a conceptual example for each.",
+    "ground_truth": "TAM (Total Addressable Market) is the entire market for a product/service, broadest and easiest to estimate (e.g., 'Mobile healthcare apps' globally) [85]. SAM (Served Addressable Market) is the portion of TAM a startup's value proposition can address, sharpening focus (e.g., 'Mobile healthcare apps for seniors') [86]. Target Market is a further refinement, a specific demographic or segment the startup will initially pursue (e.g., 'Mobile healthcare apps for elders/seniors targeting retirement homes') [86]."
+  },
+  {
+    "query": "In the context of pitching, why is it advised not to write a talk word for word, and what are two practical tips for using notes effectively?",
+    "ground_truth": "It is advised not to write a talk word for word because it can make the speaker sound unnatural and hinder engaging delivery [87, 88]. Two practical tips for using notes effectively are to use small pieces of paper and number them, and to use PowerPoint's notes and timing features for cues rather than full scripts [87, 89]."
+  },
+  {
+    "query": "The 'COP' Canvas asks about 'Passion,' 'Capabilities,' and 'Opportunities.' How does reflecting on these elements contribute to an individual's entrepreneurial journey?",
+    "ground_truth": "Reflecting on 'Passion' (interests, what moves you), 'Capabilities' (skills, talents), and 'Opportunities' (problems/challenges to solve) as per the 'COP' Canvas provides a foundational self-assessment [90, 91]. This process helps individuals identify areas where their interests and strengths align with market needs, which is a starting point for identifying and pursuing viable entrepreneurial ventures [20, 90, 91]."
+  },
+  {
+    "query": "How does the concept of 'Embracing Uncertainty' from Effectuation relate to the 'Comfortable with uncertainty' trait of entrepreneurs?",
+    "ground_truth": "'Embracing Uncertainty' is a core commonality between Effectuation and the Entrepreneurial Mindset, particularly the trait of being 'Comfortable with uncertainty' [43, 92]. Effectuation's 'Lemonade Principle' explicitly advises expert entrepreneurs to embrace and leverage surprises rather than trying to avoid them, turning 'bad news' into clues for new markets [48, 49]. This shows that rather than being paralysed by uncertainty, successful entrepreneurs actively navigate and even capitalize on it."
+  },
+  {
+    "query": "Given that 'Technology Transformation Awareness' is a learning outcome, how might AI, as discussed in Module M8 (AI: Reimagining How We Innovate), enhance an entrepreneurial solution based on M12's recap?",
+    "ground_truth": "'Technology Transformation Awareness' encourages understanding how technology changes things [58]. Module M8 explicitly lists 'AI: Reimagining How We Innovate' in the course outline [58], and M12's recap reiterates 'Leverage Technology and Innovation' by incorporating AI or digital tools to enhance a solution [93]. Therefore, AI could be leveraged to disrupt traditional models, automate processes, provide new insights, or create unique product features, thereby enhancing the entrepreneurial solution [93]."
+  },
+  {
+    "query": "Why is 'Lots of ‘doing’ in a Team setting' emphasized as a way to get the best out of the EIE course, and how does team success relate to individual success in this context?",
+    "ground_truth": "'Lots of ‘doing’ in a Team setting' is emphasized because it allows students to practice frameworks and tools, fostering the development of practical skills [38]. Team success is directly tied to individual success ('if Team succeeds, you succeed') [34, 38], promoting collaboration, shared learning, and leveraging diverse skills crucial for entrepreneurial ventures, where 'Not the Right Team' is a top reason for failure [29, 94]."
+  },
+  {
+    "query": "Describe how the 'Lemonade Principle' encourages expert entrepreneurs to approach unexpected challenges.",
+    "ground_truth": "The 'Lemonade Principle' encourages expert entrepreneurs to 'Embrace and Leverage surprises' [48, 49]. Instead of viewing unexpected challenges or 'bad news' as setbacks to be avoided, they interpret them as potential clues or opportunities to create new markets or redefine their approach [48, 49]. This principle highlights adaptability and a positive reinterpretation of contingencies."
+  },
+  {
+    "query": "What distinguishes 'Gross Profit Margin' from 'Operating Profit Margin' and what does each indicate about a company's profitability?",
+    "ground_truth": "Gross Profit Margin is (Sales revenue – COGS) as a percentage of revenue, indicating the gross profitability from product production and sales [36]. Operating Profit Margin is Operating Profit expressed as a percentage of Revenue, indicating the profitability of the company’s core operating activities after all ongoing operating expenses (excluding COGS, taxes, interest) are accounted for [36]."
+  },
+  {
+    "query": "How does understanding customer's 'Pains' and 'Gains' contribute to creating effective 'Pain Relievers' and 'Gain Creators' in the Value Proposition Canvas?",
+    "ground_truth": "Understanding customer 'Pains' (problems, bad outcomes, risks) allows for the creation of 'Pain Relievers' that specifically eliminate or minimize those identified issues [76, 77]. Similarly, identifying customer 'Gains' (desired outcomes, benefits sought) enables the development of 'Gain Creators' that produce those specific benefits, enhancing the product/service's appeal and value proposition [76, 77]."
+  },
+  {
+    "query": "If a startup chooses a 'Clone Market', what specific strategic approach is implied, and why might this be a viable entry strategy?",
+    "ground_truth": "If a startup chooses a 'Clone Market', it implies a strategic approach where an existing market or business model is modified or adopted for a different country or geography [84]. This can be a viable entry strategy because it leverages proven concepts and reduces some of the risks associated with entirely new market creation, as seen with examples like Ola [84]."
+  },
+  {
+    "query": "What is one key objective of the EIE course related to innovation and entrepreneurship?",
+    "ground_truth": "To embrace an I&E Mindset. [1]"
+  },
+  {
+    "query": "Name one specific learning outcome of the EIE course concerning transformative changes.",
+    "ground_truth": "Understanding Transformative Tech-led Changes. [1]"
+  },
+  {
+    "query": "According to the EU Competence Framework, how is entrepreneurship defined in terms of transforming ideas?",
+    "ground_truth": "Entrepreneurship is when you act upon opportunities and ideas and transform them into value for others. [2]"
+  },
+  {
+    "query": "What are the three core building blocks of entrepreneurship as outlined in the course?",
+    "ground_truth": "Imagination, Creativity, Innovation. [3]"
+  },
+  {
+    "query": "Identify one common myth about entrepreneurs.",
+    "ground_truth": "They are born not made, or they are high risk takers. [4]"
+  },
+  {
+    "query": "What is one key characteristic of a 'Growth Mindset' that supports entrepreneurship?",
+    "ground_truth": "It implies that the entrepreneurial mindset is learnable and can be conditioned through practice and time. [5]"
+  },
+  {
+    "query": "According to Elon Musk, what does it signify if things are 'not failing' in an innovative environment?",
+    "ground_truth": "It means you are not innovating enough. [6]"
+  },
+  {
+    "query": "Which Stanford professor is credited with originating the concept of Effectuation?",
+    "ground_truth": "Dr. Saras Sarasvathy. [7]"
+  },
+  {
+    "query": "What are the three key principles of Design Thinking mentioned in the EIE course?",
+    "ground_truth": "Empathy, Ideation, Experimentation. [8]"
+  },
+  {
+    "query": "What is the primary difference between an 'idea' and an 'opportunity' in entrepreneurial terms?",
+    "ground_truth": "An idea is a flash of inspiration, while an opportunity is an open door or a pathway to creating value. [9, 10]"
+  },
+  {
+    "query": "Name one obstacle to ethical decision-making in startups.",
+    "ground_truth": "Complacency, Self-Delusion, Rationalizations, or Survival Mentality. [11]"
+  },
+  {
+    "query": "What is listed as one of the top reasons for startup failure according to the course?",
+    "ground_truth": "'Not the Right Team.' [12]"
+  },
+  {
+    "query": "According to Verna Myers, how is 'inclusion' defined in relation to 'diversity'?",
+    "ground_truth": "Diversity is being invited to the party, and inclusion is being asked to dance. [13]"
+  },
+  {
+    "query": "Name one early sign of a dysfunctional team-member relationship.",
+    "ground_truth": "Criticism, Contempt, Defensiveness, or Stonewalling. [14]"
+  },
+  {
+    "query": "How is 'Customer Value' primarily defined in the context of a product or service?",
+    "ground_truth": "The usefulness of a product/service to a customer. [15]"
+  },
+  {
+    "query": "What is a 'Value Proposition' in simple terms?",
+    "ground_truth": "A bundle of products and/or services that create value for a specific customer segment. [15]"
+  },
+  {
+    "query": "What is the Business Model Canvas (BMC) described as, in terms of its view of a business?",
+    "ground_truth": "A 10,000ft-level view. [16]"
+  },
+  {
+    "query": "Name one type of customer segment identified in the Business Model Canvas.",
+    "ground_truth": "Mass market, Niche market, Segmented market, or Diversified market. [17]"
+  },
+  {
+    "query": "What is the broadest measure of market size that quantifies the entire chain of buyer/seller relationships in a market?",
+    "ground_truth": "Total Addressable Market (TAM). [18]"
+  },
+  {
+    "query": "Name one type of market, other than 'Existing Market,' described in the course.",
+    "ground_truth": "Resegmented Market, New Market, or Clone Market. [19]"
+  },
+  {
+    "query": "According to CB Insights, what is the second top reason startups fail?",
+    "ground_truth": "'Ran out of Cash.' [20]"
+  },
+  {
+    "query": "What is the fundamental accounting equation taught in the course?",
+    "ground_truth": "Assets – Liability = Owner’s Equity. [21]"
+  },
+  {
+    "query": "What is a 'Convertible Note' primarily used for in early rounds of funding?",
+    "ground_truth": "As a loan that can be converted into equity under certain conditions. [22, 23]"
+  },
+  {
+    "query": "What does the 'Runway' metric indicate for a startup?",
+    "ground_truth": "The amount of time until the company runs out of cash, expressed in months. [24]"
+  },
+  {
+    "query": "According to the course recap, what is the initial step in the entrepreneurial journey?",
+    "ground_truth": "Identify a Problem or Opportunity. [25]"
+  },
+  {
+    "query": "Which module is specifically dedicated to forming a team and defining roles in startups?",
+    "ground_truth": "Module M5. [26]"
+  },
+  {
+    "query": "What is the definition of 'Revenue' for a company?",
+    "ground_truth": "Money a company earns from selling its products before any expenses are deducted. [27]"
+  },
+  {
+    "query": "What type of assets include cash, financial instruments, inventories, and accounts receivables?",
+    "ground_truth": "Current Assets. [21]"
+  },
+  {
+    "query": "What term refers to the ownership or shares of a company held by founders, investors, or employees?",
+    "ground_truth": "Equity. [28]"
+  },
+  {
+    "query": "What is a 'Monthly Burn Rate' in the context of startup finance?",
+    "ground_truth": "The net amount of cash flow for a month when net cash flow is negative. [29]"
+  },
+  {
+    "query": "Beyond individual learning, what interpersonal skill development is a stated objective of the EIE course?",
+    "ground_truth": "To find like-minded fellow students & build a network. [30]"
+  },
+  {
+    "query": "How does the EIE course structure encourage practical application of learned concepts?",
+    "ground_truth": "Through 'doing' in a Team setting and practicing the framework/tools learned. [31]"
+  },
+  {
+    "query": "Differentiate between an 'entrepreneurial' person and an 'entrepreneur' using the provided examples.",
+    "ground_truth": "Alex, who uses creativity to find solutions and takes risks within an existing company, is entrepreneurial, while Sarah, who quits her job to start a new company building fitness products, is an entrepreneur. [32, 33]"
+  },
+  {
+    "query": "In the context of startup ecosystems, what is India's global ranking?",
+    "ground_truth": "India is the 3rd largest startup ecosystem. [34]"
+  },
+  {
+    "query": "What equation represents innovation in the course material?",
+    "ground_truth": "Innovation = Invention multiplied by Commercialization. [35]"
+  },
+  {
+    "query": "Why are problems considered an entrepreneur's best friend according to the course?",
+    "ground_truth": "Because entrepreneurs are encouraged to look for problems rather than just ideas, as problems often present opportunities for value creation. [36]"
+  },
+  {
+    "query": "How does the 'How Might We...' phrasing assist in problem-solving for entrepreneurs?",
+    "ground_truth": "It helps in reframing problems as opportunities, enabling the generation of novel solutions. [37]"
+  },
+  {
+    "query": "How does Design Thinking aim to reduce the risk associated with launching new ideas?",
+    "ground_truth": "By helping to surface unmet customer needs and generating revolutionary, not just incremental, solutions. [8]"
+  },
+  {
+    "query": "A chef looks in the fridge to see what ingredients are available before deciding what to cook for dinner. Which type of reasoning, causal or effectual, does this scenario best represent?",
+    "ground_truth": "Effectual reasoning. [7, 38]"
+  },
+  {
+    "query": "What does the 'Affordable Loss Principle' primarily advise entrepreneurs to do regarding risk?",
+    "ground_truth": "Invest what they can afford to lose at each step, focusing on the downside risk rather than expected returns. [39, 40]"
+  },
+  {
+    "query": "According to the course, what is often disguised as a great opportunity for entrepreneurs?",
+    "ground_truth": "Difficult problems. [10]"
+  },
+  {
+    "query": "How does the course suggest 'value' of an opportunity can be quantified using multiple factors?",
+    "ground_truth": "Through a formula involving Value of Potential Opportunity, Number of Target Customers, Frequency of Solution Use, Willingness to Pay, and Level of Satisfaction with existing solutions. [41]"
+  },
+  {
+    "query": "In the context of Innovation-Driven Entrepreneurship (IDE) startups, which quadrant represents a 'No Go!' scenario?",
+    "ground_truth": "The quadrant with an Unvalidated Business Model and Low Growth (non-scalable) Business Model. [42]"
+  },
+  {
+    "query": "What are the three elements identified as the 'secret of High-Performing Teams'?",
+    "ground_truth": "Energy, Engagement, and Exploration. [13]"
+  },
+  {
+    "query": "In a balanced founding team, what is the primary role associated with the 'Hacker' type?",
+    "ground_truth": "To build the product/solution and anything else needed along the way. [43]"
+  },
+  {
+    "query": "Instead of asking 'Is there a Perfect Team?', what is the more practical question advised for teams to ask themselves?",
+    "ground_truth": "'How Do We Work Together?' [14]"
+  },
+  {
+    "query": "According to the Value Proposition Canvas framework, what are the three main components of a 'Customer Profile'?",
+    "ground_truth": "Customer Jobs, Pains, and Gains. [44, 45]"
+  },
+  {
+    "query": "What question about customer choice is critical to constructing a strong Value Proposition?",
+    "ground_truth": "'Why should the customer choose your solution?' [44]"
+  },
+  {
+    "query": "A startup's offering saves customers time and effort. Which source of value proposition is this primarily tapping into?",
+    "ground_truth": "Convenience/Usability. [46]"
+  },
+  {
+    "query": "A startup's revenue model involves charging customers each time they use a particular feature of their software. Which type of revenue stream is this?",
+    "ground_truth": "Usage fee. [47]"
+  },
+  {
+    "query": "When a startup collaborates with another firm to reduce risk and uncertainty, which component of the Business Model Canvas does this activity fall under?",
+    "ground_truth": "Key Partnerships. [48]"
+  },
+  {
+    "query": "What is the primary difference in detail level between a Business Model Canvas (BMC) and a Business Plan (BP)?",
+    "ground_truth": "BMC offers a 10,000ft-level, visual overview, while a Business Plan is more strategic, detailed, and includes financials. [16]"
+  },
+  {
+    "query": "A startup identifies a market opportunity by adapting an existing successful business model from one country to a different country/geography. Which market type does this best exemplify?",
+    "ground_truth": "Clone Market. [19]"
+  },
+  {
+    "query": "What is the 'Think of Threes' rule for presentations?",
+    "ground_truth": "Tell people what you’re going to say, Tell them, and Tell them what you’ve said. [49]"
+  },
+  {
+    "query": "Why is differentiating between 'facts,' 'assumptions,' and 'extrapolations' crucial when building a market model?",
+    "ground_truth": "To ensure accuracy and clarity in the financial potential estimates, allowing for multiple scenarios. [50]"
+  },
+  {
+    "query": "How does 'Gross Profit' differ from 'Net Income' in a company's financial statements?",
+    "ground_truth": "Gross Profit is Sales Revenue less Cost of Goods Sold, while Net Income is Operating Profit minus Taxes, Interest, and other charges. [27, 51]"
+  },
+  {
+    "query": "A startup needs to understand its cash inflows and outflows for operations, investing, and financing activities. Which financial statement would provide this information?",
+    "ground_truth": "The Cash Flow Statement. [52]"
+  },
+  {
+    "query": "Why does the course emphasize that finance knowledge is critical for every startup founder, not just finance professionals?",
+    "ground_truth": "Because founders need to make informed decisions, plan for growth, manage resources effectively, and avoid cash shortages, without which even a great product can fail. [20, 53]"
+  },
+  {
+    "query": "How does 'Vesting' primarily encourage long-term commitment from founders, investors, and employees?",
+    "ground_truth": "By ensuring they earn their equity over time or upon achieving specific milestones. [54, 55]"
+  },
+  {
+    "query": "What is the key advantage of a 'SAFE Note' over a 'Convertible Note' for early-stage startups seeking capital?",
+    "ground_truth": "A SAFE Note is not a debt instrument, meaning it has no interest payments, making it a quicker and easier way to raise capital without immediate valuation. [23, 28]"
+  },
+  {
+    "query": "If a student aims to achieve a deep understanding of the entrepreneurial journey from ideation to market entry, which two course objectives directly align with this goal?",
+    "ground_truth": "Idea-to-Market Process Familiarity and Business Fundamentals Understanding. [1, 30]"
+  },
+  {
+    "query": "Contrast a Small Medium Enterprise (SME) with an Innovation Driven Enterprise (IDE) based on their risk profile and time to profitability.",
+    "ground_truth": "SMEs generally have less risk and less time to get profitable, whereas IDEs typically have more risk and more time to get profitable. [33]"
+  },
+  {
+    "query": "How does the 'COP' canvas activity aid individuals in identifying potential entrepreneurial ventures?",
+    "ground_truth": "It helps by listing personal Passions, Capabilities (skills/talents), and Opportunities (problems/challenges to solve), providing a framework to connect personal attributes with market needs. [56, 57]"
+  },
+  {
+    "query": "An entrepreneur focuses on identifying new needs and creating never-before-existed products like electric cars. Which market type is this most representative of?",
+    "ground_truth": "New Market. [19]"
+  },
+  {
+    "query": "A startup founder constantly seeks feedback, iterates on their product, and views setbacks as learning experiences rather than definitive endings. Which entrepreneurial mindset attribute is most prominently displayed here?",
+    "ground_truth": "Dealing with Failure, which is described as a catalyst for growth, resilience, and adaptability. [6, 58]"
+  },
+  {
+    "query": "In the NABC approach, what specific comparison is made regarding a unique approach's benefits?",
+    "ground_truth": "Benefits are compared 'against the competition or alternatives.' [59]"
+  },
+  {
+    "query": "Explain how the 'Pilot-in-the-Plane Principle' reflects an effectual worldview for entrepreneurs.",
+    "ground_truth": "It suggests that entrepreneurs believe the future is not found or predicted, but rather created through their actions and within their control. [60, 61]"
+  },
+  {
+    "query": "An entrepreneur decides to pivot their startup's direction after receiving unexpected negative feedback during a prototype test, viewing it as an opportunity to discover a new market segment. Which Effectuation Principle is this entrepreneur primarily demonstrating?",
+    "ground_truth": "The Lemonade Principle, which involves embracing and leveraging surprises as clues to create new markets. [40, 62]"
+  },
+  {
+    "query": "In Design Thinking, what does the 'Viability' aspect primarily refer to in the context of innovation?",
+    "ground_truth": "It refers to the business aspect, ensuring the solution can be sustained commercially. [63]"
+  },
+  {
+    "query": "A startup identifies a significant customer pain point and develops a solution. However, they struggle to determine if customers would pay for it and if it's profitable. Which two elements of an attractive opportunity are they currently struggling with?",
+    "ground_truth": "Customers' willing to Pay and is likely Profitable. [41]"
+  },
+  {
+    "query": "Airbnb's founders observed that hotel rooms were expensive and scarce during a conference, leading them to realize people had spare rooms. Which source of startup opportunity does this example best illustrate?",
+    "ground_truth": "Personal (experience of) need or problem, and/or Customers’ needs. [64, 65]"
+  },
+  {
+    "query": "How does the course redefine entrepreneurship to emphasize a critical non-financial aspect?",
+    "ground_truth": "It redefines it by explicitly adding 'ethically' to the statement: 'Entrepreneurship is when you act [ethically] upon opportunities and ideas and transform them into value for others.' [66]"
+  },
+  {
+    "query": "A startup team is experiencing frequent arguments, with members often blaming each other and refusing to listen. Which two early signs of dysfunctional team relationships are most evident here?",
+    "ground_truth": "Criticism and Stonewalling (refusing to communicate). [14]"
+  },
+  {
+    "query": "While forming a startup team, what are the optimal levels of diversity recommended for Expertise, Opinion, and Power, respectively?",
+    "ground_truth": "High for Expertise, Moderate for Opinion, and Low for Power. [13]"
+  },
+  {
+    "query": "A Founding CEO successfully creates order and provides 'comfort in chaos' within the early firm. Which characteristic defines this specific leadership role?",
+    "ground_truth": "The Founding CEO brings order and creates 'Comfort in Chaos'; Leads the Company. [67]"
+  },
+  {
+    "query": "An entrepreneur designs a product to eliminate a major frustration (pain point) for their target customers, and also ensures it delivers unexpected positive outcomes (gains). Which two components of the 'Value Map' are they actively addressing?",
+    "ground_truth": "Pain Relievers and Gain Creators. [45, 68]"
+  },
+  {
+    "query": "In the Positioning Statement template, what is the purpose of the 'Unlike (Primary competitive alternative)' section?",
+    "ground_truth": "To highlight the product's primary differentiation compared to competitors. [68, 69]"
+  },
+  {
+    "query": "A company identifies that its product's value is perceived differently by various customer groups, and that this perception isn't solely tied to its monetary price. Which two characteristics of 'Customer Value' are highlighted by this scenario?",
+    "ground_truth": "That Value 'Varies from customer to customer' and 'is not limited to money.' [15]"
+  },
+  {
+    "query": "A startup aims to reach new customers by leveraging online advertising and direct sales through its own e-commerce platform. Which two components of the Business Model Canvas are they primarily addressing?",
+    "ground_truth": "Channels (for Awareness and Purchase) and Customer Acquisition (under Customer Relationships). [17]"
+  },
+  {
+    "query": "If a business focuses on minimizing costs by offering no-frills products and automating services, which two core components of the Business Model Canvas are closely linked to this strategy?",
+    "ground_truth": "Cost-driven (under Cost Structure) and Automated Services (under Customer Relationships). [17, 47]"
+  },
+  {
+    "query": "An entrepreneur is evaluating a potential business by identifying necessary physical assets, key production processes, and strategic alliances to acquire specific resources. Which three main sections of the Business Model Canvas framework are they analyzing?",
+    "ground_truth": "Key Resources (Physical), Key Activities (Production), and Key Partnerships (Specific resources/capabilities). [47, 48]"
+  },
+  {
+    "query": "A startup is targeting employees aged 25-40 in companies with over $500M in revenue for their health/fitness at work product. Which specific market size segment are they defining?",
+    "ground_truth": "Target Market. [70]"
+  },
+  {
+    "query": "How does market type influence a startup's Sales, Marketing, and Business development strategies?",
+    "ground_truth": "The course states that Sales, Marketing, and Business Development differ radically by market type. [71]"
+  },
+  {
+    "query": "A presenter is advised to 'vary style,' 'move about,' and 'vary pitch' during their talk. Which general pitching technique do these suggestions fall under?",
+    "ground_truth": "Presentation Techniques (specifically 'Pace of delivery,' 'Vary style,' 'Move about,' 'Vary pitch'). [49]"
+  },
+  {
+    "query": "A company's 'Operating Profit Margin' has decreased significantly, despite a stable 'Gross Profit Margin.' What financial change would most directly explain this scenario?",
+    "ground_truth": "An increase in Operating Expenses (ongoing costs like rent, salaries, utilities, marketing, excluding COGS), as Operating Profit is Gross Profit minus Operating Expenses. [72]"
+  },
+  {
+    "query": "A startup models its revenue based on the number of units sold per quarter and the price per unit. Which two specific financial terms define this model?",
+    "ground_truth": "Unit Sales and Product Sale Price (per unit) contribute to Product Revenue, which is part of the Revenue Model. [52, 73]"
+  },
+  {
+    "query": "If a startup's forecasted Profit & Loss statement for Year 1 shows a negative 'Product GM' but positive 'Operating Profit' in Year 4, what does this progression imply about the business?",
+    "ground_truth": "It implies that while the direct profitability of products (Gross Margin) might initially be negative, the overall operational efficiency and revenue growth over time allow the company to become profitable, covering its operating expenses. [74]"
+  },
+  {
+    "query": "A startup, in its early stages, is unsure of its precise valuation but needs to raise funds. Which hybrid funding instrument is specifically mentioned as suitable for this situation?",
+    "ground_truth": "Convertible Note. [23]"
+  },
+  {
+    "query": "If a startup's 'Monthly Burn Rate' is high and its 'Runway' is shrinking, what fundamental financial challenge is the startup facing, and what is its immediate implication?",
+    "ground_truth": "The startup is experiencing negative net cash flow, meaning it is losing cash each month and is at risk of running out of funds in the near future. [24, 29]"
+  },
+  {
+    "query": "Explain how 'Dilution' occurs for existing shareholders when a startup raises additional funding.",
+    "ground_truth": "Dilution occurs when the startup issues new shares to new investors, which decreases the percentage of equity held by existing shareholders, even if the total company value increases. [55]"
+  }
+]

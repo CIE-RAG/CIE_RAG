@@ -71,13 +71,13 @@ const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
       {/* Logo */}
       <div className="absolute top-6 left-6 z-10">
         <div className="flex items-center space-x-4">
-    <div className="w-50 h-30 flex items-center justify-center transition-all duration-300 hover:scale-105">
-      <PESLogo className="w-20 h-18" />
-    </div>
-    <div className="w-50 h-30 flex items-center justify-center transition-all duration-300 hover:scale-105">
-      <Logo className="w-20 h-18"/>
-    </div>
-  </div>
+          <div className="w-50 h-30 flex items-center justify-center transition-all duration-300 hover:scale-105">
+            <PESLogo className="w-20 h-18" />
+          </div>
+          <div className="w-50 h-30 flex items-center justify-center transition-all duration-300 hover:scale-105">
+            <Logo className="w-20 h-18" />
+          </div>
+        </div>
       </div>
 
       {/* Login Form */}
@@ -149,9 +149,9 @@ const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
                   className="absolute right-3 top-1/2 transform -translate-y-1/2 text-[#313c71]/60 hover:text-[#313c71] transition-colors duration-200 p-1"
                 >
                   {showPassword ? (
-                    <EyeOff className="w-5 h-5" />
-                  ) : (
                     <Eye className="w-5 h-5" />
+                  ) : (
+                    <EyeOff className="w-5 h-5" />
                   )}
                 </button>
               </div>
