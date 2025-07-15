@@ -8,7 +8,8 @@ import openpyxl
 from pptx import Presentation
 import zipfile
 from PIL import Image
-from moviepy import VideoFileClip
+#from moviepy import VideoFileClip
+from moviepy.editor import VideoFileClip
 from transformers import (
     BlipProcessor, BlipForConditionalGeneration,
     Blip2Processor, Blip2ForConditionalGeneration,

@@ -1,18 +1,15 @@
-// this code is a helper module that makes it easy to connect our React frontend with FastAPI
-// uses a library called axios to send and receive HTTP requests
-// sets up a way for React App to send chat messages to the backend and receive the AI responses
-// organizes our code such that all requests occur in one place
+// services/api.ts
+import axios from 'axios';
+import { WebSocketService } from './websocketService';
 
-import axios from 'axios'; // talks to server to get/send data , basically letting your frontend talk to the backend
-
-const API_BASE_URL = 'http://localhost:8000'; // Your FastAPI backend URL
+const API_BASE_URL = 'http://localhost:8000';
 
 const api = axios.create({
   baseURL: API_BASE_URL,
   headers: {
     'Content-Type': 'application/json',
   },
-  timeout: 30000, // 30 second timeout for AI responses
+  timeout: 30000,
 });
 
 export interface ChatRequest {
@@ -24,10 +21,44 @@ export interface ChatResponse {
   response: string;
 }
 
+// WebSocket service instance
+let wsService: WebSocketService | null = null;
+let wsConnected = false;
+
 export const chatAPI = {
-  sendMessage: async (query: string, username: string): Promise<ChatResponse> => {
+  // Initialize WebSocket connection
+  initializeWebSocket: async (username: string): Promise<void> => {
+    if (wsService) {
+      wsService.disconnect();
+    }
+    
+    wsService = new WebSocketService(username);
     try {
-      const response = await api.post<ChatResponse>('/chat', {
+      await wsService.connect();
+      wsConnected = true;
+      console.log('WebSocket initialized successfully');
+    } catch (error) {
+      console.error('WebSocket initialization failed:', error);
+      wsConnected = false;
+    }
+  },
+
+  // Enhanced sendMessage with automatic fallback
+  sendMessage: async (query: string, username: string): Promise<ChatResponse> => {
+    // Try WebSocket first if connected
+    if (wsService && wsConnected) {
+      try {
+        const response = await wsService.sendMessage(query);
+        return { response };
+      } catch (error) {
+        console.warn('WebSocket failed, falling back to HTTP:', error);
+        wsConnected = false;
+      }
+    }
+
+    // Fallback to HTTP API
+    try {
+      const response = await api.post('/chat', {
         query,
         username
       });
@@ -38,6 +69,21 @@ export const chatAPI = {
         throw new Error(error.response?.data?.detail || 'Failed to send message');
       }
       throw error;
+    }
+  },
+
+  // Get WebSocket session info
+  getSessionInfo: () => ({
+    connected: wsConnected,
+    sessionId: wsService?.getSessionId() || null
+  }),
+
+  // Cleanup WebSocket
+  cleanup: () => {
+    if (wsService) {
+      wsService.disconnect();
+      wsService = null;
+      wsConnected = false;
     }
   }
 };
