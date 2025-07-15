@@ -18,3 +18,4 @@ faiss-cpu
 llama-index
 numpy
 pandas
+better-profanity

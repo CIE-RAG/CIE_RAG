@@ -34,6 +34,17 @@ const ChatbotInterface: React.FC<ChatbotInterfaceProps> = ({
   user,
   onLogout,
 }) => {
+  const handleDeleteConversation = (conversationId: string) => {
+    // Remove the conversation from the conversations array
+    setConversations((prev) =>
+      prev.filter((conv) => conv.id !== conversationId)
+    );
+
+    // If the deleted conversation was active, clear the active conversation
+    if (activeConversation === conversationId) {
+      setActiveConversation(null);
+    }
+  };
   const [conversations, setConversations] = useState<Conversation[]>([]);
   const [activeConversation, setActiveConversation] = useState<string | null>(
     null
@@ -71,93 +82,6 @@ const ChatbotInterface: React.FC<ChatbotInterfaceProps> = ({
     setIsSidebarOpen(false);
   };
 
-  // const simulateBotResponse = (userMessage: string): string => {
-  //   const responses = [
-  //     "I understand you're asking about " +
-  //       userMessage.toLowerCase() +
-  //       ". Let me help you with that.",
-  //     "That's an interesting question. Based on my knowledge, I can provide you with some insights.",
-  //     "I'd be happy to help you with that. Here's what I can tell you about your query.",
-  //     "Thank you for your question. Let me provide you with a comprehensive answer.",
-  //   ];
-
-  //   return (
-  //     responses[Math.floor(Math.random() * responses.length)] +
-  //     " " +
-  //     "This is a simulated response to demonstrate the chat functionality. In a real implementation, this would be connected to your RAG system to provide accurate, context-aware responses based on your knowledge base."
-  //   );
-  // };
-
-  // const handleSendMessage = async () => {
-  //   if (!inputMessage.trim()) return;
-
-  //   const userMessage: Message = {
-  //     id: Date.now().toString(),
-  //     text: inputMessage,
-  //     isUser: true,
-  //     timestamp: new Date(),
-  //   };
-
-  //   let conversationId = activeConversation;
-
-  //   if (!conversationId) {
-  //     // Create new conversation if none exists
-  //     const newConversation: Conversation = {
-  //       id: Date.now().toString(),
-  //       title:
-  //         inputMessage.slice(0, 30) + (inputMessage.length > 30 ? "..." : ""),
-  //       messages: [],
-  //     };
-  //     setConversations((prev) => [newConversation, ...prev]);
-  //     conversationId = newConversation.id;
-  //     setActiveConversation(conversationId);
-  //   }
-
-  //   // Add user message
-  //   setConversations((prev) =>
-  //     prev.map((conv) =>
-  //       conv.id === conversationId
-  //         ? { ...conv, messages: [...conv.messages, userMessage] }
-  //         : conv
-  //     )
-  //   );
-
-  //   setInputMessage("");
-  //   setIsLoading(true);
-
-  //   // Reset textarea height
-  //   if (textareaRef.current) {
-  //     textareaRef.current.style.height = "auto";
-  //   }
-
-  //   // Simulate bot response
-  //   setTimeout(() => {
-  //     const botMessage: Message = {
-  //       id: (Date.now() + 1).toString(),
-  //       text: simulateBotResponse(inputMessage),
-  //       isUser: false,
-  //       timestamp: new Date(),
-  //     };
-
-  //     setConversations((prev) =>
-  //       prev.map((conv) =>
-  //         conv.id === conversationId
-  //           ? {
-  //               ...conv,
-  //               messages: [...conv.messages, botMessage],
-  //               title:
-  //                 conv.title === "New Chat"
-  //                   ? inputMessage.slice(0, 30) +
-  //                     (inputMessage.length > 30 ? "..." : "")
-  //                   : conv.title,
-  //             }
-  //           : conv
-  //       )
-  //     );
-
-  //     setIsLoading(false);
-  //   }, 1000 + Math.random() * 2000);
-  // };
   const handleSendMessage = async () => {
     if (!inputMessage.trim()) return;
 
@@ -304,6 +228,7 @@ const ChatbotInterface: React.FC<ChatbotInterfaceProps> = ({
           onClose={() => setIsSidebarOpen(false)}
           isCollapsed={isSidebarCollapsed}
           onToggleCollapse={toggleSidebar}
+          onDeleteConversation={handleDeleteConversation} // Add this line
         />
       </div>
 
