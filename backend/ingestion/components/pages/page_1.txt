@@ -1,0 +1,21 @@
+Page 1:
+M1 - Why Startups Fail
+Startup -> search for repeatable and scalable business model
+Why Conventional Product Development Fails
+The Lean Approach
+BMC (reference)
+Startups != small companies
+This approach focuses on the business plan first and testing later -> BIG assumption: customers +
+market already available
+Focus on implementation/tech instead of idea
+Linear process
+Most startups fail from lack of customers rather than a failure of their product development
+Components:
+1. Business Model Canvas
+2. Customer Development
+3. Agile Engineering
+Pivot: Substantive change to business model component
+Iteration: Minor, incremental change
+No plan survives without contacting customers first
+Create MVP -> simplest version of product that validates your business model
+Check for scalable business model

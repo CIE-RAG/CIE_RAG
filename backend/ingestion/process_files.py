@@ -17,12 +17,21 @@ from transformers import (
     BartTokenizer, BartForConditionalGeneration
 )
 
-MISTRAL_API_KEY = os.getenv("MISTRAL_API_KEY")
+MISTRAL_API_KEY = "SnNCe10sp5tm06gtA2D5pNyGkPlPYfXJ" or os.getenv("MISTRAL_API_KEY")
 DEEPGRAM_API_KEY = os.getenv("DEEPGRAM_API_KEY")
 LLAMA_CLOUD_API_KEY = os.getenv("LLAMA_CLOUD_API_KEY")
 
 class Parser:
     def __init__(self):
+        
+        os.makedirs("components/pages", exist_ok=True)
+        os.makedirs("components/images", exist_ok=True)
+        os.makedirs("components/slides", exist_ok=True)
+        os.makedirs("components/sheets", exist_ok=True)
+        os.makedirs("components/texts", exist_ok=True)
+        os.makedirs("components/clips", exist_ok=True)
+        os.makedirs("components/videos", exist_ok=True)
+
         self.raarr = open("order.txt","a+")
         self.AI_MODELS = self.initialize_models()
 
