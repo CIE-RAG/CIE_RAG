@@ -68,10 +68,21 @@ const Sidebar: React.FC<SidebarProps> = ({
 
   const handleDeleteConversation = () => {
     if (contextMenu.conversationId) {
-      onDeleteConversation(contextMenu.conversationId);
+      // const conversation = conversations.find(
+      //   (c) => c.id === contextMenu.conversationId
+      // );
+      const confirmed = window.confirm(
+        `Are you sure you want to delete this message? This action cannot be undone.`
+      );
+
+      if (confirmed) {
+        onDeleteConversation(contextMenu.conversationId);
+      }
+
       handleCloseContextMenu();
     }
   };
+
   const formatConversationTime = (messages: any[]) => {
     if (messages.length === 0) return "";
     const lastMessage = messages[messages.length - 1];
