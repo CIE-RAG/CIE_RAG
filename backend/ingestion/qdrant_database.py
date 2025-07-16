@@ -11,7 +11,7 @@ from qdrant_client.http.models import (
     FieldCondition, MatchValue, UpdateStatus
 )
 from dotenv import load_dotenv
-from ingestion.BBCB_modules import Parser
+from ingestion.process_files import Parser
 # Load environment variables
 load_dotenv()
 
