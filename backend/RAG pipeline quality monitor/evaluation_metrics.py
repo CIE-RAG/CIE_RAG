@@ -118,59 +118,59 @@ def normalize_query(query):
     normalized = re.sub(r'\s+', ' ', normalized)  # Replace multiple spaces with single space
     return normalized
 
-# === Load JSON Dataset with Enhanced Key Matching ===
-try:
-    with open("final_dataset1.json", "r", encoding="utf-8") as f:
-        raw_data = json.load(f)
+# # === Load JSON Dataset with Enhanced Key Matching ===
+# try:
+#     with open("final_dataset1.json", "r", encoding="utf-8") as f:
+#         raw_data = json.load(f)
     
-    # Create multiple mappings for better matching
-    hf_dict = {}
-    hf_dict_normalized = {}
-    hf_dict_original = {}
+#     # Create multiple mappings for better matching
+#     hf_dict = {}
+#     hf_dict_normalized = {}
+#     hf_dict_original = {}
     
-    for row in raw_data:
-        original_query = row['query']
-        ground_truth = row['ground_truth']
+#     for row in raw_data:
+#         original_query = row['query']
+#         ground_truth = row['ground_truth']
         
-        # Store with different normalizations
-        hf_dict[original_query.strip().lower()] = ground_truth
-        hf_dict_normalized[normalize_query(original_query)] = ground_truth
-        hf_dict_original[original_query] = ground_truth
+#         # Store with different normalizations
+#         hf_dict[original_query.strip().lower()] = ground_truth
+#         hf_dict_normalized[normalize_query(original_query)] = ground_truth
+#         hf_dict_original[original_query] = ground_truth
     
-    print(f"✅ Loaded {len(raw_data)} queries from dataset")
-    print(f"📋 Sample queries from dataset:")
-    for i, query in enumerate(list(hf_dict.keys())[:3]):
-        print(f"  [{i+1}] '{query}'")
+#     print(f"✅ Loaded {len(raw_data)} queries from dataset")
+#     print(f"📋 Sample queries from dataset:")
+#     for i, query in enumerate(list(hf_dict.keys())[:3]):
+#         print(f"  [{i+1}] '{query}'")
     
-except FileNotFoundError:
-    print("⚠️ final_dataset1.json not found. Creating empty dataset.")
-    hf_dict = {}
-    hf_dict_normalized = {}
-    hf_dict_original = {}
+# except FileNotFoundError:
+#     print("⚠️ final_dataset1.json not found. Creating empty dataset.")
+#     hf_dict = {}
+#     hf_dict_normalized = {}
+#     hf_dict_original = {}
 
-# === Qdrant Setup (Mock if not available) ===
-class MockQdrantManager:
-    def __init__(self, collection_name):
-        self.collection_name = collection_name
-        print(f"🔧 Mock Qdrant Manager initialized for collection: {collection_name}")
+# # === Qdrant Setup (Mock if not available) ===
+# class MockQdrantManager:
+#     def __init__(self, collection_name):
+#         self.collection_name = collection_name
+#         print(f"🔧 Mock Qdrant Manager initialized for collection: {collection_name}")
     
-    def search(self, query, limit=3):
-        # Return mock contexts for testing
-        return [
-            {"text": f"Mock context 1 for query: {query[:50]}..."},
-            {"text": f"Mock context 2 related to: {query[:50]}..."},
-            {"text": f"Mock context 3 discussing: {query[:50]}..."}
-        ]
+#     def search(self, query, limit=3):
+#         # Return mock contexts for testing
+#         return [
+#             {"text": f"Mock context 1 for query: {query[:50]}..."},
+#             {"text": f"Mock context 2 related to: {query[:50]}..."},
+#             {"text": f"Mock context 3 discussing: {query[:50]}..."}
+#         ]
 
-try:
-    from qdrant import QdrantManager
-    qdrant = QdrantManager(collection_name=QDRANT_COLLECTION)
-    print("✅ Qdrant Manager initialized")
-except ImportError:
-    print("⚠️ Qdrant not available, using mock manager")
-    qdrant = MockQdrantManager(collection_name=QDRANT_COLLECTION)
+# try:
+#     from qdrant import QdrantManager
+#     qdrant = QdrantManager(collection_name=QDRANT_COLLECTION)
+#     print("✅ Qdrant Manager initialized")
+# except ImportError:
+#     print("⚠️ Qdrant not available, using mock manager")
+#     qdrant = MockQdrantManager(collection_name=QDRANT_COLLECTION)
 
-# === Initialize Local Metrics ===
+# # === Initialize Local Metrics ===
 metrics_calculator = LocalRAGMetrics()
 
 # === Core Functions ===
@@ -219,49 +219,44 @@ def get_context(query, top_k=3):
         print(f"⚠️ Context retrieval error: {e}")
         return [f"Fallback context for: {query}"]
 
-def get_ollama_response(query, context):
-    """Get response from Ollama API"""
-    prompt = f"Context:\n{context}\n\nQuestion: {query}\n\nPlease provide a helpful answer based on the context provided."
+# def get_ollama_response(query, context):
+#     """Get response from Ollama API"""
+#     prompt = f"Context:\n{context}\n\nQuestion: {query}\n\nPlease provide a helpful answer based on the context provided."
     
-    try:
-        response = requests.post(
-            f"{OLLAMA_SERVER_URL}/api/chat",
-            headers={"Content-Type": "application/json"},
-            json={
-                "model": OLLAMA_MODEL,
-                "messages": [
-                    {"role": "system", "content": "You are a helpful assistant. Answer questions based only on the provided context. If the context doesn't contain relevant information, say so clearly."},
-                    {"role": "user", "content": prompt}
-                ],
-                "stream": False
-            },
-            timeout=60
-        )
+#     try:
+#         response = requests.post(
+#             f"{OLLAMA_SERVER_URL}/api/chat",
+#             headers={"Content-Type": "application/json"},
+#             json={
+#                 "model": OLLAMA_MODEL,
+#                 "messages": [
+#                     {"role": "system", "content": "You are a helpful assistant. Answer questions based only on the provided context. If the context doesn't contain relevant information, say so clearly."},
+#                     {"role": "user", "content": prompt}
+#                 ],
+#                 "stream": False
+#             },
+#             timeout=60
+#         )
         
-        if response.status_code == 200:
-            response_json = response.json()
-            return response_json["message"]["content"].strip()
-        else:
-            return f"Error: HTTP {response.status_code}"
+#         if response.status_code == 200:
+#             response_json = response.json()
+#             return response_json["message"]["content"].strip()
+#         else:
+#             return f"Error: HTTP {response.status_code}"
             
-    except requests.exceptions.RequestException as e:
-        print(f"❌ Ollama API Error: {e}")
-        return f"Error: Failed to connect to Ollama server. Please check if Ollama is running at {OLLAMA_SERVER_URL}"
-    except Exception as e:
-        print(f"❌ Unexpected error: {e}")
-        return "Error: Failed to get valid response from Ollama."
+#     except requests.exceptions.RequestException as e:
+#         print(f"❌ Ollama API Error: {e}")
+#         return f"Error: Failed to connect to Ollama server. Please check if Ollama is running at {OLLAMA_SERVER_URL}"
+#     except Exception as e:
+#         print(f"❌ Unexpected error: {e}")
+#         return "Error: Failed to get valid response from Ollama."
 
 def evaluate_single(query, ground_truth, response, contexts):
-    """Evaluate a single query-response pair using local metrics"""
-    scores = metrics_calculator.evaluate_all(query, ground_truth, response, contexts)
-    
-    # Create a DataFrame for consistent output format
-    df = pd.DataFrame([{
-        "query": query,
-        **scores
-    }])
-    
-    return df
+        """Evaluate a single query-response pair using local metrics"""
+        scores = metrics_calculator.evaluate_all(query, ground_truth, response, contexts)    
+        # Create a DataFrame for consistent output format
+        df = pd.DataFrame([{"query": query, **scores}])                  
+        return df
 
 def plot_metrics(df):
     """Plot evaluation metrics"""
@@ -328,118 +323,118 @@ def save_detailed_results(query, ground_truth, response, contexts, scores, filen
     
     return result
 
-# === Main Interactive Loop ===
-response_log = []
-print("\n🎯 Local RAG Evaluation System (No API Dependencies)")
-print("=" * 60)
-print("📊 Available Metrics:")
-print("  • Context Relevance: How relevant contexts are to the query")
-print("  • Context Precision: How precisely contexts relate to the response")
-print("  • Context Recall: How well contexts cover ground truth")
-print("  • Answer Relevance: How relevant the response is to the query")
-print("  • Answer Correctness: How correct the response is vs ground truth")
-print("=" * 60)
-print("Type 'exit' to quit, 'stats' to see overall statistics\n")
+# # === Main Interactive Loop ===
+# response_log = []
+# print("\n🎯 Local RAG Evaluation System (No API Dependencies)")
+# print("=" * 60)
+# print("📊 Available Metrics:")
+# print("  • Context Relevance: How relevant contexts are to the query")
+# print("  • Context Precision: How precisely contexts relate to the response")
+# print("  • Context Recall: How well contexts cover ground truth")
+# print("  • Answer Relevance: How relevant the response is to the query")
+# print("  • Answer Correctness: How correct the response is vs ground truth")
+# print("=" * 60)
+# print("Type 'exit' to quit, 'stats' to see overall statistics\n")
 
-while True:
-    query = input("🔍 Enter a user query: ").strip()
+# while True:
+#     query = input("🔍 Enter a user query: ").strip()
     
-    if query.lower() == "exit":
-        break
-    elif query.lower() == "stats":
-        if response_log:
-            print(f"\n📈 Session Statistics:")
-            print(f"  • Total queries processed: {len(response_log)}")
-            print(f"  • Queries with ground truth: {sum(1 for r in response_log if r['ground_truth'] is not None)}")
-            print(f"  • Average response length: {np.mean([len(r['llm_response']) for r in response_log]):.1f} characters")
-        else:
-            print("📊 No queries processed yet.")
-        continue
+#     if query.lower() == "exit":
+#         break
+#     elif query.lower() == "stats":
+#         if response_log:
+#             print(f"\n📈 Session Statistics:")
+#             print(f"  • Total queries processed: {len(response_log)}")
+#             print(f"  • Queries with ground truth: {sum(1 for r in response_log if r['ground_truth'] is not None)}")
+#             print(f"  • Average response length: {np.mean([len(r['llm_response']) for r in response_log]):.1f} characters")
+#         else:
+#             print("📊 No queries processed yet.")
+#         continue
     
-    if not query:
-        print("⚠️ Please enter a valid query.")
-        continue
+#     if not query:
+#         print("⚠️ Please enter a valid query.")
+#         continue
     
-    print(f"\n🔄 Processing query: '{query}'")
+#     print(f"\n🔄 Processing query: '{query}'")
     
-    # Get contexts
-    contexts = get_context(query)
-    context_str = " ".join(contexts)
+#     # Get contexts
+#     contexts = get_context(query)
+#     context_str = " ".join(contexts)
     
-    # Get response
-    response = get_ollama_response(query, context_str)
+#     # Get response
+#     response = get_ollama_response(query, context_str)
     
-    # Display results
-    print("\n📚 Retrieved Contexts:")
-    for i, ctx in enumerate(contexts, 1):
-        print(f"  [{i}] {ctx[:200]}{'...' if len(ctx) > 200 else ''}")
+#     # Display results
+#     print("\n📚 Retrieved Contexts:")
+#     for i, ctx in enumerate(contexts, 1):
+#         print(f"  [{i}] {ctx[:200]}{'...' if len(ctx) > 200 else ''}")
     
-    print(f"\n🤖 Ollama Response:\n{response}\n")
+#     print(f"\n🤖 Ollama Response:\n{response}\n")
     
-    # Check for ground truth and evaluate with enhanced matching
-    gt, match_type = find_ground_truth(query)
-    if gt:
-        print(f"🎯 Ground Truth Found ({match_type}) → Running Local Evaluation...")
-        print(f"📋 Ground Truth: {gt}\n")
+#     # Check for ground truth and evaluate with enhanced matching
+#     gt, match_type = find_ground_truth(query)
+#     if gt:
+#         print(f"🎯 Ground Truth Found ({match_type}) → Running Local Evaluation...")
+#         print(f"📋 Ground Truth: {gt}\n")
         
-        # Evaluate using local metrics
-        df = evaluate_single(query, gt, response, contexts)
-        scores = df.drop("query", axis=1).iloc[0].to_dict()
+#         # Evaluate using local metrics
+#         df = evaluate_single(query, gt, response, contexts)
+#         scores = df.drop("query", axis=1).iloc[0].to_dict()
         
-        # Display results
-        print("📊 Evaluation Results:")
-        print(df.to_string(index=False, float_format='%.3f'))
+#         # Display results
+#         print("📊 Evaluation Results:")
+#         print(df.to_string(index=False, float_format='%.3f'))
         
-        # Plot metrics
-        plot_metrics(df)
+#         # Plot metrics
+#         plot_metrics(df)
         
-        # Save detailed results
-        detailed_result = save_detailed_results(query, gt, response, contexts, scores)
+#         # Save detailed results
+#         detailed_result = save_detailed_results(query, gt, response, contexts, scores)
         
-        response_log.append({
-            "query": query,
-            "ground_truth": gt,
-            "llm_response": response,
-            "contexts": contexts,
-            "scores": scores
-        })
+#         response_log.append({
+#             "query": query,
+#             "ground_truth": gt,
+#             "llm_response": response,
+#             "contexts": contexts,
+#             "scores": scores
+#         })
         
-        print(f"\n✨ Summary: Avg Score = {detailed_result['summary']['avg_score']:.3f}")
-        print(f"   Best: {detailed_result['summary']['best_metric']} | Worst: {detailed_result['summary']['worst_metric']}")
+#         print(f"\n✨ Summary: Avg Score = {detailed_result['summary']['avg_score']:.3f}")
+#         print(f"   Best: {detailed_result['summary']['best_metric']} | Worst: {detailed_result['summary']['worst_metric']}")
         
-    else:
-        print("⚠️ Ground truth not found in dataset — running partial evaluation...")
-        print(f"🔍 Tried matching strategies: direct, normalized, fuzzy, contains")
+#     else:
+#         print("⚠️ Ground truth not found in dataset — running partial evaluation...")
+#         print(f"🔍 Tried matching strategies: direct, normalized, fuzzy, contains")
         
-        # Debug: Show similar queries for troubleshooting
-        print("\n🔍 Most similar queries in dataset:")
-        similar = get_close_matches(query.lower().strip(), list(hf_dict.keys()), n=3, cutoff=0.3)
-        for i, sim_query in enumerate(similar, 1):
-            print(f"  [{i}] '{sim_query}'")
+#         # Debug: Show similar queries for troubleshooting
+#         print("\n🔍 Most similar queries in dataset:")
+#         similar = get_close_matches(query.lower().strip(), list(hf_dict.keys()), n=3, cutoff=0.3)
+#         for i, sim_query in enumerate(similar, 1):
+#             print(f"  [{i}] '{sim_query}'")
         
-        # Still calculate metrics that don't require ground truth
-        partial_scores = {
-            "context_relevance": metrics_calculator.context_relevance(query, contexts),
-            "answer_relevance": metrics_calculator.answer_relevance(query, response)
-        }
+#         # Still calculate metrics that don't require ground truth
+#         partial_scores = {
+#             "context_relevance": metrics_calculator.context_relevance(query, contexts),
+#             "answer_relevance": metrics_calculator.answer_relevance(query, response)
+#         }
         
-        print(f"\n📊 Partial Evaluation (no ground truth):")
-        for metric, score in partial_scores.items():
-            print(f"  • {metric}: {score:.3f}")
+#         print(f"\n📊 Partial Evaluation (no ground truth):")
+#         for metric, score in partial_scores.items():
+#             print(f"  • {metric}: {score:.3f}")
         
-        response_log.append({
-            "query": query,
-            "ground_truth": None,
-            "llm_response": response,
-            "contexts": contexts,
-            "scores": partial_scores
-        })
+#         response_log.append({
+#             "query": query,
+#             "ground_truth": None,
+#             "llm_response": response,
+#             "contexts": contexts,
+#             "scores": partial_scores
+#         })
     
-    # Save response log
-    with open("live_response_log.json", "w", encoding="utf-8") as f:
-        json.dump(response_log, f, indent=2, ensure_ascii=False)
+#     # Save response log
+#     with open("live_response_log.json", "w", encoding="utf-8") as f:
+#         json.dump(response_log, f, indent=2, ensure_ascii=False)
     
-    print("\n✅ Results saved to live_response_log.json and detailed_results.json")
-    print("=" * 60 + "\n")
+#     print("\n✅ Results saved to live_response_log.json and detailed_results.json")
+#     print("=" * 60 + "\n")
 
-print("\n👋 Session ended. Check the generated files for detailed results!")
+# print("\n👋 Session ended. Check the generated files for detailed results!")
