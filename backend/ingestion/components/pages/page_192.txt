@@ -1,0 +1,18 @@
+Page 192:
+EIE M5 Session Quiz - Discussion / Recap
+EIE - II
+5. Which of the following best describes the difference between a pretotype and a prototype?
+A) A pretotype is built for function, while a prototype is built for appearance
+B) A pretotype is cheaper and faster to create than a prototype: Correct Answer –1205 students got it right!
+C) A pretotype is only a digital simulation, while a prototype is a physical model
+D) A pretotype is used for investor presentations, while a prototype is used for manufacturing
+6. What phrase does Alberto Savoia use to emphasize the importance of pretotyping?
+A) "Fail fast, fail cheap, fail often"
+B) "Build it and they will come"
+C) "Test before you invest” Correct Answer –1338 students got it right!
+D) "Innovation starts with imagination"
+14. Which of the following best describes the structure of an XYZ Hypothesis?
+A) At least X% of Y will Z: Correct Answer –894 students got it right!
+B) At least Y% of X will Z
+C) At least Z% of X will Y
+D) At least X% of Z will Y

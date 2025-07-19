@@ -11,7 +11,8 @@ from qdrant_client.http.models import (
     FieldCondition, MatchValue, UpdateStatus
 )
 from dotenv import load_dotenv
-from ingestion.BBCB_modules import Parser
+#from process_files import Parser
+from ingestion.process_files import Parser
 # Load environment variables
 load_dotenv()
 
@@ -41,12 +42,12 @@ class QdrantManager:
         self.qdrant_url = (
             qdrant_url 
             or os.getenv("QDRANT_URL") 
-            or "https://ab1a28a4-8c5e-4483-bd7f-59bc400e25a0.europe-west3-0.gcp.cloud.qdrant.io"  # Default fallback
+            or "https://779493cf-f284-4ca5-872a-c1aa2d40a777.europe-west3-0.gcp.cloud.qdrant.io"  # Default fallback
         )
         self.qdrant_api_key = (
             qdrant_api_key 
             or os.getenv("QDRANT_API_KEY") 
-            or "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2Nlc3MiOiJtIn0.UTbNfnmUXj_I6uNQec82uJqoFj71kDi1NPeEihxWBvA"  # Default fallback
+            or "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2Nlc3MiOiJtIn0.lbVCSfymAyvGHycoFLhm8bOUTJAWmVd6jnfC0dcCupI"  # Default fallback
         )
         
         # 3. Validate critical parameters

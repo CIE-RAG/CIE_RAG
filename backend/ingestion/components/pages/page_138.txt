@@ -1,0 +1,13 @@
+Page 138:
+7. Concierge: 
+Manually/openly, act as the product you eventually want to build 
+(unlike ‘Wizard of Oz’ where people are behind the scenes).
+8. Pilots: 
+Put an early version of your product in the hands of your 
+customers, scale down the size of the implementation, and 
+assign a finite time period to the project.
+9. Usability: 
+Check to see if someone can effectively use a product without 
+getting stuck or blocked.
+Examples of Experiments
+EIE - II

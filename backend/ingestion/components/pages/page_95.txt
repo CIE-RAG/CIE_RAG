@@ -1,0 +1,15 @@
+Page 95:
+How do you Test your Hypotheses (Steps)
+1. Capture your hypotheses (assumptions/opinions)
+2. Design the Experiments to test assumptions/opinions
+3. Test your hypotheses by conducting your key hypotheses
+•
+Run the Experiments (“Get out of the Building”, Customer interviews, not surveys)
+•
+Gather Data/Results from the Experiments (hypothesis is validated or invalidated)
+•
+What insights did you gather? How does this affect your problem/ solution/ BMC/ etc?
+Tip:
+For your experiments, recommend having some artifact (Pretotype/Prototype/MVP)
+Artifact can be: Paper, Digital, Native (in order of ascending fidelity: low -> high)
+EIE - II

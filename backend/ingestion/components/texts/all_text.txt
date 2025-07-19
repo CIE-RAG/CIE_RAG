@@ -1,0 +1,108 @@
+Page 1:
+M1 - Why Startups Fail
+Startup -> search for repeatable and scalable business model
+Why Conventional Product Development Fails
+The Lean Approach
+BMC (reference)
+Startups != small companies
+This approach focuses on the business plan first and testing later -> BIG assumption: customers +
+market already available
+Focus on implementation/tech instead of idea
+Linear process
+Most startups fail from lack of customers rather than a failure of their product development
+Components:
+1. Business Model Canvas
+2. Customer Development
+3. Agile Engineering
+Pivot: Substantive change to business model component
+Iteration: Minor, incremental change
+No plan survives without contacting customers first
+Create MVP -> simplest version of product that validates your business model
+Check for scalable business model
+
+
+Page 2:
+Submodule: Desirability (Customer Development)
+Customer Segments:
+Which customers/users you are serving
+Mass market, niche market, diversified market (two or more unrelated groups), segmented market
+(distinct groups of customers with distinct requirements)
+1. Segmented Market
+A market that is divided into distinct groups of customers with different needs, preferences, or
+characteristics.
+Businesses tailor their products or services to meet the specific demands of each segment.
+Example: An airline offers economy, business, and first-class tickets to cater to different customer
+groups.
+1. Diversified Market
+A market where a business targets two or more unrelated customer groups with different needs.
+The company offers distinct products or services to serve these unrelated groups.
+Example: Amazon serves individual consumers with e-commerce while offering cloud computing
+services to businesses.
+1. Mass Market
+A market where a business targets a broad customer base with a single product or service, aiming
+to reach as many people as possible.
+The focus is on high volume, standardization, and economies of scale.
+Example: Coca-Cola sells a standardized product worldwide, appealing to a wide audience.
+
+
+Page 3:
+Channels
+Value Proposition
+Customer Relationships
+Submodule: Viability (Price Stuff)
+Revenue Streams
+Cost Structure
+Submodule: Feasibility (All Them Keys)
+Key Resources
+1. Niche Market
+A market where a business focuses on a small, specialized group of customers with specific
+needs or interests.
+Products or services are highly tailored to meet the preferences of this group.
+Example: A company that sells luxury vegan leather bags caters to eco-conscious consumers in
+the luxury fashion niche.
+How you're reaching the customer and what they find convenient
+Eg: Web, own store, retail/distribution channels etc.
+What you're offering the customer and whether they care
+Types of relationships established with customer (personal/automates/acquisitive etc)
+Customer acquisition -> customer retention -> Boost sales (upsell)
+Where and how you're going to make money from; how much customers will be willing to pay and
+in what way
+Two types of revenue:
+Transactional: One time payment for a purchase
+Recurring: Repeating payment over a period of time
+Minimise costs as much as possible without compromising quality
+Two types of costing:
+Fixed: Price remains the same regardless of volume produced
+Variable: Price varies with amount of goods produced
+Economy of Scale: Cost advantages achieved as a business increases production, leading to lower
+costs per unit due to higher efficiency
+Economy of Scope: Cost advantages gained by a business from producing multiple products or
+services using the same resources or processes
+The essential resources needed for your model to run
+
+
+Page 4:
+Key Partners
+Key Activities
+Customer Development
+Agile Development
+Could be physical, intellectual, human, financial etc.
+Partners/suppliers you rely on in your business model
+Activities that need to be performed well to ensure the success of your model
+Parallel process to product dev
+Tied to customer milestones
+Learning and discovery before execution
+
+
+--- Image Descriptions ---
+Image from page 1: BLIP: cost vs cost of buying
+BLIP2: a graph shows the cost of not taking action
+
+Image from page 2: BLIP: the business model canvas
+BLIP2: the business model canvas
+
+Image from page 4: BLIP: business model canvas canvas
+BLIP2: business model canvas netflix
+
+Image from page 5: BLIP: a white background with the words prefix prefix prefix prefix prefix prefix prefix prefix prefix prefix prefix prefix prefix prefix prefix
+BLIP2: a diagram showing the different stages of the customer experience

@@ -1,0 +1,7 @@
+Page 175:
+Job #1 in Customer Discovery: Validating Key Assumptions
+EIE - II
+Don’t prototype it first!
+Pretotype first!
+Pretotype: An artifact or technique that can be used to 
+collect YODA (your-own-data) very quickly and very inexpensively.

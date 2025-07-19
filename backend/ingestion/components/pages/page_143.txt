@@ -1,0 +1,9 @@
+Page 143:
+10
+• 12 Tips for Early Customer Development Interviews (Giff Constable): Link
+• Interviews vs. Experiments (Giff Constable): Link
+“Interviews give you the greatest insights. Experiments give you the greatest proof”
+• Results of hypothesis validation fall into 4 buckets:
+see Progress Board template: Invalidated, Validated, WIP*, Unclear results
+Tips/Tricks: Before ‘Getting Out of the Building’
+EIE - II

@@ -1,0 +1,28 @@
+Page 137:
+10
+1. Landing Page: 
+A simple web page/website conveying your value proposition 
+and allows visitors to express their interest through a call to 
+action.
+2. Advertising: 
+Paying to display your value proposition to a relevant audience 
+through an ad to see if people respond or convert. 
+3. Promotional Material: 
+A type of advertising test where you create online or offline 
+promotional materials to gauge reactions or generate demand.
+4. Pre-selling (including crowdfunding): 
+Attempting to secure orders before the product is built.
+Examples of Experiments
+EIE - II
+5. Paper Testing: 
+Applying primarily to software and information (data, analysis, 
+media, etc) products, paper tests are where you 
+mock up an example of an application user interface or report 
+and put it in front of a potential customer.
+6. Product Prototype: 
+A working version of your product/experience built for learning 
+and fast iteration rather than for robustness or scale.
+7. Dummy Product (‘Wizard of Oz’):
+Where the customer thinks they are interfacing with a real
+product (or feature), but where your team provides the
+service manually, hidden behind the scenes (hence the name).

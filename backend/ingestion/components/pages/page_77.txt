@@ -1,0 +1,12 @@
+Page 77:
+5
+Selecting a Good Problem Statement / Opportunity
+• Problem: Is this a ‘good’* & real problem (today, not in the distant future)?
+• Need: Who needs this (customer) and what benefit is the customer seeking?
+• Business: Viable from a ‘business’ (think BMC) point-of-view? Competitive Landscape?
+• Execution: Is there a path for you/team to get started on above? 
+• Why your team would be an ideal founding team for this opportunity?
+• Testable: Can this problem & solution be tested (from a customer dev perspective)?
+* Use TIPSC to narrow down on opportunity: Timely, Important, Profitable, Solvable, Context
+Above Feeds into ‘NABC'
+EIE - II

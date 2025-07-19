@@ -1,0 +1,31 @@
+Page 136:
+Experiments vs. Interviews
+EIE - II
+Experiments
+Interviews
+Purpose/Approach
+Test the hypotheses
+Gather Insights
+Data (type) Collected
+Quantitative
+(conversion rate, click-through rate, 
+A/B test results, etc)
+Qualitative
+(emotional reason/response, decision-
+making reasoning, user stories, etc)
+Bias & Interpretation
+Less prone to bias
+More prone to bias
+(e.g. confirmation-bias)
+Speed & Scale
+High 
+(can be automated, scaled in many cases)
+Low
+(requires more time/effort, typically 
+done individually)
+Depth (of understanding)
+What people do 
+(not why they do it)
+Why customers behave the way 
+they do
+Important to Know When to Run Experiments vs. Conducting Interviews

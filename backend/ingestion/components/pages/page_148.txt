@@ -1,0 +1,11 @@
+Page 148:
+Customer Discovery Overview - Test the Problem
+Test the Problem
+• Design the tests (to validate the problem hypothesis)
+• Run the tests’ –use data / insights to (in)validate hypothesis
+⚬Interview potential customers
+• Update the BMC (BMC#2)
+Phase 2
+Test the Problem
+18
+EIE - II
