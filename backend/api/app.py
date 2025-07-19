@@ -1,18 +1,20 @@
 import os
 import json
 import asyncio
-from fastapi import FastAPI, WebSocket, WebSocketDisconnect, HTTPException
+import uuid
+import logging
+from fastapi import FastAPI, WebSocket, WebSocketDisconnect, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.websockets import WebSocketState
 import redis.asyncio as redis
 from pydantic import BaseModel
 from datetime import datetime
-import uuid
-import logging
 from asyncio import Lock
 from collections import defaultdict
 from response_generator.generator import ResponseGenerator
 from ingestion.faiss_database import setup_faiss_with_text_storage
 from preprocessor.profanity_check import check_profanity
+from tenacity import retry, stop_after_attempt, wait_exponential
 
 # Set up logging
 logging.basicConfig(level=logging.INFO)
@@ -20,12 +22,17 @@ logger = logging.getLogger(__name__)
 
 # App initialization
 app = FastAPI()
+
+# Configure CORS middleware
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[os.getenv("FRONTEND_URL", "http://localhost:3000")],
+    allow_origins=[
+        os.getenv("FRONTEND_URL", "http://localhost:3000"),
+        "http://localhost:5173"
+    ],
     allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
+    allow_methods=["GET", "POST", "OPTIONS", "DELETE"],
+    allow_headers=["Content-Type", "Authorization"],
 )
 
 # Constants
@@ -41,7 +48,7 @@ redis_client = None
 active_connections = {}
 connection_lock = Lock()
 
-# Chat history for context retention
+# Chat history for context retention, keyed by session_id
 chat_histories = defaultdict(list)
 
 # Setup RAG pipeline
@@ -52,13 +59,19 @@ generator.load_faiss(faiss_retriever)
 # Input/output models
 class ChatRequest(BaseModel):
     query: str
-    username: str
+    user_id: str
 
 class ChatResponse(BaseModel):
     response: str
 
-class Message(BaseModel):
-    text: str
+class LoginRequest(BaseModel):
+    email: str
+    password: str
+
+class LoginResponse(BaseModel):
+    user_id: str
+    email: str
+    name: str
 
 # SessionManager: Handles Redis-backed session lifecycle and chat storage
 class SessionManager:
@@ -66,6 +79,35 @@ class SessionManager:
         if not os.path.exists(CHAT_HISTORY_FILE):
             with open(CHAT_HISTORY_FILE, 'w') as f:
                 json.dump({}, f)
+
+    @retry(stop=stop_after_attempt(3), wait=wait_exponential(multiplier=1, min=2, max=10))
+    async def create_user(self, email: str, name: str):
+        user_id = str(uuid.uuid4())
+        user_data = {
+            "user_id": user_id,
+            "email": email,
+            "name": name,
+            "created_at": datetime.now().isoformat()
+        }
+        try:
+            await redis_client.hset(f"user:{user_id}", mapping={
+                "data": json.dumps(user_data),
+                "email": email,
+                "name": name
+            })
+            logger.info(f"Created user: {user_id} for email: {email}")
+            return user_id
+        except Exception as e:
+            logger.error(f"Failed to create user in Redis: {str(e)}")
+            raise HTTPException(status_code=500, detail="Failed to create user")
+
+    async def get_user(self, user_id: str):
+        try:
+            user_data = await redis_client.hget(f"user:{user_id}", "data")
+            return json.loads(user_data) if user_data else None
+        except Exception as e:
+            logger.error(f"Failed to get user {user_id}: {str(e)}")
+            return None
 
     async def create_session(self, user_id: str, websocket: WebSocket = None):
         session_id = f"{user_id}_{uuid.uuid4()}"
@@ -75,13 +117,19 @@ class SessionManager:
             "conversation_history": [],
             "created_at": datetime.now().isoformat()
         }
-        await redis_client.hset(f"session:{session_id}", mapping={
-            "data": json.dumps(session_data),
-            "user_id": user_id,
-            "created_at": session_data["created_at"]
-        })
-        await redis_client.expire(f"session:{session_id}", SESSION_EXPIRY)
-        await redis_client.set(f"user_session:{user_id}", session_id, ex=SESSION_EXPIRY)
+        try:
+            await redis_client.hset(f"session:{session_id}", mapping={
+                "data": json.dumps(session_data),
+                "user_id": user_id,
+                "created_at": session_data["created_at"]
+            })
+            await redis_client.expire(f"session:{session_id}", SESSION_EXPIRY)
+            # Only set user_session for HTTP sessions
+            if not websocket:
+                await redis_client.set(f"user_session:{user_id}", session_id, ex=SESSION_EXPIRY)
+        except Exception as e:
+            logger.error(f"Failed to create session for user {user_id}: {str(e)}")
+            raise HTTPException(status_code=500, detail="Failed to create session")
 
         if websocket:
             async with connection_lock:
@@ -91,20 +139,30 @@ class SessionManager:
         return session_id
 
     async def get_session(self, session_id: str):
-        session_data = await redis_client.hget(f"session:{session_id}", "data")
-        return json.loads(session_data) if session_data else None
+        try:
+            session_data = await redis_client.hget(f"session:{session_id}", "data")
+            return json.loads(session_data) if session_data else None
+        except Exception as e:
+            logger.error(f"Failed to get session {session_id}: {str(e)}")
+            return None
 
     async def get_or_create_session(self, user_id: str, websocket: WebSocket = None):
-        session_id = await redis_client.get(f"user_session:{user_id}")
-        if session_id:
-            session_id = session_id.decode() if isinstance(session_id, bytes) else session_id
-            exists = await redis_client.exists(f"session:{session_id}")
-            if exists:
-                if websocket:
-                    async with connection_lock:
-                        active_connections[session_id] = websocket
-                return session_id
-        return await self.create_session(user_id, websocket)
+        try:
+            if websocket:
+                return await self.create_session(user_id, websocket)
+            session_id = await redis_client.get(f"user_session:{user_id}")
+            if session_id:
+                session_id = session_id.decode() if isinstance(session_id, bytes) else session_id
+                exists = await redis_client.exists(f"session:{session_id}")
+                if exists:
+                    if websocket:
+                        async with connection_lock:
+                            active_connections[session_id] = websocket
+                    return session_id
+            return await self.create_session(user_id, websocket)
+        except Exception as e:
+            logger.error(f"Error in get_or_create_session for user {user_id}: {str(e)}")
+            raise HTTPException(status_code=500, detail="Session management error")
 
     async def update_session(self, session_id: str, query: str, response: str):
         session_data = await redis_client.hget(f"session:{session_id}", "data")
@@ -119,9 +177,12 @@ class SessionManager:
             "timestamp": datetime.now().isoformat()
         })
 
-        await redis_client.hset(f"session:{session_id}", "data", json.dumps(session_dict))
-        await redis_client.expire(f"session:{session_id}", SESSION_EXPIRY)
-        await self.save_to_json(session_id, query, response)
+        try:
+            await redis_client.hset(f"session:{session_id}", "data", json.dumps(session_dict))
+            await redis_client.expire(f"session:{session_id}", SESSION_EXPIRY)
+            await self.save_to_json(session_id, query, response)
+        except Exception as e:
+            logger.error(f"Failed to update session {session_id}: {str(e)}")
 
     async def save_to_json(self, session_id: str, query: str, response: str):
         try:
@@ -136,16 +197,36 @@ class SessionManager:
             "timestamp": datetime.now().isoformat()
         })
 
-        with open(CHAT_HISTORY_FILE, 'w') as f:
-            json.dump(history, f, indent=4)
+        try:
+            with open(CHAT_HISTORY_FILE, 'w') as f:
+                json.dump(history, f, indent=4)
+        except Exception as e:
+            logger.error(f"Failed to save chat history to JSON: {str(e)}")
+
+    async def remove_from_json(self, session_id: str):
+        try:
+            with open(CHAT_HISTORY_FILE, 'r') as f:
+                history = json.load(f)
+            history.pop(session_id, None)
+            with open(CHAT_HISTORY_FILE, 'w') as f:
+                json.dump(history, f, indent=4)
+            logger.info(f"Removed session {session_id} from chat_history.json")
+        except Exception as e:
+            logger.error(f"Failed to remove session {session_id} from JSON: {str(e)}")
 
     async def delete_session(self, session_id: str):
-        user_id = await redis_client.hget(f"session:{session_id}", "user_id")
-        if user_id:
-            user_id = user_id.decode() if isinstance(user_id, bytes) else user_id
-            await redis_client.delete(f"user_session:{user_id}")
-            chat_histories[user_id].clear()  # Clear in-memory history
-        await redis_client.delete(f"session:{session_id}")
+        try:
+            user_id = await redis_client.hget(f"session:{session_id}", "user_id")
+            if user_id:
+                user_id = user_id.decode() if isinstance(user_id, bytes) else user_id
+                remaining_sessions = [key async for key in redis_client.scan_iter(f"session:*{user_id}*")]
+                if len(remaining_sessions) <= 1:
+                    await redis_client.delete(f"user_session:{user_id}")
+            await redis_client.delete(f"session:{session_id}")
+            chat_histories[session_id].clear()
+            await self.remove_from_json(session_id)
+        except Exception as e:
+            logger.error(f"Failed to delete session {session_id}: {str(e)}")
 
         async with connection_lock:
             active_connections.pop(session_id, None)
@@ -158,21 +239,21 @@ class SessionManager:
                 async with connection_lock:
                     for session_id in list(active_connections.keys()):
                         websocket = active_connections[session_id]
-                        if not getattr(websocket, "application_state", None) or not websocket.application_state.connected:
-                            await self.delete_session(session_id)
-
-                for key in await redis_client.keys("session:*"):
-                    ttl = await redis_client.ttl(key)
-                    if ttl == -1:
-                        await redis_client.expire(key, SESSION_EXPIRY)
+                        try:
+                            if websocket.application_state != WebSocketState.CONNECTED:
+                                await self.delete_session(session_id)
+                        except Exception as e:
+                            logger.error(f"Cleanup error for session {session_id}: {str(e)}")
+                            continue
             except Exception as e:
-                logger.error(f"Cleanup error: {str(e)}")
+                logger.error(f"Unexpected cleanup error: {str(e)}")
 
             await asyncio.sleep(60)
 
 session_manager = SessionManager()
 
 # Redis connection initialization
+@retry(stop=stop_after_attempt(3), wait=wait_exponential(multiplier=1, min=2, max=10))
 async def init_redis():
     global redis_client
     redis_client = redis.from_url(REDIS_URL, decode_responses=True)
@@ -181,7 +262,7 @@ async def init_redis():
         logger.info("Connected to Redis")
     except Exception as e:
         logger.error(f"Redis connection failed: {e}")
-        raise
+        raise HTTPException(status_code=500, detail="Redis connection failed")
 
 # Health check
 @app.get("/health")
@@ -192,10 +273,39 @@ async def health_check():
     except Exception as e:
         return {"status": "healthy", "message": "Backend is running", "redis": "disconnected", "error": str(e)}
 
+# Explicit OPTIONS handler for /login
+@app.options("/login")
+async def options_login():
+    return {"status": "ok"}
+
+# Login endpoint to generate unique user ID
+@app.post("/login", response_model=LoginResponse)
+async def login(request: LoginRequest):
+    logger.info(f"Received POST /login with email: {request.email}")
+    if not request.email or not request.password:
+        raise HTTPException(status_code=400, detail="Email and password are required")
+    
+    # Validate SRN format (13 characters, starts with "PES")
+    if len(request.email) != 13 or not request.email.upper().startswith("PES"):
+        raise HTTPException(status_code=400, detail="SRN must be 13 characters starting with 'PES'")
+    
+    if len(request.password) < 6:
+        raise HTTPException(status_code=400, detail="Password must be at least 6 characters")
+
+    # Use the email as the name to ensure consistency with frontend validation
+    name = request.email
+    try:
+        user_id = await session_manager.create_user(request.email, name)
+        logger.info(f"Login successful for user_id: {user_id}")
+        return LoginResponse(user_id=user_id, email=request.email, name=name)
+    except Exception as e:
+        logger.error(f"Login failed for {request.email}: {str(e)}")
+        raise HTTPException(status_code=500, detail="Internal server error")
+
 # HTTP chat endpoint
 @app.post("/chat", response_model=ChatResponse)
 async def chat(request: ChatRequest):
-    user = request.username
+    user_id = request.user_id
     query = request.query.strip()
 
     if not query:
@@ -204,15 +314,15 @@ async def chat(request: ChatRequest):
     if check_profanity(query):
         return ChatResponse(response="⚠️ Please avoid using offensive language.")
 
-    session_id = await session_manager.get_or_create_session(user)
-    chat_histories[user].append({"role": "user", "content": query})
+    session_id = await session_manager.get_or_create_session(user_id)
+    chat_histories[session_id].append({"role": "user", "content": query})
 
     response_data = generator.generate(query)
     reply = response_data["answer"]
 
     await session_manager.update_session(session_id, query, reply)
-    chat_histories[user].append({"role": "assistant", "content": reply})
-    chat_histories[user] = chat_histories[user][-20:]  # Limit memory use
+    chat_histories[session_id].append({"role": "assistant", "content": reply})
+    chat_histories[session_id] = chat_histories[session_id][-20:]
 
     return ChatResponse(response=reply)
 
@@ -220,7 +330,8 @@ async def chat(request: ChatRequest):
 @app.websocket("/ws/{user_id}")
 async def websocket_endpoint(websocket: WebSocket, user_id: str):
     await websocket.accept()
-    session_id = await session_manager.get_or_create_session(user_id, websocket)
+    session_id = await session_manager.create_session(user_id, websocket)
+    logger.info(f"WebSocket connection established for session: {session_id}")
     await websocket.send_json({"session_id": session_id})
     try:
         while True:
@@ -235,19 +346,22 @@ async def websocket_endpoint(websocket: WebSocket, user_id: str):
             response_data = generator.generate(query)
             response = response_data["answer"]
             await session_manager.update_session(session_id, query, response)
+            chat_histories[session_id].append({"role": "user", "content": query})
+            chat_histories[session_id].append({"role": "assistant", "content": response})
+            chat_histories[session_id] = chat_histories[session_id][-20:]
             await websocket.send_json({
                 "session_id": session_id,
                 "query": query,
                 "response": response
             })
-            chat_histories[user_id].append({"role": "user", "content": query})
-            chat_histories[user_id].append({"role": "assistant", "content": response})
-            chat_histories[user_id] = chat_histories[user_id][-20:]  # Limit memory use
     except WebSocketDisconnect:
         logger.info(f"Disconnected: {session_id}")
+    except Exception as e:
+        logger.error(f"WebSocket error for session {session_id}: {str(e)}")
     finally:
         async with connection_lock:
             active_connections.pop(session_id, None)
+            await session_manager.delete_session(session_id)
 
 # Session history API
 @app.get("/session/{session_id}/history")
@@ -255,7 +369,8 @@ async def get_session_history(session_id: str):
     session = await session_manager.get_session(session_id)
     if not session:
         raise HTTPException(status_code=404, detail="Session not found")
-    return {"session_id": session_id, "conversation_history": session["conversation_history"]}
+    history = session["conversation_history"] + chat_histories[session_id]
+    return {"session_id": session_id, "conversation_history": history}
 
 # Delete session endpoint
 @app.delete("/session/{session_id}")

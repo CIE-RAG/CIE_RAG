@@ -4,11 +4,11 @@ import ChatbotInterface from './components/ChatbotInterface';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [user, setUser] = useState<{ email: string; name: string } | null>(null);
+  const [user, setUser] = useState<{ user_id: string; email: string; name: string } | null>(null);
 
-  const handleLogin = (email: string, password: string) => {
-    // Simulate login process
-    setUser({ email, name: email.split('@')[0] });
+  const handleLogin = (user: { user_id: string; email: string; name: string }) => {
+    // Rely on backend and LoginPage.tsx validation for SRN format
+    setUser(user);
     setIsLoggedIn(true);
   };
 

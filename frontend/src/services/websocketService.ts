@@ -1,4 +1,3 @@
-// services/websocketService.ts
 export interface WebSocketMessage {
   session_id?: string;
   query?: string;
@@ -14,7 +13,7 @@ export class WebSocketService {
   private messageHandlers: ((message: WebSocketMessage) => void)[] = [];
   private sessionId: string | null = null;
 
-  constructor(private userId: string) {}
+  constructor(private user_id: string) {}
 
   connect(): Promise<void> {
     return new Promise((resolve, reject) => {
@@ -23,7 +22,7 @@ export class WebSocketService {
         return;
       }
 
-      this.ws = new WebSocket(`ws://localhost:8000/ws/${this.userId}`);
+      this.ws = new WebSocket(`ws://localhost:8000/ws/${this.user_id}`);
 
       this.ws.onopen = () => {
         console.log('WebSocket connected');
@@ -33,12 +32,9 @@ export class WebSocketService {
 
       this.ws.onmessage = (event) => {
         const message: WebSocketMessage = JSON.parse(event.data);
-        
-        // Store session_id when received
         if (message.session_id) {
           this.sessionId = message.session_id;
         }
-        
         this.messageHandlers.forEach(handler => handler(message));
       };
 

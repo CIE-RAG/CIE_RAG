@@ -1,91 +1,90 @@
-// services/api.ts
+import { WebSocketService, WebSocketMessage } from './websocketService';
 import axios from 'axios';
-import { WebSocketService } from './websocketService';
 
-const API_BASE_URL = 'http://localhost:8000';
+class ChatAPI {
+  private static instance: ChatAPI;
+  private webSocketService: WebSocketService | null = null;
 
-const api = axios.create({
-  baseURL: API_BASE_URL,
-  headers: {
-    'Content-Type': 'application/json',
-  },
-  timeout: 30000,
-});
+  private constructor() {}
 
-export interface ChatRequest {
-  query: string;
-  username: string;
-}
-
-export interface ChatResponse {
-  response: string;
-}
-
-// WebSocket service instance
-let wsService: WebSocketService | null = null;
-let wsConnected = false;
-
-export const chatAPI = {
-  // Initialize WebSocket connection
-  initializeWebSocket: async (username: string): Promise<void> => {
-    if (wsService) {
-      wsService.disconnect();
+  static getInstance(): ChatAPI {
+    if (!ChatAPI.instance) {
+      ChatAPI.instance = new ChatAPI();
     }
-    
-    wsService = new WebSocketService(username);
+    return ChatAPI.instance;
+  }
+
+  async initializeWebSocket(userId: string): Promise<void> {
     try {
-      await wsService.connect();
-      wsConnected = true;
-      console.log('WebSocket initialized successfully');
-    } catch (error) {
-      console.error('WebSocket initialization failed:', error);
-      wsConnected = false;
-    }
-  },
-
-  // Enhanced sendMessage with automatic fallback
-  sendMessage: async (query: string, username: string): Promise<ChatResponse> => {
-    // Try WebSocket first if connected
-    if (wsService && wsConnected) {
-      try {
-        const response = await wsService.sendMessage(query);
-        return { response };
-      } catch (error) {
-        console.warn('WebSocket failed, falling back to HTTP:', error);
-        wsConnected = false;
+      if (!this.webSocketService || this.webSocketService.getSessionId() === null) {
+        this.webSocketService = new WebSocketService(userId);
+        await this.webSocketService.connect();
+        console.log('WebSocket initialized successfully for user:', userId);
       }
-    }
-
-    // Fallback to HTTP API
-    try {
-      const response = await api.post('/chat', {
-        query,
-        username
-      });
-      return response.data;
     } catch (error) {
-      console.error('API Error:', error);
-      if (axios.isAxiosError(error)) {
-        throw new Error(error.response?.data?.detail || 'Failed to send message');
-      }
+      console.error('WebSocket initialization error:', error);
       throw error;
     }
-  },
+  }
 
-  // Get WebSocket session info
-  getSessionInfo: () => ({
-    connected: wsConnected,
-    sessionId: wsService?.getSessionId() || null
-  }),
+  async createNewSession(userId: string): Promise<string> {
+    try {
+      // Create a new WebSocketService instance for a new session
+      this.webSocketService = new WebSocketService(userId);
+      await this.webSocketService.connect();
+      
+      // Wait briefly to ensure session_id is received
+      const maxWaitTime = 5000; // 5 seconds
+      const startTime = Date.now();
+      while (!this.webSocketService.getSessionId() && Date.now() - startTime < maxWaitTime) {
+        await new Promise(resolve => setTimeout(resolve, 100));
+      }
 
-  // Cleanup WebSocket
-  cleanup: () => {
-    if (wsService) {
-      wsService.disconnect();
-      wsService = null;
-      wsConnected = false;
+      const sessionId = this.webSocketService.getSessionId();
+      if (sessionId) {
+        console.log('Session ID from WebSocket:', sessionId);
+        return sessionId;
+      }
+
+      console.warn('No session ID from WebSocket, falling back to HTTP');
+      const response = await axios.post('http://localhost:8000/create_session', { user_id: userId });
+      if (response.data.session_id) {
+        console.log('Session ID from HTTP:', response.data.session_id);
+        return response.data.session_id;
+      }
+      throw new Error('No session ID received from HTTP endpoint');
+    } catch (error) {
+      console.error('Error creating new session:', error);
+      throw error;
     }
   }
-};
 
-export default api;
+  async sendMessage(message: string, userId: string): Promise<WebSocketMessage> {
+    try {
+      if (!this.webSocketService) {
+        await this.initializeWebSocket(userId);
+      }
+      const response = await this.webSocketService!.sendMessage(message);
+      return { response };
+    } catch (error) {
+      console.error('Error sending message:', error);
+      throw error;
+    }
+  }
+
+  getSessionInfo(): { sessionId: string | null } {
+    return {
+      sessionId: this.webSocketService ? this.webSocketService.getSessionId() : null,
+    };
+  }
+
+  cleanup(): void {
+    if (this.webSocketService) {
+      this.webSocketService.disconnect();
+      this.webSocketService = null;
+      console.log('WebSocket cled up');
+    }
+  }
+}
+
+export const chatAPI = ChatAPI.getInstance();
