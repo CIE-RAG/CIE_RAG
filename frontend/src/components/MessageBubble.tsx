@@ -21,9 +21,17 @@ interface Message {
 
 interface MessageBubbleProps {
   message: Message;
+  imageName?: string;
 }
 
-const MessageBubble: React.FC<MessageBubbleProps> = ({ message }) => {
+const MessageBubble: React.FC<MessageBubbleProps> = ({
+  message,
+  imageName,
+}) => {
+  const imageUrl = imageName
+    ? `http://localhost:8000/images/${imageName}`
+    : null;
+
   const [copied, setCopied] = useState(false);
   const [imageError, setImageError] = useState(false);
 
@@ -39,10 +47,10 @@ const MessageBubble: React.FC<MessageBubbleProps> = ({ message }) => {
   };
 
   const handleDownload = () => {
-    if (message.image) {
+    if (message.image || imageUrl) {
       // Download image
       const link = document.createElement("a");
-      link.href = message.image;
+      link.href = message.image || imageUrl!;
       link.download = `image-${message.id}.jpg`;
       document.body.appendChild(link);
       link.click();
@@ -67,35 +75,37 @@ const MessageBubble: React.FC<MessageBubbleProps> = ({ message }) => {
   if (message.isUser) {
     return (
       <div className="flex justify-end mb-4">
-        <div className="flex items-end space-x-2 max-w-[70%]">
-          <div className="bg-[#313C71] text-white rounded-2xl rounded-br-md px-4 py-3 shadow-lg">
-            {message.image && (
-              <div className="mb-2">
-                <img
-                  src={message.image}
-                  alt="User image"
-                  className="max-w-full h-auto rounded-lg cursor-pointer"
-                  onClick={() => window.open(message.image, "_blank")}
-                  onError={() => setImageError(true)}
-                  style={{ maxHeight: "300px" }}
-                />
-                {imageError && (
-                  <div className="flex items-center justify-center h-32 bg-gray-100 rounded-lg">
-                    <ImageIcon className="w-8 h-8 text-gray-400" />
-                    <span className="ml-2 text-gray-500">
-                      Image failed to load
-                    </span>
-                  </div>
-                )}
-              </div>
-            )}
-            {message.text && <div>{message.text}</div>}
-            <div className="text-xs text-white/70 mt-1">
+        <div className="max-w-xs lg:max-w-md px-4 py-2 bg-blue-500 text-white rounded-lg">
+          {(message.image || imageUrl) && (
+            <div className="mb-2">
+              <img
+                src={message.image || imageUrl!}
+                alt="User uploaded image"
+                className="rounded-lg cursor-pointer"
+                onClick={() =>
+                  window.open(message.image || imageUrl!, "_blank")
+                }
+                onError={() => setImageError(true)}
+                style={{ maxHeight: "300px" }}
+              />
+              {imageError && (
+                <div className="text-red-200 text-sm mt-1 flex items-center">
+                  <ImageIcon className="w-4 h-4 mr-1" />
+                  Image failed to load
+                </div>
+              )}
+            </div>
+          )}
+          {message.text && <p className="break-words">{message.text}</p>}
+          <div className="flex items-center justify-between mt-2 text-xs text-blue-100">
+            <div className="flex items-center">
+              <User className="w-3 h-3 mr-1" />
+              You
+            </div>
+            <div className="flex items-center">
+              <Clock className="w-3 h-3 mr-1" />
               {formatTime(message.timestamp)}
             </div>
-          </div>
-          <div className="w-8 h-8 bg-[#313C71] rounded-full flex items-center justify-center">
-            <User className="w-4 h-4 text-white" />
           </div>
         </div>
       </div>
@@ -105,33 +115,27 @@ const MessageBubble: React.FC<MessageBubbleProps> = ({ message }) => {
   // Bot message bubble with image rendering
   return (
     <div className="flex justify-start mb-4">
-      <div className="flex items-start space-x-3 max-w-[85%]">
-        <div className="w-8 h-8 bg-[#313C71] rounded-full flex items-center justify-center flex-shrink-0">
-          <Bot className="w-4 h-4 text-white" />
-        </div>
-        <div className="bg-white/90 backdrop-blur-sm rounded-2xl rounded-tl-md px-4 py-3 shadow-lg border border-[#313C71]/10">
-          {message.image && (
-            <div className="mb-2">
-              <img
-                src={message.image}
-                alt="Bot response image"
-                className="max-w-full h-auto rounded-lg cursor-pointer"
-                onClick={() => window.open(message.image, "_blank")}
-                onError={() => setImageError(true)}
-                style={{ maxHeight: "300px" }}
-              />
-              {imageError && (
-                <div className="flex items-center justify-center h-32 bg-gray-100 rounded-lg">
-                  <ImageIcon className="w-8 h-8 text-gray-400" />
-                  <span className="ml-2 text-gray-500">
-                    Image failed to load
-                  </span>
-                </div>
-              )}
-            </div>
-          )}
-
-          {message.text && (
+      <div className="max-w-xs lg:max-w-md px-4 py-2 bg-gray-200 text-gray-800 rounded-lg">
+        {(message.image || imageUrl) && (
+          <div className="mb-2">
+            <img
+              src={message.image || imageUrl!}
+              alt="Bot response image"
+              className="rounded-lg cursor-pointer"
+              onClick={() => window.open(message.image || imageUrl!, "_blank")}
+              onError={() => setImageError(true)}
+              style={{ maxHeight: "300px" }}
+            />
+            {imageError && (
+              <div className="text-red-500 text-sm mt-1 flex items-center">
+                <ImageIcon className="w-4 h-4 mr-1" />
+                Image failed to load
+              </div>
+            )}
+          </div>
+        )}
+        {message.text && (
+          <div className="prose prose-sm max-w-none">
             <ReactMarkdown
               remarkPlugins={[remarkGfm]}
               components={{
@@ -142,33 +146,36 @@ const MessageBubble: React.FC<MessageBubbleProps> = ({ message }) => {
             >
               {message.text}
             </ReactMarkdown>
-          )}
-
-          <div className="flex items-center justify-between mt-2">
-            <div className="text-xs text-[#313C71]/60 flex items-center">
+          </div>
+        )}
+        <div className="flex items-center justify-between mt-2 text-xs text-gray-600">
+          <div className="flex items-center">
+            <Bot className="w-3 h-3 mr-1" />
+            Assistant
+          </div>
+          <div className="flex items-center space-x-2">
+            <div className="flex items-center">
               <Clock className="w-3 h-3 mr-1" />
               {formatTime(message.timestamp)}
             </div>
-            <div className="flex space-x-2">
-              <button
-                onClick={handleCopy}
-                className="p-1 rounded hover:bg-[#313C71]/10 transition-colors"
-                title="Copy message"
-              >
-                {copied ? (
-                  <Check className="w-4 h-4 text-green-600" />
-                ) : (
-                  <Copy className="w-4 h-4 text-[#313C71]/60" />
-                )}
-              </button>
-              <button
-                onClick={handleDownload}
-                className="p-1 rounded hover:bg-[#313C71]/10 transition-colors"
-                title={message.image ? "Download image" : "Download text"}
-              >
-                <Download className="w-4 h-4 text-[#313C71]/60" />
-              </button>
-            </div>
+            <button
+              onClick={handleCopy}
+              className="p-1 hover:bg-gray-300 rounded transition-colors"
+              title="Copy message"
+            >
+              {copied ? (
+                <Check className="w-3 h-3 text-green-600" />
+              ) : (
+                <Copy className="w-3 h-3" />
+              )}
+            </button>
+            <button
+              onClick={handleDownload}
+              className="p-1 hover:bg-gray-300 rounded transition-colors"
+              title="Download"
+            >
+              <Download className="w-3 h-3" />
+            </button>
           </div>
         </div>
       </div>

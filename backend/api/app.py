@@ -15,6 +15,7 @@ from response_generator.generator import ResponseGenerator
 from ingestion.faiss_database import setup_faiss_with_text_storage
 from preprocessor.profanity_check import check_profanity
 from tenacity import retry, stop_after_attempt, wait_exponential
+from fastapi.staticfiles import StaticFiles
 
 # Set up logging
 logging.basicConfig(level=logging.INFO)
@@ -22,6 +23,8 @@ logger = logging.getLogger(__name__)
 
 # App initialization
 app = FastAPI()
+
+app.mount("/images", StaticFiles(directory="ingestion/components/images"), name="images")
 
 # Configure CORS middleware
 app.add_middleware(
@@ -380,6 +383,24 @@ async def delete_session(session_id: str):
         raise HTTPException(status_code=404, detail="Session not found")
     await session_manager.delete_session(session_id)
     return {"status": "success", "message": f"Session {session_id} deleted"}
+
+@app.get("/api/images")
+async def list_images():
+    """Return a list of available images"""
+    images_dir = "ingestion/components/images"
+    if not os.path.exists(images_dir):
+        return {"images": []}
+    
+    image_files = []
+    for filename in os.listdir(images_dir):
+        if filename.lower().endswith(('.png', '.jpg', '.jpeg', '.gif', '.bmp', '.svg')):
+            image_files.append({
+                "name": filename,
+                "url": f"/images/{filename}"
+            })
+    
+    return {"images": image_files}
+
 
 @app.on_event("startup")
 async def startup_event():
