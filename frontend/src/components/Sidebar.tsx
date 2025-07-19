@@ -6,14 +6,16 @@ import {
   Clock,
   ChevronLeft,
   ChevronRight,
+  Trash2,
 } from "lucide-react";
-import ContextMenu from "./ContextMenu";
-import { useState } from "react";
+import axios from "axios";
+import { chatAPI } from "../services/api";
 
 interface Conversation {
   id: string;
   title: string;
   messages: any[];
+  session_id?: string;
 }
 
 interface SidebarProps {
@@ -25,6 +27,7 @@ interface SidebarProps {
   isCollapsed: boolean;
   onToggleCollapse: () => void;
   onDeleteConversation: (id: string) => void;
+  user_id: string;
 }
 
 const Sidebar: React.FC<SidebarProps> = ({
@@ -36,42 +39,8 @@ const Sidebar: React.FC<SidebarProps> = ({
   isCollapsed,
   onToggleCollapse,
   onDeleteConversation,
+  user_id,
 }) => {
-  const [contextMenu, setContextMenu] = useState<{
-    isOpen: boolean;
-    position: { x: number; y: number };
-    conversationId: string | null;
-  }>({
-    isOpen: false,
-    position: { x: 0, y: 0 },
-    conversationId: null,
-  });
-
-  const handleContextMenu = (
-    event: React.MouseEvent,
-    conversationId: string
-  ) => {
-    event.preventDefault();
-    setContextMenu({
-      isOpen: true,
-      position: { x: event.clientX, y: event.clientY },
-      conversationId,
-    });
-  };
-  const handleCloseContextMenu = () => {
-    setContextMenu({
-      isOpen: false,
-      position: { x: 0, y: 0 },
-      conversationId: null,
-    });
-  };
-
-  const handleDeleteConversation = () => {
-    if (contextMenu.conversationId) {
-      onDeleteConversation(contextMenu.conversationId);
-      handleCloseContextMenu();
-    }
-  };
   const formatConversationTime = (messages: any[]) => {
     if (messages.length === 0) return "";
     const lastMessage = messages[messages.length - 1];
@@ -94,13 +63,54 @@ const Sidebar: React.FC<SidebarProps> = ({
     }
   };
 
+  const handleDelete = async (conversation: Conversation) => {
+    // Show confirmation alert before proceeding
+    const confirmMessage = `Are you sure you want to delete "${conversation.title}"?`;
+    if (!window.confirm(confirmMessage)) {
+      return; // User cancelled, exit without deleting
+    }
+
+    if (!conversation.session_id) {
+      console.warn("No session_id for conversation:", conversation.id);
+      onDeleteConversation(conversation.id);
+      return;
+    }
+
+    try {
+      const response = await axios.delete(
+        `http://localhost:8000/session/${conversation.session_id}`
+      );
+      if (response.status === 200) {
+        console.log(`Successfully deleted session: ${conversation.session_id}`);
+        onDeleteConversation(conversation.id);
+      } else {
+        console.error(`Unexpected response status: ${response.status}`);
+      }
+    } catch (error) {
+      console.error("Failed to delete conversation:", error);
+      onDeleteConversation(conversation.id);
+    }
+  };
+
+  const handleNewChat = async () => {
+    if (!user_id) {
+      console.error("No user_id provided for new chat");
+      return;
+    }
+    try {
+      console.log("Triggering new conversation for user:", user_id);
+      await onNewChat();
+    } catch (error) {
+      console.error("Failed to create new session:", error);
+    }
+  };
+
   return (
     <div
       className={`${
         isCollapsed ? "w-16" : "w-80"
       } bg-white h-full border-r border-[#313c71]/20 flex flex-col shadow-xl transition-all duration-300`}
     >
-      {/* Header */}
       <div className="p-4 border-b border-[#313C71]/20">
         <div className="flex items-center justify-between mb-4">
           {!isCollapsed && (
@@ -130,7 +140,7 @@ const Sidebar: React.FC<SidebarProps> = ({
         </div>
 
         <button
-          onClick={onNewChat}
+          onClick={handleNewChat}
           className={`w-full bg-[#EF7F1A] text-white py-3 rounded-xl font-semibold hover:bg-[#E75728] active:bg-[#E75728] transition-all duration-300 transform hover:scale-[1.02] active:scale-[0.98] shadow-lg hover:shadow-xl flex items-center justify-center space-x-2 focus:outline-none focus:ring-4 focus:ring-[#67753A]/20 ${
             isCollapsed ? "px-2" : "px-4"
           }`}
@@ -141,7 +151,6 @@ const Sidebar: React.FC<SidebarProps> = ({
         </button>
       </div>
 
-      {/* Conversations List */}
       <div className="flex-1 overflow-y-auto p-2 custom-scrollbar">
         {conversations.length === 0 ? (
           <div className="text-center py-12">
@@ -160,69 +169,72 @@ const Sidebar: React.FC<SidebarProps> = ({
         ) : (
           <div className="space-y-2">
             {conversations.map((conversation) => (
-              <button
-                key={conversation.id}
-                onClick={() => onConversationSelect(conversation.id)}
-                onContextMenu={(e) => handleContextMenu(e, conversation.id)}
-                className={`w-full text-left p-3 rounded-xl transition-all duration-300 ${
-                  activeConversation === conversation.id
-                    ? "bg-[#313C71]/30 backdrop-blur-sm text-[#313C71] shadow-lg transform scale-[1.02]"
-                    : "bg-[#313C71]/10 backdrop-blur-sm hover:bg-[#313C71]/20 text-[#313C71]/90 hover:shadow-md"
-                } group ${isCollapsed ? "px-2" : "px-3"}`}
-                title={isCollapsed ? conversation.title : ""}
-              >
-                <div className="flex items-start space-x-3">
-                  <div
-                    className={`w-2 h-2 rounded-full mt-2 flex-shrink-0 ${
-                      activeConversation === conversation.id
-                        ? "bg-[#313C71]"
-                        : "bg-[#313C71]/60"
-                    }`}
-                  />
-                  {!isCollapsed && (
-                    <div className="flex-1 min-w-0">
-                      <h3 className="font-semibold text-sm truncate mb-1">
-                        {conversation.title}
-                      </h3>
-                      <div className="flex items-center justify-between">
-                        <p
-                          className={`text-xs ${
-                            activeConversation === conversation.id
-                              ? "text-[#313C71]/80"
-                              : "text-[#313C71]/60"
-                          }`}
-                        >
-                          {conversation.messages.length} messages
-                        </p>
-                        {conversation.messages.length > 0 && (
-                          <div
-                            className={`flex items-center space-x-1 text-xs ${
+              <div key={conversation.id} className="flex items-start space-x-2">
+                <button
+                  onClick={() => onConversationSelect(conversation.id)}
+                  className={`flex-1 text-left p-3 rounded-xl transition-all duration-300 ${
+                    activeConversation === conversation.id
+                      ? "bg-[#313C71]/30 backdrop-blur-sm text-[#313C71] shadow-lg transform scale-[1.02]"
+                      : "bg-[#313C71]/10 backdrop-blur-sm hover:bg-[#313C71]/20 text-[#313C71]/90 hover:shadow-md"
+                  } group ${isCollapsed ? "px-2" : "px-3"}`}
+                  title={isCollapsed ? conversation.title : ""}
+                >
+                  <div className="flex items-start space-x-3">
+                    <div
+                      className={`w-2 h-2 rounded-full mt-2 flex-shrink-0 ${
+                        activeConversation === conversation.id
+                          ? "bg-[#313C71]"
+                          : "bg-[#313C71]/60"
+                      }`}
+                    />
+                    {!isCollapsed && (
+                      <div className="flex-1 min-w-0">
+                        <h3 className="font-semibold text-sm truncate mb-1">
+                          {conversation.title}
+                        </h3>
+                        <div className="flex items-center justify-between">
+                          <p
+                            className={`text-xs ${
                               activeConversation === conversation.id
                                 ? "text-[#313C71]/80"
-                                : "text-[#313C71]/50"
+                                : "text-[#313C71]/60"
                             }`}
                           >
-                            <Clock className="w-3 h-3" />
-                            <span>
-                              {formatConversationTime(conversation.messages)}
-                            </span>
-                          </div>
-                        )}
+                            {conversation.messages.length} messages
+                          </p>
+                          {conversation.messages.length > 0 && (
+                            <div
+                              className={`flex items-center space-x-1 text-xs ${
+                                activeConversation === conversation.id
+                                  ? "text-[#313C71]/80"
+                                  : "text-[#313C71]/50"
+                              }`}
+                            >
+                              <Clock className="w-3 h-3" />
+                              <span>
+                                {formatConversationTime(conversation.messages)}
+                              </span>
+                            </div>
+                          )}
+                        </div>
                       </div>
-                    </div>
-                  )}
-                </div>
-              </button>
+                    )}
+                  </div>
+                </button>
+                {!isCollapsed && (
+                  <button
+                    onClick={() => handleDelete(conversation)}
+                    className="p-2 rounded-lg hover:bg-red-50 transition-all duration-200 group"
+                    title="Delete conversation"
+                  >
+                    <Trash2 className="w-4 h-4 text-red-600 group-hover:scale-110 transition-transform duration-200" />
+                  </button>
+                )}
+              </div>
             ))}
           </div>
         )}
       </div>
-      <ContextMenu
-        isOpen={contextMenu.isOpen}
-        position={contextMenu.position}
-        onClose={handleCloseContextMenu}
-        onDelete={handleDeleteConversation}
-      />
     </div>
   );
 };

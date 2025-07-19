@@ -2,22 +2,26 @@ import React, { useState } from "react";
 import { Eye, EyeOff, AlertCircle } from "lucide-react";
 import Logo from "./cieLogo";
 import PESLogo from "./pesLogo";
+import axios from "axios";
 
 interface LoginPageProps {
-  onLogin: (email: string, password: string) => void;
+  onLogin: (user: { user_id: string; email: string; name: string }) => void;
 }
 
 const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  const [errors, setErrors] = useState<{ email?: string; password?: string }>(
-    {}
-  );
+  const [errors, setErrors] = useState<{
+    email?: string;
+    password?: string;
+    general?: string;
+  }>({});
   const [isLoading, setIsLoading] = useState(false);
 
   const validateForm = () => {
-    const newErrors: { email?: string; password?: string } = {};
+    const newErrors: { email?: string; password?: string; general?: string } =
+      {};
 
     if (!email) {
       newErrors.email = "SRN is required";
@@ -43,17 +47,36 @@ const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
     if (!validateForm()) return;
 
     setIsLoading(true);
+    setErrors({});
 
-    // Simulate API call
-    setTimeout(() => {
-      onLogin(email, password);
+    try {
+      const response = await axios.post(
+        "http://localhost:8000/login",
+        {
+          email,
+          password,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      onLogin(response.data);
+    } catch (error) {
+      let errorMessage = "Failed to login. Please check your SRN and password.";
+      if (axios.isAxiosError(error)) {
+        errorMessage = error.response?.data?.detail || errorMessage;
+      }
+      setErrors({ general: errorMessage });
+      console.error("Login error:", error);
+    } finally {
       setIsLoading(false);
-    }, 1000);
+    }
   };
 
   const handleSrnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value.toUpperCase();
-    // Limit to 13 characters
     if (value.length <= 13) {
       setEmail(value);
     }
@@ -61,14 +84,6 @@ const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
 
   return (
     <div className="min-h-screen flex items-center justify-center p-4 relative overflow-hidden bg-gradient-to-br from-[#ffffff] to-[#C7C5FF]">
-      {/* Background Pattern
-      <div className="absolute inset-0 opacity-5">
-        <div className="absolute top-20 left-20 w-32 h-32 bg-[#67753A] rounded-full blur-3xl"></div>
-        <div className="absolute bottom-20 right-20 w-40 h-40 bg-[#67753A] rounded-full blur-3xl"></div>
-        <div className="absolute top-1/2 left-1/4 w-24 h-24 bg-[#67753A] rounded-full blur-2xl"></div>
-      </div> */}
-
-      {/* Logo */}
       <div className="absolute top-6 left-6 z-10">
         <div className="flex items-center space-x-4">
           <div className="w-50 h-30 flex items-center justify-center transition-all duration-300 hover:scale-105">
@@ -80,7 +95,6 @@ const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
         </div>
       </div>
 
-      {/* Login Form */}
       <div className="w-full max-w-sm relative z-10">
         <div className="bg-white/90 backdrop-blur-sm rounded-2xl shadow-2xl p-6 border border-white/30 transform transition-all duration-500 hover:shadow-3xl">
           <div className="text-center mb-6">
@@ -92,8 +106,14 @@ const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
             </p>
           </div>
 
+          {errors.general && (
+            <div className="flex items-center mb-4 text-red-600 text-sm animate-slide-down">
+              <AlertCircle className="w-4 h-4 mr-1.5" />
+              {errors.general}
+            </div>
+          )}
+
           <form onSubmit={handleSubmit} className="space-y-4">
-            {/* SRN Field */}
             <div className="space-y-1.5">
               <label
                 htmlFor="email"
@@ -122,7 +142,6 @@ const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
               )}
             </div>
 
-            {/* Password Field */}
             <div className="space-y-1.5">
               <label
                 htmlFor="password"
@@ -149,9 +168,9 @@ const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
                   className="absolute right-3 top-1/2 transform -translate-y-1/2 text-[#313c71]/60 hover:text-[#313c71] transition-colors duration-200 p-1"
                 >
                   {showPassword ? (
-                    <Eye className="w-5 h-5" />
-                  ) : (
                     <EyeOff className="w-5 h-5" />
+                  ) : (
+                    <Eye className="w-5 h-5" />
                   )}
                 </button>
               </div>
@@ -163,7 +182,6 @@ const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
               )}
             </div>
 
-            {/* Login Button */}
             <button
               type="submit"
               disabled={isLoading}
