@@ -8,6 +8,7 @@ import { Send, Menu, X, ChevronLeft, ChevronRight, Bot } from "lucide-react";
 import { chatAPI } from "../services/api";
 
 interface User {
+  user_id: string;
   email: string;
   name: string;
 }
@@ -23,6 +24,7 @@ interface Conversation {
   id: string;
   title: string;
   messages: Message[];
+  session_id?: string;
 }
 
 interface ChatbotInterfaceProps {
@@ -34,17 +36,35 @@ const ChatbotInterface: React.FC<ChatbotInterfaceProps> = ({
   user,
   onLogout,
 }) => {
-  const handleDeleteConversation = (conversationId: string) => {
-    // Remove the conversation from the conversations array
-    setConversations((prev) =>
-      prev.filter((conv) => conv.id !== conversationId)
-    );
+  useEffect(() => {
+    console.log("User state on mount:", user);
+    if (user?.user_id) {
+      console.log("Initializing WebSocket for user:", user.user_id);
+      chatAPI.initializeWebSocket(user.user_id).catch((error) => {
+        console.error("WebSocket initialization failed:", error);
+      });
+    } else {
+      console.warn("No user_id available, WebSocket not initialized");
+    }
+    return () => {
+      console.log("Cleaning up WebSocket on unmount");
+      chatAPI.cleanup();
+    };
+  }, [user?.user_id]);
 
-    // If the deleted conversation was active, clear the active conversation
+  const handleDeleteConversation = (conversationId: string) => {
+    console.log("Deleting conversation:", conversationId);
+    setConversations((prev) => {
+      const updated = prev.filter((conv) => conv.id !== conversationId);
+      console.log("Updated conversations:", updated);
+      return updated;
+    });
     if (activeConversation === conversationId) {
+      console.log("Clearing active conversation");
       setActiveConversation(null);
     }
   };
+
   const [conversations, setConversations] = useState<Conversation[]>([]);
   const [activeConversation, setActiveConversation] = useState<string | null>(
     null
@@ -70,20 +90,42 @@ const ChatbotInterface: React.FC<ChatbotInterfaceProps> = ({
   const hasMessages =
     currentConversation && currentConversation.messages.length > 0;
 
-  const createNewConversation = () => {
-    const newConversation: Conversation = {
-      id: Date.now().toString(),
-      title: "New Chat",
-      messages: [],
-    };
-
-    setConversations((prev) => [newConversation, ...prev]);
-    setActiveConversation(newConversation.id);
-    setIsSidebarOpen(false);
+  const createNewConversation = async () => {
+    if (!user?.user_id) {
+      console.error("No user_id available for creating new conversation");
+      return;
+    }
+    try {
+      console.log("Creating new conversation for user:", user.user_id);
+      const sessionId = await chatAPI.createNewSession(user.user_id);
+      if (!sessionId) {
+        console.error("No session ID received");
+        return;
+      }
+      console.log("New session ID created:", sessionId);
+      const newConversation: Conversation = {
+        id: Date.now().toString(),
+        title: "New Chat",
+        messages: [],
+        session_id: sessionId,
+      };
+      setConversations((prev) => {
+        const updated = [newConversation, ...prev];
+        console.log("Updated conversations:", updated);
+        return updated;
+      });
+      setActiveConversation(newConversation.id);
+      setIsSidebarOpen(false);
+    } catch (error) {
+      console.error("Failed to create new conversation:", error);
+    }
   };
 
   const handleSendMessage = async () => {
-    if (!inputMessage.trim()) return;
+    if (!inputMessage.trim() || !user?.user_id) {
+      console.warn("Empty message or no user_id");
+      return;
+    }
 
     const userMessage: Message = {
       id: Date.now().toString(),
@@ -93,21 +135,31 @@ const ChatbotInterface: React.FC<ChatbotInterfaceProps> = ({
     };
 
     let conversationId = activeConversation;
+    let sessionId = currentConversation?.session_id;
 
     if (!conversationId) {
-      // Create new conversation if none exists
+      console.log("No active conversation, creating new one");
+      sessionId = await chatAPI.createNewSession(user.user_id);
+      if (!sessionId) {
+        console.error("Failed to get session ID for new conversation");
+        return;
+      }
       const newConversation: Conversation = {
         id: Date.now().toString(),
         title:
           inputMessage.slice(0, 30) + (inputMessage.length > 30 ? "..." : ""),
         messages: [],
+        session_id: sessionId,
       };
-      setConversations((prev) => [newConversation, ...prev]);
+      setConversations((prev) => {
+        const updated = [newConversation, ...prev];
+        console.log("Updated conversations:", updated);
+        return updated;
+      });
       conversationId = newConversation.id;
       setActiveConversation(conversationId);
     }
 
-    // Add user message immediately
     setConversations((prev) =>
       prev.map((conv) =>
         conv.id === conversationId
@@ -116,25 +168,24 @@ const ChatbotInterface: React.FC<ChatbotInterfaceProps> = ({
       )
     );
 
-    const currentInput = inputMessage; // Store current input
+    const currentInput = inputMessage;
     setInputMessage("");
     setIsLoading(true);
 
-    // Reset textarea height
     if (textareaRef.current) {
       textareaRef.current.style.height = "auto";
     }
 
     try {
-      // Get username from user prop or use a default
-      const username = user?.email || "anonymous_user";
-
-      // Call your actual backend API
-      const response = await chatAPI.sendMessage(currentInput, username);
+      const response = await chatAPI.sendMessage(currentInput, user.user_id);
+      if (!sessionId) {
+        sessionId = chatAPI.getSessionInfo().sessionId || undefined;
+        console.log("Updated sessionId from response:", sessionId);
+      }
 
       const botMessage: Message = {
         id: (Date.now() + 1).toString(),
-        text: response.response,
+        text: response.response ?? "",
         isUser: false,
         timestamp: new Date(),
       };
@@ -150,14 +201,13 @@ const ChatbotInterface: React.FC<ChatbotInterfaceProps> = ({
                     ? currentInput.slice(0, 30) +
                       (currentInput.length > 30 ? "..." : "")
                     : conv.title,
+                session_id: sessionId,
               }
             : conv
         )
       );
     } catch (error) {
       console.error("Error sending message:", error);
-
-      // Add error message to chat
       const errorMessage: Message = {
         id: (Date.now() + 1).toString(),
         text: `Sorry, there was an error processing your request: ${
@@ -188,8 +238,6 @@ const ChatbotInterface: React.FC<ChatbotInterfaceProps> = ({
 
   const handleTextareaChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setInputMessage(e.target.value);
-
-    // Auto-resize textarea
     const textarea = e.target;
     textarea.style.height = "auto";
     textarea.style.height = Math.min(textarea.scrollHeight, 150) + "px";
@@ -201,7 +249,6 @@ const ChatbotInterface: React.FC<ChatbotInterfaceProps> = ({
 
   return (
     <div className="h-screen flex overflow-hidden bg-gradient-to-br from-[#ffffff] to-[#C7C5FF]">
-      {/* Mobile Sidebar Overlay */}
       {isSidebarOpen && (
         <div
           className="fixed inset-0 bg-black/50 z-40 lg:hidden transition-opacity duration-300"
@@ -209,7 +256,6 @@ const ChatbotInterface: React.FC<ChatbotInterfaceProps> = ({
         />
       )}
 
-      {/* Sidebar */}
       <div
         className={`${
           isSidebarOpen ? "translate-x-0" : "-translate-x-full"
@@ -228,13 +274,12 @@ const ChatbotInterface: React.FC<ChatbotInterfaceProps> = ({
           onClose={() => setIsSidebarOpen(false)}
           isCollapsed={isSidebarCollapsed}
           onToggleCollapse={toggleSidebar}
-          onDeleteConversation={handleDeleteConversation} // Add this line
+          onDeleteConversation={handleDeleteConversation}
+          user_id={user?.user_id || ""}
         />
       </div>
 
-      {/* Main Chat Area */}
       <div className="flex-1 flex flex-col min-w-0">
-        {/* Header with proper spacing for dropdown */}
         <div className="bg-transparent backdrop-blur-sm p-4 flex items-center justify-between relative z-10">
           <div className="flex items-center space-x-4">
             <button
@@ -243,8 +288,6 @@ const ChatbotInterface: React.FC<ChatbotInterfaceProps> = ({
             >
               <Menu className="w-5 h-5 text-[#313C71]" />
             </button>
-
-            {/* Logo Only */}
             <div className="w-50 h-30 flex items-center justify-center transition-all duration-300 hover:scale-105">
               <PESLogo className="w-20 h-18" />
             </div>
@@ -252,13 +295,10 @@ const ChatbotInterface: React.FC<ChatbotInterfaceProps> = ({
               <Logo className="w-20 h-18" />
             </div>
           </div>
-
           <UserMenu user={user} onLogout={onLogout} />
         </div>
 
-        {/* Messages Area or Welcome Screen with proper top margin */}
         {!hasMessages ? (
-          /* Welcome Screen with Centered Input */
           <div
             className="flex-1 flex flex-col items-center justify-center p-8"
             style={{ marginTop: "50px" }}
@@ -268,8 +308,6 @@ const ChatbotInterface: React.FC<ChatbotInterfaceProps> = ({
                 What Can I Help You With Today?
               </h2>
             </div>
-
-            {/* Centered Input Area */}
             <div className="w-full max-w-2xl">
               <div className="flex items-end space-x-3">
                 <div className="flex-1">
@@ -290,7 +328,7 @@ const ChatbotInterface: React.FC<ChatbotInterfaceProps> = ({
                 </div>
                 <button
                   onClick={handleSendMessage}
-                  disabled={!inputMessage.trim() || isLoading}
+                  disabled={!inputMessage.trim() || isLoading || !user?.user_id}
                   className="h-[60px] px-4 bg-[#313C71] text-white hover:bg-[#E75728] active:bg-[#E75728] disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 transform hover:scale-105 active:scale-95 shadow-lg hover:shadow-xl focus:outline-none focus:ring-4 focus:ring-[#313c71]/20 flex items-center justify-center"
                   style={{ borderRadius: "20px" }}
                 >
@@ -300,13 +338,11 @@ const ChatbotInterface: React.FC<ChatbotInterfaceProps> = ({
             </div>
           </div>
         ) : (
-          /* Regular Chat Interface */
           <>
-            {/* Messages Area with proper spacing from header */}
             <div
               className="flex-1 overflow-y-auto custom-scrollbar"
               style={{
-                paddingTop: "50px", // Ensure 50px clearance from header/dropdown
+                paddingTop: "50px",
                 paddingLeft: "16px",
                 paddingRight: "16px",
                 paddingBottom: "16px",
@@ -316,7 +352,7 @@ const ChatbotInterface: React.FC<ChatbotInterfaceProps> = ({
                 {currentConversation.messages.map((message) => (
                   <div
                     key={message.id}
-                    className={`${message.isUser ? "pr-16" : "pl-16"}`} // Add horizontal padding to prevent overlap
+                    className={`${message.isUser ? "pr-16" : "pl-16"}`}
                   >
                     <MessageBubble message={message} />
                   </div>
@@ -344,12 +380,10 @@ const ChatbotInterface: React.FC<ChatbotInterfaceProps> = ({
                     </div>
                   </div>
                 )}
-
                 <div ref={messagesEndRef} />
               </div>
             </div>
 
-            {/* Bottom Input Area */}
             <div className="bg-transparent backdrop-blur-sm p-4">
               <div className="flex items-end space-x-3 max-w-4xl mx-auto">
                 <div className="flex-1">
@@ -370,7 +404,7 @@ const ChatbotInterface: React.FC<ChatbotInterfaceProps> = ({
                 </div>
                 <button
                   onClick={handleSendMessage}
-                  disabled={!inputMessage.trim() || isLoading}
+                  disabled={!inputMessage.trim() || isLoading || !user?.user_id}
                   className="h-[60px] px-4 bg-[#EF7F1A] text-white hover:bg-[#E75728] active:bg-[#E75728] disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 transform hover:scale-105 active:scale-95 shadow-lg hover:shadow-xl focus:outline-none focus:ring-4 focus:ring-[#313c71]/20 flex items-center justify-center"
                   style={{ borderRadius: "20px" }}
                 >
