@@ -1,3 +1,4 @@
+# app.py
 import os
 import json
 import asyncio
@@ -16,13 +17,14 @@ from ingestion.faiss_database import setup_faiss_with_text_storage
 from preprocessor.profanity_check import check_profanity
 from tenacity import retry, stop_after_attempt, wait_exponential
 from fastapi.staticfiles import StaticFiles
-from typing import List, Dict
+import httpx
+import urllib.parse
+
 # Set up logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 # App initialization
-
 app = FastAPI()
 
 app.mount("/images", StaticFiles(directory="ingestion/components/images"), name="images")
@@ -30,9 +32,9 @@ app.mount("/images", StaticFiles(directory="ingestion/components/images"), name=
 # Configure CORS middleware
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=["*"],  
     allow_credentials=False,
-    allow_methods=["GET", "POST", "OPTIONS", "DELETE", "PUT"],
+    allow_methods=["GET", "POST", "OPTIONS", "DELETE"],
     allow_headers=["Content-Type", "Authorization"],
 )
 
@@ -41,12 +43,6 @@ REDIS_URL = os.getenv("REDIS_URL", "redis://localhost:6379")
 WEBSOCKET_TIMEOUT = float(os.getenv("WEBSOCKET_TIMEOUT", "300"))
 SESSION_EXPIRY = int(os.getenv("SESSION_EXPIRY", "86400"))
 CHAT_HISTORY_FILE = "chat_history.json"
-
-LOCAL_STORE_DIR = "Localstore"
-
-if not os.path.exists(LOCAL_STORE_DIR):
-    os.makedirs(LOCAL_STORE_DIR)
-
 
 # Redis client
 redis_client = None
@@ -82,7 +78,7 @@ class LoginResponse(BaseModel):
 
 # SessionManager: Handles Redis-backed session lifecycle and chat storage
 class SessionManager:
-    def __init__(self):
+    def init(self):
         if not os.path.exists(CHAT_HISTORY_FILE):
             with open(CHAT_HISTORY_FILE, 'w') as f:
                 json.dump({}, f)
@@ -191,113 +187,42 @@ class SessionManager:
         except Exception as e:
             logger.error(f"Failed to update session {session_id}: {str(e)}")
 
-    # async def save_to_json(self, session_id: str, query: str, response: str):
-    #     try:
-    #         with open(CHAT_HISTORY_FILE, 'r') as f:
-    #             history = json.load(f)
-    #     except json.JSONDecodeError:
-    #         history = {}
-
-    #     history.setdefault(session_id, []).append({
-    #         "query": query,
-    #         "response": response,
-    #         "timestamp": datetime.now().isoformat()
-    #     })
-
-    #     try:
-    #         with open(CHAT_HISTORY_FILE, 'w') as f:
-    #             json.dump(history, f, indent=4)
-    #     except Exception as e:
-    #         logger.error(f"Failed to save chat history to JSON: {str(e)}")
-
-    # async def remove_from_json(self, session_id: str):
-    #     try:
-    #         with open(CHAT_HISTORY_FILE, 'r') as f:
-    #             history = json.load(f)
-    #         history.pop(session_id, None)
-    #         with open(CHAT_HISTORY_FILE, 'w') as f:
-    #             json.dump(history, f, indent=4)
-    #         logger.info(f"Removed session {session_id} from chat_history.json")
-    #     except Exception as e:
-    #         logger.error(f"Failed to remove session {session_id} from JSON: {str(e)}")
-
     async def save_to_json(self, session_id: str, query: str, response: str):
-        user_id = session_id.split("_")[0]
-        user_file = os.path.join(LOCAL_STORE_DIR, f"{user_id}.json")
-
         try:
-            if os.path.exists(user_file):
-                with open(user_file, 'r') as f:
-                    history = json.load(f)
-            else:
-                history = {}
-
-            history.setdefault(session_id, []).append({
-                "query": query,
-                "response": response,
-                "timestamp": datetime.now().isoformat()
-            })
-
-            with open(user_file, 'w') as f:
-                json.dump(history, f, indent=4)
-
-        except Exception as e:
-            logger.error(f"Failed to save chat to {user_file}: {str(e)}")
-        
-    async def remove_from_json(self, session_id: str):
-        user_id = session_id.split("_")[0]
-        user_file = os.path.join(LOCAL_STORE_DIR, f"{user_id}.json")
-
-        if not os.path.exists(user_file):
-            return
-
-        try:
-            with open(user_file, 'r') as f:
+            with open(CHAT_HISTORY_FILE, 'r') as f:
                 history = json.load(f)
+        except json.JSONDecodeError:
+            history = {}
 
-            history.pop(session_id, None)
+        history.setdefault(session_id, []).append({
+            "query": query,
+            "response": response,
+            "timestamp": datetime.now().isoformat()
+        })
 
-            with open(user_file, 'w') as f:
-                json.dump(history, f, indent=4)
-
-            logger.info(f"Removed session {session_id} from {user_file}")
-
-        except Exception as e:
-            logger.error(f"Failed to remove session {session_id} from {user_file}: {str(e)}")
-
-
-    async def get_latest_session_history(self, session_id: str, limit: int = 5) -> List[Dict[str, str]]:
-        """
-        Return the latest history for a session (up to `limit` Q&A pairs),
-        formatted as alternating 'user' and 'assistant' roles.
-        """
         try:
-            # Pull from Redis session data
-            session_data = await redis_client.hget(f"session:{session_id}", "data")
-            if not session_data:
-                return []
-
-            session_dict = json.loads(session_data)
-            conversation = session_dict.get("conversation_history", [])
-
-            # Format as role-content dicts
-            history = []
-            for turn in conversation[-limit:]:
-                history.append({"role": "user", "content": turn["query"]})
-                history.append({"role": "assistant", "content": turn["response"]})
-
-            return history[-(limit*2):]  # last 5 pairs = 10 entries max
+            with open(CHAT_HISTORY_FILE, 'w') as f:
+                json.dump(history, f, indent=4)
         except Exception as e:
-            logger.error(f"Error fetching session history for {session_id}: {str(e)}")
-            return []
+            logger.error(f"Failed to save chat history to JSON: {str(e)}")
 
+    async def remove_from_json(self, session_id: str):
+        try:
+            with open(CHAT_HISTORY_FILE, 'r') as f:
+                history = json.load(f)
+            history.pop(session_id, None)
+            with open(CHAT_HISTORY_FILE, 'w') as f:
+                json.dump(history, f, indent=4)
+            logger.info(f"Removed session {session_id} from chat_history.json")
+        except Exception as e:
+            logger.error(f"Failed to remove session {session_id} from JSON: {str(e)}")
 
     async def delete_session(self, session_id: str):
         try:
             user_id = await redis_client.hget(f"session:{session_id}", "user_id")
             if user_id:
                 user_id = user_id.decode() if isinstance(user_id, bytes) else user_id
-                remaining_sessions = [key async for key in redis_client.scan_iter(f"session:*{user_id}*")]
+                remaining_sessions = [key async for key in redis_client.scan_iter(f"session:{user_id}")]
                 if len(remaining_sessions) <= 1:
                     await redis_client.delete(f"user_session:{user_id}")
             await redis_client.delete(f"session:{session_id}")
@@ -328,30 +253,7 @@ class SessionManager:
 
             await asyncio.sleep(60)
 
-            async def load_history_from_json(self, session_id: str):
-                user_id = session_id.split("_")[0]
-                user_file = os.path.join(LOCAL_STORE_DIR, f"{user_id}.json")
-
-                if not os.path.exists(user_file):
-                    return []
-
-                try:
-                    with open(user_file, 'r') as f:
-                        all_sessions = json.load(f)
-                    session_history = all_sessions.get(session_id, [])
-                    # Format to chat-style history
-                    formatted = []
-                    for item in session_history:
-                        formatted.append({"role": "user", "content": item["query"]})
-                        formatted.append({"role": "assistant", "content": item["response"]})
-                    return formatted[-10:]  # Limit context window
-                except Exception as e:
-                    logger.error(f"Failed to load history from {user_file}: {str(e)}")
-                    return []
-
-
 session_manager = SessionManager()
-
 
 # Redis connection initialization
 @retry(stop=stop_after_attempt(3), wait=wait_exponential(multiplier=1, min=2, max=10))
@@ -398,13 +300,12 @@ async def login(request: LoginRequest):
     try:
         user_id = await session_manager.create_user(request.email, name)
         logger.info(f"Login successful for user_id: {user_id}")
-        return LoginResponse(user_id=user_id, email=request.email, name=name)
+        return LoginResponse(email=str(request.email), name=str(name), user_id=str(user_id))
     except Exception as e:
         logger.error(f"Login failed for {request.email}: {str(e)}")
         raise HTTPException(status_code=500, detail="Internal server error")
 
 # HTTP chat endpoint
-# 
 @app.post("/chat", response_model=ChatResponse)
 async def chat(request: ChatRequest):
     user_id = request.user_id
@@ -414,21 +315,17 @@ async def chat(request: ChatRequest):
         raise HTTPException(status_code=400, detail="Empty query not allowed")
 
     if check_profanity(query):
-        return ChatResponse(response="⚠️ Please avoid using offensive language.")
+        return ChatResponse(response="⚠ Please avoid using offensive language.")
 
     session_id = await session_manager.get_or_create_session(user_id)
+    chat_histories[session_id].append({"role": "user", "content": query})
 
-    if session_id not in chat_histories or not chat_histories[session_id]:
-        chat_histories[session_id] = await session_manager.load_history_from_json(session_id)
-
-    history = chat_histories[session_id][-10:]  # last 5 Q&A pairs
-    response_data = generator.generate(query, chat_history=history)
+    response_data = generator.generate(query)
     reply = response_data["answer"]
 
     await session_manager.update_session(session_id, query, reply)
-    chat_histories[session_id].append({"role": "user", "content": query})
     chat_histories[session_id].append({"role": "assistant", "content": reply})
-    chat_histories[session_id] = chat_histories[session_id][-20:]  # maintain window
+    chat_histories[session_id] = chat_histories[session_id][-20:]
 
     return ChatResponse(response=reply)
 
@@ -440,37 +337,114 @@ async def websocket_endpoint(websocket: WebSocket, user_id: str):
     logger.info(f"WebSocket connection established for session: {session_id}")
     await websocket.send_json({"session_id": session_id})
     try:
-        while True:
-            data = await websocket.receive_json()
-            query = data.get("query")
-            if not query:
-                await websocket.send_json({"error": "No query provided"})
-                continue
-            if check_profanity(query):
-                await websocket.send_json({"response": "⚠️ Please avoid using offensive language."})
-                continue
-            # response_data = generator.generate(query)
-            # response = response_data["answer"]
-            history = chat_histories[session_id][-10:]
-            response_data = generator.generate(query, chat_history=history)
-            response = response_data["answer"]
-            await session_manager.update_session(session_id, query, response)
-            chat_histories[session_id].append({"role": "user", "content": query})
-            chat_histories[session_id].append({"role": "assistant", "content": response})
-            chat_histories[session_id] = chat_histories[session_id][-20:]
-            await websocket.send_json({
-                "session_id": session_id,
-                "query": query,
-                "response": response
-            })
+        async with httpx.AsyncClient() as client:
+            while True:
+                data = await websocket.receive_json()
+                query = data.get("query")
+                if not query:
+                    await websocket.send_json({"error": "No query provided"})
+                    continue
+                if check_profanity(query):
+                    await websocket.send_json({"response": "⚠ Please avoid using offensive language."})
+                    continue
+
+                # Step 1: Send query to producer_service
+                message_id = str(uuid.uuid4())
+                query_data = {
+                    "session_id": session_id,
+                    "user_id": user_id,
+                    "message_id": message_id,
+                    "type": "query",
+                    "message": query
+                }
+                encoded_data = urllib.parse.urlencode(query_data)
+                producer_response = await client.post(
+                    "http://localhost:8500/send_message",  # Changed to match producer_service endpoint
+                    headers={
+                        "accept": "application/json",
+                        "Content-Type": "application/x-www-form-urlencoded"
+                    },
+                    content=encoded_data
+                )
+                if producer_response.status_code != 200:
+                    await websocket.send_json({"error": "Failed to send query to producer"})
+                    continue
+                logger.info(f"Query sent to producer: {query_data}")
+
+                # Step 2: Fetch query from consumer_service
+                consumer_response = await client.get(
+                    f"http://localhost:8001/messages?topic=query&limit=1&latest=true"
+                )
+                if consumer_response.status_code != 200:
+                    await websocket.send_json({"error": "Failed to fetch query from consumer"})
+                    continue
+                consumer_data = consumer_response.json()
+                if consumer_data["count"] == 0 or consumer_data["messages"][0]["value"]["message_id"] != message_id:
+                    await websocket.send_json({"error": "Query not found in consumer"})
+                    continue
+                logger.info(f"Query fetched from consumer: {consumer_data}")
+
+                # Step 3: Generate response using ResponseGenerator
+                response_data = generator.generate(query)
+                response = response_data["answer"]
+
+                # Step 4: Update session with query and response
+                await session_manager.update_session(session_id, query, response)
+                chat_histories[session_id].append({"role": "user", "content": query})
+                chat_histories[session_id].append({"role": "assistant", "content": response})
+                chat_histories[session_id] = chat_histories[session_id][-20:]
+
+                # Step 5: Send answer to producer_service
+                answer_data = {
+                    "session_id": session_id,
+                    "user_id": user_id,
+                    "message_id": message_id,
+                    "type": "answer",
+                    "message": response
+                }
+                encoded_answer = urllib.parse.urlencode(answer_data)
+                producer_answer_response = await client.post(
+                    "http://localhost:8500/send_message",  # Changed to match producer_service endpoint
+                    headers={
+                        "accept": "application/json",
+                        "Content-Type": "application/x-www-form-urlencoded"
+                    },
+                    content=encoded_answer
+                )
+                if producer_answer_response.status_code != 200:
+                    await websocket.send_json({"error": "Failed to send answer to producer"})
+                    continue
+                logger.info(f"Answer sent to producer: {answer_data}")
+
+                # Step 6: Fetch answer from consumer_service
+                consumer_answer_response = await client.get(
+                    f"http://localhost:8001/messages?topic=answer&limit=1&latest=true"
+                )
+                if consumer_answer_response.status_code != 200:
+                    await websocket.send_json({"error": "Failed to fetch answer from consumer"})
+                    continue
+                consumer_answer_data = consumer_answer_response.json()
+                if consumer_answer_data["count"] == 0 or consumer_answer_data["messages"][0]["value"]["message_id"] != message_id:
+                    await websocket.send_json({"error": "Answer not found in consumer"})
+                    continue
+                logger.info(f"Answer fetched from consumer: {consumer_answer_data}")
+
+                # Step 7: Send response back to WebSocket client
+                await websocket.send_json({
+                    "session_id": session_id,
+                    "query": query,
+                    "response": response
+                })
+
     except WebSocketDisconnect:
         logger.info(f"Disconnected: {session_id}")
     except Exception as e:
         logger.error(f"WebSocket error for session {session_id}: {str(e)}")
+        await websocket.send_json({"error": f"Internal error: {str(e)}"})
     finally:
         async with connection_lock:
             active_connections.pop(session_id, None)
-            await session_manager.delete_session(session_id)
+            await沈_manager.delete_session(session_id)
 
 # Session history API
 @app.get("/session/{session_id}/history")
@@ -507,7 +481,6 @@ async def list_images():
     
     return {"images": image_files}
 
-
 @app.on_event("startup")
 async def startup_event():
     await init_redis()
@@ -518,6 +491,6 @@ async def shutdown_event():
     if redis_client:
         await redis_client.close()
 
-if __name__ == "__main__":
+if __name__ == "main":
     import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    uvicorn.run(app, host="0.0.0.0",port=8500)
