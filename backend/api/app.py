@@ -16,12 +16,13 @@ from ingestion.faiss_database import setup_faiss_with_text_storage
 from preprocessor.profanity_check import check_profanity
 from tenacity import retry, stop_after_attempt, wait_exponential
 from fastapi.staticfiles import StaticFiles
-
+from typing import List, Dict
 # Set up logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 # App initialization
+
 app = FastAPI()
 
 app.mount("/images", StaticFiles(directory="ingestion/components/images"), name="images")
@@ -40,6 +41,12 @@ REDIS_URL = os.getenv("REDIS_URL", "redis://localhost:6379")
 WEBSOCKET_TIMEOUT = float(os.getenv("WEBSOCKET_TIMEOUT", "300"))
 SESSION_EXPIRY = int(os.getenv("SESSION_EXPIRY", "86400"))
 CHAT_HISTORY_FILE = "chat_history.json"
+
+LOCAL_STORE_DIR = "Localstore"
+
+if not os.path.exists(LOCAL_STORE_DIR):
+    os.makedirs(LOCAL_STORE_DIR)
+
 
 # Redis client
 redis_client = None
@@ -184,35 +191,106 @@ class SessionManager:
         except Exception as e:
             logger.error(f"Failed to update session {session_id}: {str(e)}")
 
+    # async def save_to_json(self, session_id: str, query: str, response: str):
+    #     try:
+    #         with open(CHAT_HISTORY_FILE, 'r') as f:
+    #             history = json.load(f)
+    #     except json.JSONDecodeError:
+    #         history = {}
+
+    #     history.setdefault(session_id, []).append({
+    #         "query": query,
+    #         "response": response,
+    #         "timestamp": datetime.now().isoformat()
+    #     })
+
+    #     try:
+    #         with open(CHAT_HISTORY_FILE, 'w') as f:
+    #             json.dump(history, f, indent=4)
+    #     except Exception as e:
+    #         logger.error(f"Failed to save chat history to JSON: {str(e)}")
+
+    # async def remove_from_json(self, session_id: str):
+    #     try:
+    #         with open(CHAT_HISTORY_FILE, 'r') as f:
+    #             history = json.load(f)
+    #         history.pop(session_id, None)
+    #         with open(CHAT_HISTORY_FILE, 'w') as f:
+    #             json.dump(history, f, indent=4)
+    #         logger.info(f"Removed session {session_id} from chat_history.json")
+    #     except Exception as e:
+    #         logger.error(f"Failed to remove session {session_id} from JSON: {str(e)}")
+
     async def save_to_json(self, session_id: str, query: str, response: str):
-        try:
-            with open(CHAT_HISTORY_FILE, 'r') as f:
-                history = json.load(f)
-        except json.JSONDecodeError:
-            history = {}
-
-        history.setdefault(session_id, []).append({
-            "query": query,
-            "response": response,
-            "timestamp": datetime.now().isoformat()
-        })
+        user_id = session_id.split("_")[0]
+        user_file = os.path.join(LOCAL_STORE_DIR, f"{user_id}.json")
 
         try:
-            with open(CHAT_HISTORY_FILE, 'w') as f:
+            if os.path.exists(user_file):
+                with open(user_file, 'r') as f:
+                    history = json.load(f)
+            else:
+                history = {}
+
+            history.setdefault(session_id, []).append({
+                "query": query,
+                "response": response,
+                "timestamp": datetime.now().isoformat()
+            })
+
+            with open(user_file, 'w') as f:
                 json.dump(history, f, indent=4)
-        except Exception as e:
-            logger.error(f"Failed to save chat history to JSON: {str(e)}")
 
+        except Exception as e:
+            logger.error(f"Failed to save chat to {user_file}: {str(e)}")
+        
     async def remove_from_json(self, session_id: str):
+        user_id = session_id.split("_")[0]
+        user_file = os.path.join(LOCAL_STORE_DIR, f"{user_id}.json")
+
+        if not os.path.exists(user_file):
+            return
+
         try:
-            with open(CHAT_HISTORY_FILE, 'r') as f:
+            with open(user_file, 'r') as f:
                 history = json.load(f)
+
             history.pop(session_id, None)
-            with open(CHAT_HISTORY_FILE, 'w') as f:
+
+            with open(user_file, 'w') as f:
                 json.dump(history, f, indent=4)
-            logger.info(f"Removed session {session_id} from chat_history.json")
+
+            logger.info(f"Removed session {session_id} from {user_file}")
+
         except Exception as e:
-            logger.error(f"Failed to remove session {session_id} from JSON: {str(e)}")
+            logger.error(f"Failed to remove session {session_id} from {user_file}: {str(e)}")
+
+
+    async def get_latest_session_history(self, session_id: str, limit: int = 5) -> List[Dict[str, str]]:
+        """
+        Return the latest history for a session (up to `limit` Q&A pairs),
+        formatted as alternating 'user' and 'assistant' roles.
+        """
+        try:
+            # Pull from Redis session data
+            session_data = await redis_client.hget(f"session:{session_id}", "data")
+            if not session_data:
+                return []
+
+            session_dict = json.loads(session_data)
+            conversation = session_dict.get("conversation_history", [])
+
+            # Format as role-content dicts
+            history = []
+            for turn in conversation[-limit:]:
+                history.append({"role": "user", "content": turn["query"]})
+                history.append({"role": "assistant", "content": turn["response"]})
+
+            return history[-(limit*2):]  # last 5 pairs = 10 entries max
+        except Exception as e:
+            logger.error(f"Error fetching session history for {session_id}: {str(e)}")
+            return []
+
 
     async def delete_session(self, session_id: str):
         try:
@@ -250,7 +328,30 @@ class SessionManager:
 
             await asyncio.sleep(60)
 
+            async def load_history_from_json(self, session_id: str):
+                user_id = session_id.split("_")[0]
+                user_file = os.path.join(LOCAL_STORE_DIR, f"{user_id}.json")
+
+                if not os.path.exists(user_file):
+                    return []
+
+                try:
+                    with open(user_file, 'r') as f:
+                        all_sessions = json.load(f)
+                    session_history = all_sessions.get(session_id, [])
+                    # Format to chat-style history
+                    formatted = []
+                    for item in session_history:
+                        formatted.append({"role": "user", "content": item["query"]})
+                        formatted.append({"role": "assistant", "content": item["response"]})
+                    return formatted[-10:]  # Limit context window
+                except Exception as e:
+                    logger.error(f"Failed to load history from {user_file}: {str(e)}")
+                    return []
+
+
 session_manager = SessionManager()
+
 
 # Redis connection initialization
 @retry(stop=stop_after_attempt(3), wait=wait_exponential(multiplier=1, min=2, max=10))
@@ -303,6 +404,7 @@ async def login(request: LoginRequest):
         raise HTTPException(status_code=500, detail="Internal server error")
 
 # HTTP chat endpoint
+# 
 @app.post("/chat", response_model=ChatResponse)
 async def chat(request: ChatRequest):
     user_id = request.user_id
@@ -315,14 +417,18 @@ async def chat(request: ChatRequest):
         return ChatResponse(response="⚠️ Please avoid using offensive language.")
 
     session_id = await session_manager.get_or_create_session(user_id)
-    chat_histories[session_id].append({"role": "user", "content": query})
 
-    response_data = generator.generate(query)
+    if session_id not in chat_histories or not chat_histories[session_id]:
+        chat_histories[session_id] = await session_manager.load_history_from_json(session_id)
+
+    history = chat_histories[session_id][-10:]  # last 5 Q&A pairs
+    response_data = generator.generate(query, chat_history=history)
     reply = response_data["answer"]
 
     await session_manager.update_session(session_id, query, reply)
+    chat_histories[session_id].append({"role": "user", "content": query})
     chat_histories[session_id].append({"role": "assistant", "content": reply})
-    chat_histories[session_id] = chat_histories[session_id][-20:]
+    chat_histories[session_id] = chat_histories[session_id][-20:]  # maintain window
 
     return ChatResponse(response=reply)
 
@@ -343,7 +449,10 @@ async def websocket_endpoint(websocket: WebSocket, user_id: str):
             if check_profanity(query):
                 await websocket.send_json({"response": "⚠️ Please avoid using offensive language."})
                 continue
-            response_data = generator.generate(query)
+            # response_data = generator.generate(query)
+            # response = response_data["answer"]
+            history = chat_histories[session_id][-10:]
+            response_data = generator.generate(query, chat_history=history)
             response = response_data["answer"]
             await session_manager.update_session(session_id, query, response)
             chat_histories[session_id].append({"role": "user", "content": query})

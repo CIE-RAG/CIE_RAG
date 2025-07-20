@@ -60,8 +60,27 @@ class ResponseGenerator:
 
         return results, sources_used
 
-    def generate(self, query, top_k=5):
+    # def generate(self, query, top_k=5):
+    #     results, used = self.search(query, top_k)
+    #     if not results:
+    #         return {
+    #             "query": query,
+    #             "answer": "I couldn't find any relevant information to answer your question.",
+    #             "sources": [],
+    #             "used_sources": used
+    #         }
+
+    #     answer = mistral_llm.generate_response(query, results)
+    #     return {
+    #         "query": query,
+    #         "answer": answer,
+    #         "sources": results,
+    #         "used_sources": used
+    #     }
+
+    def generate(self, query, chat_history=None, top_k=5):
         results, used = self.search(query, top_k)
+
         if not results:
             return {
                 "query": query,
@@ -70,7 +89,18 @@ class ResponseGenerator:
                 "used_sources": used
             }
 
-        answer = mistral_llm.generate_response(query, results)
+        if chat_history:
+            answer = mistral_llm.generate_response_with_history(
+                query=query,
+                search_results=results,
+                chat_history=chat_history
+            )
+        else:
+            answer = mistral_llm.generate_response(
+                query=query,
+                search_results=results
+            )
+
         return {
             "query": query,
             "answer": answer,

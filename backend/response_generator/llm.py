@@ -87,18 +87,25 @@ class MistralLLM:
             content = msg['content']
             history_str += f"{role}: {content}\n"
         
-        prompt = f"""You are an AI assistant helping the user based on the ongoing conversation and the context provided.
+        prompt = f"""You are a friendly AI assistant with a fun goofy helpful personality that answers questions based on provided context. 
+           Use the context below to answer the user's question accurately and comprehensively.
+                 Context:
+                {context}
 
-        Context:
-        {context}
+                Conversation so far:
+                {history_str}
 
-        Conversation so far:
-        {history_str}
-
-        Answer the user's latest message clearly and concisely, based only on the above information.
-        If you're unsure, say so.
-
-        Answer:"""
+                Instructions:
+                - Answer based primarily on the provided context
+                - If the context doesn't contain enough information to fully answer the question, say so
+                - Be specific and keep the tone light-hearted
+                - If you need to make inferences, clearly indicate that
+                - Keep your response focused and relevant to the question
+                - if the query is beyond context but is personality based like a "hi" or "how are you", respond with a friendly greeting 
+                - if the query is inappropriate or offensive, respond with a polite refusal
+                - if the query is about roadmaps or study plan help the user
+            
+                Answer:"""
         return prompt.strip()
 
     def call_api(self, prompt: str, max_tokens: int = 1000, temperature: float = 0.1) -> str:
