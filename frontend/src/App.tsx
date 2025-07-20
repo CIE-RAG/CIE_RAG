@@ -2,13 +2,18 @@ import React, { useState } from 'react';
 import LoginPage from './components/LoginPage';
 import ChatbotInterface from './components/ChatbotInterface';
 
+interface User {
+  user_id: string;
+  email: string;
+  name: string;
+}
+
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [user, setUser] = useState<{ email: string; name: string } | null>(null);
+  const [user, setUser] = useState<User | null>(null);
 
-  const handleLogin = (email: string, password: string) => {
-    // Simulate login process
-    setUser({ email, name: email.split('@')[0] });
+  const handleLogin = (userData: User) => {
+    setUser(userData);
     setIsLoggedIn(true);
   };
 

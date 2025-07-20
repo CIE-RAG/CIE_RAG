@@ -5,7 +5,7 @@ import PESLogo from "./pesLogo";
 import axios from "axios";
 
 interface LoginPageProps {
-  onLogin: (user: { user_id: string; email: string; name: string }) => void;
+  onLogin: (user: { email: string; name: string; user_id: string }) => void;
 }
 
 const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
@@ -62,7 +62,8 @@ const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
           },
         }
       );
-      onLogin(response.data);
+      console.log(onLogin, response.data);
+      onLogin(response.data); //the problem is here, the onLogin function is fucked up
     } catch (error) {
       let errorMessage = "Failed to login. Please check your SRN and password.";
       if (axios.isAxiosError(error)) {

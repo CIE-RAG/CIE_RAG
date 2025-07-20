@@ -4,7 +4,7 @@ import MessageBubble from "./MessageBubble";
 import UserMenu from "./UserMenu";
 import Logo from "./cieLogo";
 import PESLogo from "./pesLogo";
-import { Send, Menu, X, ChevronLeft, ChevronRight, Bot } from "lucide-react";
+import { Send, Menu, Bot } from "lucide-react";
 import { chatAPI } from "../services/api";
 
 interface User {
@@ -360,7 +360,7 @@ const ChatbotInterface: React.FC<ChatbotInterfaceProps> = ({
                 {isLoading && (
                   <div className="flex justify-start mb-6">
                     <div className="flex items-center space-x-3 bg-white/80 backdrop-blur-sm rounded-2xl px-6 py-4 shadow-lg border border-[#313c71]/10">
-                      <div className="flex items-center justify-center w-8 h-8 bg-gradient-to-br from-[#313c71] to-[#67753A] rounded-full">
+                      <div className="flex items-center justify-center w-8 h-8 bg-[#313c71] rounded-full">
                         <Bot className="w-4 h-4 text-white" />
                       </div>
                       <div className="flex space-x-1">
@@ -405,7 +405,7 @@ const ChatbotInterface: React.FC<ChatbotInterfaceProps> = ({
                 <button
                   onClick={handleSendMessage}
                   disabled={!inputMessage.trim() || isLoading || !user?.user_id}
-                  className="h-[60px] px-4 bg-[#EF7F1A] text-white hover:bg-[#E75728] active:bg-[#E75728] disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 transform hover:scale-105 active:scale-95 shadow-lg hover:shadow-xl focus:outline-none focus:ring-4 focus:ring-[#313c71]/20 flex items-center justify-center"
+                  className="h-[60px] px-4 bg-[#313c71] text-white hover:bg-[#E75728] active:bg-[#E75728] disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 transform hover:scale-105 active:scale-95 shadow-lg hover:shadow-xl focus:outline-none focus:ring-4 focus:ring-[#313c71]/20 flex items-center justify-center"
                   style={{ borderRadius: "20px" }}
                 >
                   <Send className="w-5 h-5" />

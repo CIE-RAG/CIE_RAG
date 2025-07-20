@@ -4,6 +4,7 @@ import { User, LogOut, ChevronDown, /*Settings, Bell*/ } from 'lucide-react';
 interface User {
   email: string;
   name: string;
+  user_id?: string;
 }
 
 interface UserMenuProps {
