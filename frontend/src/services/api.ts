@@ -47,7 +47,7 @@ class ChatAPI {
       }
 
       console.warn('No session ID from WebSocket, falling back to HTTP');
-      const response = await axios.post('http://localhost:8000/create_session', { user_id: userId });
+      const response = await axios.post('http://localhost:8500/create_session', { user_id: userId });
       if (response.data.session_id) {
         console.log('Session ID from HTTP:', response.data.session_id);
         return response.data.session_id;
