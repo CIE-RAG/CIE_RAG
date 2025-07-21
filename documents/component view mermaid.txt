@@ -1,0 +1,250 @@
+graph TB
+    %% Deployment and Infrastructure Layer
+    subgraph DeploymentPipeline["🚀 Deployment Pipeline"]
+        GitHubRepo[📁 GitHub Repository<br/>Microservices Code] --> CreateImages[🐳 Create Docker Images<br/>from Microservices<br/>cloned from GitHub repo]
+        CreateImages --> DockerCompose[🔧 Use Docker Compose<br/>to integrate the services]
+        DockerCompose --> DockerHub[🏪 Store the Docker Images<br/>into Docker Hub registry]
+        DockerHub --> K8sPull[☸ K8s pulls the images<br/>from Docker Hub registry]
+        K8sPull --> YAMLManifests[📄 Create YAML manifests<br/>for each microservice]
+        YAMLManifests --> K8sPods[🔲 K8s will create Pods<br/>for each microservice]
+        K8sPods --> PodComm[🌐 Pods will communicate<br/>with each other using Calico]
+    end
+   
+    %% Kubernetes Cluster Layer
+    subgraph K8sCluster["☸ Kubernetes Cluster"]
+        subgraph UIPod["UI Pod"]
+            UIService[🖥 UI/Frontend Service]
+        end
+       
+        subgraph FastAPIPod["FastAPI Pod"]
+            FastAPIService[FastAPI - app.py]
+        end
+       
+        subgraph KafkaPod["Kafka Pod"]
+            KafkaCluster[Kafka Cluster]
+        end
+       
+        subgraph RAGPod["RAG Pod"]
+            RAGService[RAG Processing Service]
+        end
+       
+        subgraph LLMPod["LLM Pod"]
+            LLMService[LLM Processing Service]
+        end
+       
+        subgraph StoragePod["Storage Pod"]
+            RedisService[Redis Service]
+            VectorDBService[Vector DB Service]
+        end
+       
+        subgraph EvaluationPod["Evaluation Pod"]
+            EvaluationService[Evaluation Service]
+        end
+    end
+   
+    %% Connect Deployment to K8s
+    PodComm --> K8sCluster
+   
+    %% Top Layer - User Interface
+    User[👤 User] --> UIService
+   
+    %% Main Processing Flow - Left Side
+    UIService -->|User Query| UserQuery[User Query]
+    UserQuery --> USC_Q[📝 User-Simulated Contextual Query<br/>USC-Q]
+   
+    %% Authentication Flow - Right Side
+    UIService -->|HTTP/CORS| FastAPIService
+    FastAPIService --> Login[login]
+    Login --> ValidateAuth[Validate SRN & Password]
+    ValidateAuth --> CreateSession[Create User & Session in Redis]
+   
+    %% Kafka Processing - Left Side
+    UserQuery --> KafkaProducer1[Kafka Producer 1]
+   
+    subgraph KafkaSystem1["Kafka Message System - User Queries"]
+        KafkaLib1[Kafka Library manages message queues]
+        TopicPrompt[Topic: Prompt]
+        TopicQuery[Topic: Query]
+        TopicAnswer[Topic: Answer]
+        KafkaLib1 --> TopicPrompt
+        KafkaLib1 --> TopicQuery
+        KafkaLib1 --> TopicAnswer
+    end
+   
+    %% Connect Kafka Pod to Kafka System
+    KafkaCluster --> KafkaSystem1
+    KafkaProducer1 --> KafkaLib1
+    TopicQuery --> KafkaConsumer1[Kafka Consumer 1]
+    KafkaConsumer1 --> PreProcessing[Pre-processing<br/>profanity, log request, user ID,<br/>timestamp, session ID]
+   
+    %% Session Management - Right Side
+    FastAPIService --> SessionManager[Session Manager]
+   
+    subgraph Storage["Storage Systems"]
+        Redis[(Redis)]
+        ChatHistory[chat_history.json]
+        VectorDB[Vector DB]
+        QdrantDB[Qdrant Collection]
+    end
+   
+    %% Connect Storage Pod to Storage Systems
+    RedisService --> Redis
+    VectorDBService --> VectorDB
+    VectorDBService --> QdrantDB
+   
+    SessionManager --> Redis
+    SessionManager --> ChatHistory
+   
+    %% RAG Processing - Center
+    PreProcessing --> RAGService
+    RAGService --> ChatEndpoint[chat]
+    ChatEndpoint --> ProfanityFilter[Profanity Filter]
+    ProfanityFilter --> Embedder[Embedder]
+    Embedder --> SearchProcess[Search FAISS/Qdrant<br/>with embedded query<br/>Return top-k relevant<br/>documents<br/>Re-ranker]
+   
+    %% RAGA Assessment - Left Side
+    subgraph RAGA["🔍 RAGA Assessment System"]
+        USC_Q --> QA[📋 Quadrant Analysis]
+        QA --> QC[📊 Quadrant Collection]
+    end
+   
+    %% Vector Database - Center
+    subgraph VDB["🗄 Vector Database (Qdrant)"]
+        QdrantDB --> CIE[CIE Embeddings]
+    end
+   
+    RAGA --> VDB
+    SearchProcess --> VDB
+    VDB --> RAGPipeline[RAG Pipeline]
+   
+    %% RAG System - Center
+    subgraph RAGSystem["RAG System"]
+        RAGPipeline --> Retrieval[🔍 Retrieval Component]
+        Retrieval --> FaissRetriever[faiss_retriever]
+        FaissRetriever --> VectorDB
+        Retrieval --> Generation[🤖 Generation Component]
+        Generation --> ResponseGen[Response Generator]
+    end
+   
+    %% Prompt Building - Center
+    SearchProcess --> PromptBuilder[Prompt Builder<br/>build query prompt +<br/>chat, session history]
+    PromptBuilder --> KafkaProducer2[Kafka Producer 2]
+   
+    %% LLM Processing Kafka - Center
+    subgraph KafkaSystem2["Kafka System - LLM Processing"]
+        KafkaLib2[Kafka Library]
+        LLMTopic[LLM Topic]
+        KafkaLib2 --> LLMTopic
+    end
+   
+    %% Connect to Kafka Cluster
+    KafkaCluster --> KafkaSystem2
+    KafkaProducer2 --> KafkaLib2
+    LLMTopic --> KafkaConsumer2[Kafka Consumer 2]
+    KafkaConsumer2 --> LLMService
+   
+    %% LLM Processing - Center
+    subgraph LLMSystem["🧠 LLM Processing"]
+        LLMService --> LLMProcessing[LLM Response Generation]
+        LLMProcessing --> GPT[OpenAI GPT-3.5]
+        GPT --> Limitations[⚠ Limitations:<br/>• Quota Limit<br/>• Noise Sensitivity]
+    end
+   
+    %% Response Flow - Center to Right
+    LLMProcessing --> LLMResponse[🤖 LLM Response]
+    LLMResponse --> SendResponse[Send Response]
+    SendResponse --> WSManager[WebSocket Manager]
+   
+    %% WebSocket Communication - Right Side
+    UIService -->|WebSocket Connection| WSManager
+   
+    subgraph RealtimeComm["Realtime Communication"]
+        WSManager --> ActiveConnections[Active Connections]
+        WSManager --> ThreadLock[Lock for Thread Safety]
+        ActiveConnections --> RealtimeMessages[Real-time Chat Messages]
+    end
+   
+    %% Evaluation Flow - Right Side
+    Dataset[📊 Dataset<br/>~400 Queries + Ground Truth] --> GT[✅ Ground Truth<br/>G-T]
+   
+    subgraph Metrics["📊 Evaluation Metrics"]
+        subgraph NonLLM["📏 Non-LLM Based (Local Metrics)"]
+            KM[🔤 Keyword Matching]
+        end
+       
+        subgraph LLMMetrics["🤖 LLM-Based Metrics"]
+            CP[🎯 Context-Precision]
+            CR[🔗 Context-Relevance]
+            CRec[📥 Context-Recall]
+            AR[✨ Answer-Relevance]
+            AC[✅ Answer-Correctness]
+        end
+       
+        NonLLM --> LLMMetrics
+    end
+   
+    %% Connect Evaluation Pod to Metrics
+    EvaluationService --> Metrics
+    LLMResponse --> EvaluationService
+    GT --> EvaluationService
+   
+    subgraph Performance["📈 Performance Analysis"]
+        Precision[🎯 Precision]
+        Recall[📥 Recall]
+        Relevance[🔗 Relevance]
+        Correctness[✅ Correctness]
+       
+        Precision --> PerfResults[📊 RAG Pipeline<br/>Performance Results]
+        Recall --> PerfResults
+        Relevance --> PerfResults
+        Correctness --> PerfResults
+    end
+   
+    Metrics --> Performance
+   
+    subgraph Logging["📝 Logging System"]
+        LogEntry[📋 Log Entry:<br/>USC-Q + G-T + LLM Response + Context]
+    end
+   
+    Performance --> Logging
+   
+    %% Additional System Endpoints - Far Right
+    FastAPIService --> HealthCheck[health]
+    HealthCheck --> StatusCheck[Check Redis & Backend Status]
+   
+    FastAPIService --> SessionHistory[session/session_id/history]
+    SessionHistory --> FetchHistory[Fetch from Redis/JSON]
+   
+    FastAPIService --> DeleteSession[session/session_id/DELETE]
+    DeleteSession --> RemoveSession[Delete Session from Redis/JSON]
+   
+    %% System Events - Far Right
+    FastAPIService --> StartupEvent[Startup Event]
+    StartupEvent --> InitRedis[Initialize Redis]
+    InitRedis --> StartCleanup[Start Session Cleanup Task]
+   
+    FastAPIService --> ShutdownEvent[Shutdown Event]
+    ShutdownEvent --> CloseRedis[Close Redis Connection]
+   
+    %% Feedback Loops
+    Performance --> RAGA
+    Dataset --> RAGA
+    USC_Q --> Logging
+    GT --> Logging
+    LLMResponse --> Logging
+    LLMResponse --> SessionManager
+   
+    %% Styling
+    classDef userLayer fill:#e1f5fe,stroke:#0277bd,stroke-width:2px
+    classDef dataLayer fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px
+    classDef processLayer fill:#e8f5e8,stroke:#388e3c,stroke-width:2px
+    classDef evalLayer fill:#fff3e0,stroke:#f57c00,stroke-width:2px
+    classDef outputLayer fill:#fce4ec,stroke:#c2185b,stroke-width:2px
+    classDef kafkaLayer fill:#4A90E2,stroke:#333,stroke-width:2px
+   
+    class User,UIService,WSManager,UserQuery userLayer
+    class Dataset,GT,VDB,QdrantDB,CIE,Redis,ChatHistory,VectorDB dataLayer
+    class RAGA,RAGPipeline,LLMSystem,GPT,FastAPIService,SessionManager processLayer
+    class Metrics,NonLLM,LLMMetrics,Performance evalLayer
+    class Logging,LogEntry,LLMResponse,PerfResults outputLayer
+    class KafkaProducer1,KafkaProducer2,KafkaConsumer1,KafkaConsumer2,KafkaSystem1,KafkaSystem2,KafkaLib1,KafkaLib2 kafkaLayer
