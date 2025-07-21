@@ -78,7 +78,7 @@ const Sidebar: React.FC<SidebarProps> = ({
 
     try {
       const response = await axios.delete(
-        `http://localhost:8000/session/${conversation.session_id}`
+        `http://localhost:8500/session/${conversation.session_id}`
       );
       if (response.status === 200) {
         console.log(`Successfully deleted session: ${conversation.session_id}`);

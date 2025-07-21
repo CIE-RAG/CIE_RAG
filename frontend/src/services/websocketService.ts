@@ -22,7 +22,7 @@ export class WebSocketService {
         return;
       }
 
-      this.ws = new WebSocket(`ws://localhost:8000/ws/${this.user_id}`);
+      this.ws = new WebSocket(`ws://localhost:8500/ws/${this.user_id}`);
 
       this.ws.onopen = () => {
         console.log('WebSocket connected');

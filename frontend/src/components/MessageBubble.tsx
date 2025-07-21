@@ -211,7 +211,7 @@ const MessageBubble: React.FC<MessageBubbleProps> = ({
   imageName,
 }) => {
   const imageUrl = imageName
-    ? `http://localhost:8000/images/${imageName}`
+    ? `http://localhost:8500/images/${imageName}`
     : null;
 
   // Return appropriate component based on message type
