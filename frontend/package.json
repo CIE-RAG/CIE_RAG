@@ -10,6 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@types/react-syntax-highlighter": "^15.5.13",
     "axios": "^1.10.0",
     "highlight.js": "^11.11.1",
     "katex": "^0.16.22",
@@ -17,6 +18,7 @@
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-markdown": "^10.1.0",
+    "react-syntax-highlighter": "^15.6.1",
     "rehype-highlight": "^7.0.2",
     "rehype-katex": "^7.0.1",
     "rehype-raw": "^7.0.0",
