@@ -411,7 +411,7 @@ const ChatbotInterface: React.FC<ChatbotInterfaceProps> = ({
                         ></div>
                       </div>
                       <span className="text-[#313c71]/80 text-sm">
-                        AI is analyzing your question...
+                        CIE-GPT is analyzing your question...
                       </span>
                     </div>
                   </div>
