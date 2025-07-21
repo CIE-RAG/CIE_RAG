@@ -10,6 +10,138 @@ import {
 } from "lucide-react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { oneDark } from "react-syntax-highlighter/dist/esm/styles/prism";
+
+// Custom markdown components
+const MarkdownComponents = {
+  // Code blocks
+  code({ node, inline, className, children, ...props }: any) {
+    const match = /language-(\w+)/.exec(className || "");
+    const language = match ? match[1] : "";
+
+    if (!inline && language) {
+      return (
+        <div className="relative group my-4">
+          <div className="flex items-center justify-between bg-gray-800 text-gray-200 px-4 py-2 text-sm rounded-t-lg">
+            <span className="font-medium">{language}</span>
+            <button
+              className="opacity-0 group-hover:opacity-100 transition-opacity"
+              onClick={() => navigator.clipboard.writeText(String(children))}
+            >
+              <Copy className="h-4 w-4" />
+            </button>
+          </div>
+          <SyntaxHighlighter
+            style={oneDark}
+            language={language}
+            PreTag="div"
+            className="!mt-0 !rounded-t-none"
+            customStyle={{
+              margin: 0,
+              borderTopLeftRadius: 0,
+              borderTopRightRadius: 0,
+            }}
+          >
+            {String(children).replace(/\n$/, "")}
+          </SyntaxHighlighter>
+        </div>
+      );
+    }
+
+    // Inline code
+    return (
+      <code
+        className="bg-gray-100 text-gray-800 px-1.5 py-0.5 rounded text-sm font-mono"
+        {...props}
+      >
+        {children}
+      </code>
+    );
+  },
+
+  // Headers
+  h1: ({ children }: any) => (
+    <h1 className="text-2xl font-bold text-gray-900 mb-4 mt-6 border-b border-gray-200 pb-2">
+      {children}
+    </h1>
+  ),
+  h2: ({ children }: any) => (
+    <h2 className="text-xl font-semibold text-gray-900 mb-3 mt-5">
+      {children}
+    </h2>
+  ),
+  h3: ({ children }: any) => (
+    <h3 className="text-lg font-medium text-gray-900 mb-2 mt-4">{children}</h3>
+  ),
+
+  // Paragraphs
+  p: ({ children }: any) => (
+    <p className="mb-4 leading-relaxed text-gray-800 last:mb-0">{children}</p>
+  ),
+
+  // Lists
+  ul: ({ children }: any) => (
+    <ul className="list-disc list-inside mb-4 space-y-1 text-gray-800">
+      {children}
+    </ul>
+  ),
+  ol: ({ children }: any) => (
+    <ol className="list-decimal list-inside mb-4 space-y-1 text-gray-800">
+      {children}
+    </ol>
+  ),
+  li: ({ children }: any) => <li className="leading-relaxed">{children}</li>,
+
+  // Blockquotes
+  blockquote: ({ children }: any) => (
+    <blockquote className="border-l-4 border-gray-300 pl-4 py-2 my-4 bg-gray-50 italic text-gray-700">
+      {children}
+    </blockquote>
+  ),
+
+  // Tables
+  table: ({ children }: any) => (
+    <div className="overflow-x-auto my-4">
+      <table className="min-w-full border border-gray-200 rounded-lg">
+        {children}
+      </table>
+    </div>
+  ),
+  thead: ({ children }: any) => (
+    <thead className="bg-gray-50">{children}</thead>
+  ),
+  th: ({ children }: any) => (
+    <th className="px-4 py-2 text-left font-semibold text-gray-900 border-b border-gray-200">
+      {children}
+    </th>
+  ),
+  td: ({ children }: any) => (
+    <td className="px-4 py-2 text-gray-800 border-b border-gray-200 last:border-b-0">
+      {children}
+    </td>
+  ),
+
+  // Links
+  a: ({ children, href }: any) => (
+    <a
+      href={href}
+      className="text-blue-600 hover:text-blue-800 underline"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      {children}
+    </a>
+  ),
+
+  // Strong and emphasis
+  strong: ({ children }: any) => (
+    <strong className="font-semibold text-gray-900">{children}</strong>
+  ),
+  em: ({ children }: any) => (
+    <em className="italic text-gray-700">{children}</em>
+  ),
+};
 
 interface Message {
   id: string;
@@ -160,11 +292,7 @@ const BotMessageBubble: React.FC<{
           <div className="prose prose-sm max-w-none">
             <ReactMarkdown
               remarkPlugins={[remarkGfm]}
-              components={{
-                p: ({ children }) => (
-                  <p className="mb-2 last:mb-0">{children}</p>
-                ),
-              }}
+              components={MarkdownComponents}
             >
               {message.text}
             </ReactMarkdown>

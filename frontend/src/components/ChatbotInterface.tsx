@@ -84,6 +84,42 @@ const ChatbotInterface: React.FC<ChatbotInterfaceProps> = ({
     scrollToBottom();
   }, [activeConversation, conversations]);
 
+  useEffect(() => {
+    if (textareaRef.current) {
+      const textarea = textareaRef.current;
+      // Set initial dynamic height based on viewport
+      const minHeight = Math.max(60, window.innerHeight * 0.08); // 8% of viewport height, minimum 40px
+      const maxHeight = Math.min(600, window.innerHeight * 0.6); // 20% of viewport height, maximum 200px
+
+      textarea.style.minHeight = `${minHeight}px`;
+      textarea.style.maxHeight = `${maxHeight}px`;
+      textarea.style.height = `${minHeight}px`;
+    }
+  }, []);
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (textareaRef.current) {
+        const textarea = textareaRef.current;
+        const minHeight = Math.max(40, window.innerHeight * 0.08);
+        const maxHeight = Math.min(200, window.innerHeight * 0.2);
+
+        textarea.style.minHeight = `${minHeight}px`;
+        textarea.style.maxHeight = `${maxHeight}px`;
+
+        // Recalculate current height within new bounds
+        const currentHeight = Math.max(
+          minHeight,
+          Math.min(textarea.scrollHeight, maxHeight)
+        );
+        textarea.style.height = `${currentHeight}px`;
+      }
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   const currentConversation = conversations.find(
     (c) => c.id === activeConversation
   );
@@ -308,7 +344,7 @@ const ChatbotInterface: React.FC<ChatbotInterfaceProps> = ({
                 What Can I Help You With Today?
               </h2>
             </div>
-            <div className="w-full max-w-2xl">
+            <div className="w-full max-w-3xl">
               <div className="flex items-end space-x-3">
                 <div className="flex-1">
                   <textarea
@@ -317,11 +353,11 @@ const ChatbotInterface: React.FC<ChatbotInterfaceProps> = ({
                     onChange={handleTextareaChange}
                     onKeyPress={handleKeyPress}
                     placeholder="Ask Anything"
-                    className="w-full px-4 py-4 border-0 bg-[#ffffff] focus:outline-none focus:ring-4 focus:ring-[#313C71]/10 resize-none transition-all duration-300 placeholder-[#313C71]/60 text-[#313C71] custom-scrollbar shadow-lg monospace-placeholder"
+                    className="w-full px-4 py-4 border-0 bg-[#ffffff] focus:outline-none focus:ring-2 focus:ring-[#313C71]/10 resize-none transition-all duration-300 placeholder-[#313C71]/60 text-[#313C71] custom-scrollbar shadow-lg monospace-placeholder"
                     rows={1}
                     style={{
-                      minHeight: "60px",
-                      maxHeight: "150px",
+                      minHeight: "clamp(40px, 8vh, 80px)",
+                      maxHeight: "clamp(120px, 20vh, 200px)",
                       borderRadius: "20px",
                     }}
                   />
