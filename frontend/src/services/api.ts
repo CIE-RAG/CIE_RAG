@@ -1,6 +1,9 @@
 import { WebSocketService, WebSocketMessage } from './websocketService';
 import axios from 'axios';
 
+/** the ChatAPI singleton class helps manage chat functionality through websocket connections
+ * handles session creation, message sending, and websocket lifecycle management
+ */
 class ChatAPI {
   private static instance: ChatAPI;
   private webSocketService: WebSocketService | null = null;
@@ -14,6 +17,9 @@ class ChatAPI {
     return ChatAPI.instance;
   }
 
+  /** initializes websocket connection for a given user
+   * only creates a new session if it doesn't exist already
+   */
   async initializeWebSocket(userId: string): Promise<void> {
     try {
       if (!this.webSocketService || this.webSocketService.getSessionId() === null) {
@@ -27,13 +33,17 @@ class ChatAPI {
     }
   }
 
+  /** creates new chat session for the user
+   * establishes new websocket connection and retrieves session id
+   * falls back to HTTP API if websocket is websocket session id is unavailable
+   */
   async createNewSession(userId: string): Promise<string> {
     try {
-      // Create a new WebSocketService instance for a new session
+      // create a new WebSocketService instance for a new session
       this.webSocketService = new WebSocketService(userId);
       await this.webSocketService.connect();
       
-      // Wait briefly to ensure session_id is received
+      // wait briefly to ensure session_id is received
       const maxWaitTime = 5000; // 5 seconds
       const startTime = Date.now();
       while (!this.webSocketService.getSessionId() && Date.now() - startTime < maxWaitTime) {
@@ -59,6 +69,9 @@ class ChatAPI {
     }
   }
 
+  /** send message through websocket connection 
+   * initialize websocket if it's not already connected
+   */
   async sendMessage(message: string, userId: string): Promise<WebSocketMessage> {
     try {
       if (!this.webSocketService) {
@@ -72,19 +85,23 @@ class ChatAPI {
     }
   }
 
+  // retrieve current session info
   getSessionInfo(): { sessionId: string | null } {
     return {
       sessionId: this.webSocketService ? this.webSocketService.getSessionId() : null,
     };
   }
 
+  // cleans up websocket connection and resets service instance
+  // should only be called when chat session is no longer needed
   cleanup(): void {
     if (this.webSocketService) {
       this.webSocketService.disconnect();
       this.webSocketService = null;
-      console.log('WebSocket cled up');
+      console.log('WebSocket cleaned up');
     }
   }
 }
 
+// export singleton instance for use through the application 
 export const chatAPI = ChatAPI.getInstance();
