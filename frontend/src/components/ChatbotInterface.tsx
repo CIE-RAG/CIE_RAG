@@ -7,12 +7,17 @@ import PESLogo from "./pesLogo";
 import { Send, Menu, Bot } from "lucide-react";
 import { chatAPI } from "../services/api";
 
+// typescript interfaces define the "shape" of objects
+// objects are most commonly "props" ( properties ) or the state/context expected by our components
+
+// this interface represents user data
 interface User {
   user_id: string;
   email: string;
   name: string;
 }
 
+// this interface represents message data
 interface Message {
   id: string;
   text: string;
@@ -20,15 +25,28 @@ interface Message {
   timestamp: Date;
 }
 
+// this interface represents conversation data
 interface Conversation {
   id: string;
   title: string;
   messages: Message[];
-  session_id?: string;
+  session_id?: string; // each conversation is assigned a session id
 }
 
+// this defines the shape of the props accepted by the chatbot component
 interface ChatbotInterfaceProps {
+  /**
+   * the currently authenticated user.
+   * - if a user is logged in, this will be a User object (see User interface).
+   * - if no user is logged in, this will be null.
+   */
   user: User | null;
+
+  /**
+   * handler function to log the user out.
+   * - perform logout logic
+   * - no arguments; returns nothing.
+   */
   onLogout: () => void;
 }
 
@@ -36,6 +54,8 @@ const ChatbotInterface: React.FC<ChatbotInterfaceProps> = ({
   user,
   onLogout,
 }) => {
+  //  effect : runs on component mount and whenever User.user_id changes
+  //  it is responsible for initializing and cleaning up web socket connections based on user id
   useEffect(() => {
     console.log("User state on mount:", user);
     if (user?.user_id) {
@@ -52,6 +72,8 @@ const ChatbotInterface: React.FC<ChatbotInterfaceProps> = ({
     };
   }, [user?.user_id]);
 
+  // handler : deletes conversations based on id and updates states accordingly
+  // resets an active conversation when deleted
   const handleDeleteConversation = (conversationId: string) => {
     console.log("Deleting conversation:", conversationId);
     setConversations((prev) => {
@@ -65,25 +87,27 @@ const ChatbotInterface: React.FC<ChatbotInterfaceProps> = ({
     }
   };
 
-  const [conversations, setConversations] = useState<Conversation[]>([]);
+  // react state hooks for managing component state
+  const [conversations, setConversations] = useState<Conversation[]>([]); // list of all chat conversations
   const [activeConversation, setActiveConversation] = useState<string | null>(
     null
-  );
-  const [inputMessage, setInputMessage] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
-  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
-  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
-  const messagesEndRef = useRef<HTMLDivElement>(null);
-  const textareaRef = useRef<HTMLTextAreaElement>(null);
+  ); // currently selected conversation id
+  const [inputMessage, setInputMessage] = useState(""); // user's message input in the text area
+  const [isLoading, setIsLoading] = useState(false); // loading indicator waiting for bot response
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true); // state for sidebar visibility
+  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false); // state for sidebar expand / colapse
+  const messagesEndRef = useRef<HTMLDivElement>(null); // scroll to the bottom of message
+  const textareaRef = useRef<HTMLTextAreaElement>(null); // adjusting text area height dynamically
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  };
+  }; // helps scroll chat message container to the bottom smoothly
 
   useEffect(() => {
     scrollToBottom();
-  }, [activeConversation, conversations]);
+  }, [activeConversation, conversations]); // scroll to bottom whenever active conversation list changes
 
+  // on component mount, initialize dynamic sizing of the text area based on viewport dimensions
   useEffect(() => {
     if (textareaRef.current) {
       const textarea = textareaRef.current;
@@ -97,6 +121,7 @@ const ChatbotInterface: React.FC<ChatbotInterfaceProps> = ({
     }
   }, []);
 
+  // adjusting text area size dynamically on window resize
   useEffect(() => {
     const handleResize = () => {
       if (textareaRef.current) {
@@ -120,12 +145,14 @@ const ChatbotInterface: React.FC<ChatbotInterfaceProps> = ({
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  // get currently active conversation id / null if it doesn't exist
   const currentConversation = conversations.find(
     (c) => c.id === activeConversation
   );
   const hasMessages =
     currentConversation && currentConversation.messages.length > 0;
 
+  // creating a new conversation session for user who is logged in and marks it as active
   const createNewConversation = async () => {
     if (!user?.user_id) {
       console.error("No user_id available for creating new conversation");
@@ -157,12 +184,14 @@ const ChatbotInterface: React.FC<ChatbotInterfaceProps> = ({
     }
   };
 
+  // sends user message to bot and handles updating the conversation state
   const handleSendMessage = async () => {
     if (!inputMessage.trim() || !user?.user_id) {
       console.warn("Empty message or no user_id");
       return;
     }
 
+    // user message object
     const userMessage: Message = {
       id: Date.now().toString(),
       text: inputMessage,
@@ -170,9 +199,11 @@ const ChatbotInterface: React.FC<ChatbotInterfaceProps> = ({
       timestamp: new Date(),
     };
 
+    // determine current conversation and session ids
     let conversationId = activeConversation;
     let sessionId = currentConversation?.session_id;
 
+    // if there's no active conversation, then create one
     if (!conversationId) {
       console.log("No active conversation, creating new one");
       sessionId = await chatAPI.createNewSession(user.user_id);
@@ -187,6 +218,7 @@ const ChatbotInterface: React.FC<ChatbotInterfaceProps> = ({
         messages: [],
         session_id: sessionId,
       };
+
       setConversations((prev) => {
         const updated = [newConversation, ...prev];
         console.log("Updated conversations:", updated);
@@ -196,6 +228,7 @@ const ChatbotInterface: React.FC<ChatbotInterfaceProps> = ({
       setActiveConversation(conversationId);
     }
 
+    // add user message to conversation locally
     setConversations((prev) =>
       prev.map((conv) =>
         conv.id === conversationId
@@ -205,20 +238,23 @@ const ChatbotInterface: React.FC<ChatbotInterfaceProps> = ({
     );
 
     const currentInput = inputMessage;
-    setInputMessage("");
-    setIsLoading(true);
+    setInputMessage(""); // clear input box
+    setIsLoading(true); // show loading indicator
 
+    //  reset text area height on send
     if (textareaRef.current) {
       textareaRef.current.style.height = "auto";
     }
 
     try {
+      // send message to chat api and await response
       const response = await chatAPI.sendMessage(currentInput, user.user_id);
       if (!sessionId) {
         sessionId = chatAPI.getSessionInfo().sessionId || undefined;
         console.log("Updated sessionId from response:", sessionId);
       }
 
+      // bot's reply message object
       const botMessage: Message = {
         id: (Date.now() + 1).toString(),
         text: response.response ?? "",
@@ -226,6 +262,7 @@ const ChatbotInterface: React.FC<ChatbotInterfaceProps> = ({
         timestamp: new Date(),
       };
 
+      // append bot message and update conversation details
       setConversations((prev) =>
         prev.map((conv) =>
           conv.id === conversationId
@@ -261,10 +298,11 @@ const ChatbotInterface: React.FC<ChatbotInterfaceProps> = ({
         )
       );
     } finally {
-      setIsLoading(false);
+      setIsLoading(false); // hide loading indicator in all cases
     }
   };
 
+  // handle enter key press in text area to send messages ( shift + enter creates new line)
   const handleKeyPress = (e: React.KeyboardEvent) => {
     if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault();
@@ -272,6 +310,7 @@ const ChatbotInterface: React.FC<ChatbotInterfaceProps> = ({
     }
   };
 
+  // handles text area input change, handling its height dynamically
   const handleTextareaChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setInputMessage(e.target.value);
     const textarea = e.target;
@@ -279,12 +318,14 @@ const ChatbotInterface: React.FC<ChatbotInterfaceProps> = ({
     textarea.style.height = Math.min(textarea.scrollHeight, 150) + "px";
   };
 
+  // toggles sidebar state ( expand / collapse )
   const toggleSidebar = () => {
     setIsSidebarCollapsed(!isSidebarCollapsed);
   };
 
   return (
     <div className="h-screen flex overflow-hidden bg-gradient-to-br from-[#ffffff] to-[#C7C5FF]">
+      {/* overlay behind sidebar when in mobile mode */}
       {isSidebarOpen && (
         <div
           className="fixed inset-0 bg-black/50 z-40 lg:hidden transition-opacity duration-300"
@@ -292,6 +333,7 @@ const ChatbotInterface: React.FC<ChatbotInterfaceProps> = ({
         />
       )}
 
+      {/* sidebar component with responsive width and slide animation */}
       <div
         className={`${
           isSidebarOpen ? "translate-x-0" : "-translate-x-full"
@@ -315,6 +357,7 @@ const ChatbotInterface: React.FC<ChatbotInterfaceProps> = ({
         />
       </div>
 
+      {/* main chat area */}
       <div className="flex-1 flex flex-col min-w-0">
         <div className="bg-transparent backdrop-blur-sm p-4 flex items-center justify-between relative z-10">
           <div className="flex items-center space-x-4">
@@ -322,8 +365,11 @@ const ChatbotInterface: React.FC<ChatbotInterfaceProps> = ({
               onClick={() => setIsSidebarOpen(true)}
               className="lg:hidden p-2 rounded-xl hover:bg-[#d4d4d6]/20 transition-all duration-200 active:scale-95"
             >
+              {/* hamburger menu */}
               <Menu className="w-5 h-5 text-[#313C71]" />
             </button>
+
+            {/* logos */}
             <div className="w-50 h-30 flex items-center justify-center transition-all duration-300 hover:scale-105">
               <PESLogo className="w-20 h-18" />
             </div>
@@ -331,9 +377,11 @@ const ChatbotInterface: React.FC<ChatbotInterfaceProps> = ({
               <Logo className="w-20 h-18" />
             </div>
           </div>
+          {/* user menu with logout */}
           <UserMenu user={user} onLogout={onLogout} />
         </div>
 
+        {/* if no messages, show empty prompt with input area */}
         {!hasMessages ? (
           <div
             className="flex-1 flex flex-col items-center justify-center p-8"
@@ -344,6 +392,7 @@ const ChatbotInterface: React.FC<ChatbotInterfaceProps> = ({
                 What Can I Help You With Today?
               </h2>
             </div>
+            {/* input area */}
             <div className="w-full max-w-3xl">
               <div className="flex items-end space-x-3">
                 <div className="flex-1">
@@ -362,6 +411,7 @@ const ChatbotInterface: React.FC<ChatbotInterfaceProps> = ({
                     }}
                   />
                 </div>
+                {/* send button */}
                 <button
                   onClick={handleSendMessage}
                   disabled={!inputMessage.trim() || isLoading || !user?.user_id}
@@ -375,6 +425,7 @@ const ChatbotInterface: React.FC<ChatbotInterfaceProps> = ({
           </div>
         ) : (
           <>
+            {/* chat messages list */}
             <div
               className="flex-1 overflow-y-auto custom-scrollbar"
               style={{
@@ -393,6 +444,7 @@ const ChatbotInterface: React.FC<ChatbotInterfaceProps> = ({
                     <MessageBubble message={message} />
                   </div>
                 ))}
+                {/* loading indicator when waiting for bot response */}
                 {isLoading && (
                   <div className="flex justify-start mb-6">
                     <div className="flex items-center space-x-3 bg-white/80 backdrop-blur-sm rounded-2xl px-6 py-4 shadow-lg border border-[#313c71]/10">
@@ -420,6 +472,7 @@ const ChatbotInterface: React.FC<ChatbotInterfaceProps> = ({
               </div>
             </div>
 
+            {/* message input area fixed to the bottom */}
             <div className="bg-transparent backdrop-blur-sm p-4">
               <div className="flex items-end space-x-3 max-w-4xl mx-auto">
                 <div className="flex-1">
@@ -438,6 +491,7 @@ const ChatbotInterface: React.FC<ChatbotInterfaceProps> = ({
                     }}
                   />
                 </div>
+                {/* send button - bottom */}
                 <button
                   onClick={handleSendMessage}
                   disabled={!inputMessage.trim() || isLoading || !user?.user_id}
