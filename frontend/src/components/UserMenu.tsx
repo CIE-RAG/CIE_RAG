@@ -1,21 +1,43 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { User, LogOut, ChevronDown, /*Settings, Bell*/ } from 'lucide-react';
+import React, { useState, useRef, useEffect } from "react";
+import { User, LogOut, ChevronDown /*Settings, Bell*/ } from "lucide-react";
 
+/**
+ * user interface defining the structure of user object
+ */
 interface User {
   email: string;
   name: string;
   user_id?: string;
 }
 
+/**
+ * properties for user menu component
+ */
 interface UserMenuProps {
   user: User | null;
   onLogout: () => void;
 }
 
+/** user menu component
+ *
+ * drop down menu mentioning user information
+ *  - Name ( which in this case is still displayed as SRN )
+ *  - SRN
+ *  - NOTE : this must be changed after connecting it with real email services / PES SRN's
+ */
 const UserMenu: React.FC<UserMenuProps> = ({ user, onLogout }) => {
+  // state to track whether user menu is open
   const [isOpen, setIsOpen] = useState(false);
+  // ref to the main menu for click outside
   const menuRef = useRef<HTMLDivElement>(null);
 
+  /** effect hook for handling dropdown menu interactions
+   *
+   * it sets up event listeners for :
+   * click outside
+   * esc to close menu
+   * body scroll prevention when menu is open
+   */
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
@@ -24,34 +46,37 @@ const UserMenu: React.FC<UserMenuProps> = ({ user, onLogout }) => {
     };
 
     const handleEscapeKey = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') {
+      if (event.key === "Escape") {
         setIsOpen(false);
       }
     };
 
+    // adding event listeners only when menu is open
     if (isOpen) {
-      document.addEventListener('mousedown', handleClickOutside);
-      document.addEventListener('keydown', handleEscapeKey);
+      document.addEventListener("mousedown", handleClickOutside);
+      document.addEventListener("keydown", handleEscapeKey);
       // Prevent body scroll when dropdown is open
-      document.body.style.overflow = 'hidden';
+      document.body.style.overflow = "hidden";
     }
 
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-      document.removeEventListener('keydown', handleEscapeKey);
-      document.body.style.overflow = 'unset';
+      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("keydown", handleEscapeKey);
+      document.body.style.overflow = "unset";
     };
   }, [isOpen]);
 
+  // to generate user initials from name
   const getInitials = (name: string) => {
     return name
-      .split(' ')
-      .map(word => word[0])
-      .join('')
+      .split(" ")
+      .map((word) => word[0])
+      .join("")
       .toUpperCase()
       .slice(0, 2);
   };
 
+  // menu item click with closure
   const handleMenuItemClick = (action?: () => void) => {
     setIsOpen(false);
     if (action) {
@@ -59,18 +84,19 @@ const UserMenu: React.FC<UserMenuProps> = ({ user, onLogout }) => {
     }
   };
 
+  // early return if no user is provided
   if (!user) return null;
 
   return (
     <>
-      {/* Backdrop overlay when dropdown is open */}
+      {/* backdrop overlay when dropdown is open */}
       {isOpen && (
-        <div 
+        <div
           className="fixed inset-0 bg-transparent z-[9998]"
           onClick={() => setIsOpen(false)}
         />
       )}
-      
+
       <div className="relative z-[9999]" ref={menuRef}>
         <button
           onClick={() => setIsOpen(!isOpen)}
@@ -87,14 +113,16 @@ const UserMenu: React.FC<UserMenuProps> = ({ user, onLogout }) => {
             <p className="text-sm font-semibold text-[#313C71]">{user.name}</p>
             <p className="text-xs text-[#EF7F1A]/70">{user.email}</p>
           </div>
-          <ChevronDown className={`w-4 h-4 text-[#313C71]/70 transition-transform duration-200 ${
-            isOpen ? 'rotate-180' : ''
-          }`} />
+          <ChevronDown
+            className={`w-4 h-4 text-[#313C71]/70 transition-transform duration-200 ${
+              isOpen ? "rotate-180" : ""
+            }`}
+          />
         </button>
 
         {isOpen && (
           <div className="absolute right-0 mt-3 w-72 bg-white/95 backdrop-blur-xl rounded-xl shadow-2xl border border-[#313C71]/20 py-2 z-[10000] animate-slide-down">
-            {/* User Info */}
+            {/* user info */}
             <div className="px-4 py-4 border-b border-[#313C71]/10">
               <div className="flex items-center space-x-3">
                 <div className="w-12 h-12 bg-[#313C71]/20 backdrop-blur-sm rounded-full flex items-center justify-center shadow-md">
@@ -108,33 +136,6 @@ const UserMenu: React.FC<UserMenuProps> = ({ user, onLogout }) => {
                 </div>
               </div>
             </div>
-
-            {/* Menu Items */}
-            {/* <div className="py-2">
-              <button
-                className="w-full px-4 py-3 text-left hover:bg-[#313C71]/10 transition-colors duration-200 flex items-center space-x-3 group"
-                onClick={() => handleMenuItemClick()}
-              >
-                <User className="w-5 h-5 text-[#313C71]/60 group-hover:text-[#313C71]" />
-                <span className="text-sm text-[#313C71]/80 group-hover:text-[#313C71]">Profile</span>
-              </button>
-              
-              <button
-                className="w-full px-4 py-3 text-left hover:bg-[#313C71]/10 transition-colors duration-200 flex items-center space-x-3 group"
-                onClick={() => handleMenuItemClick()}
-              >
-                <Settings className="w-5 h-5 text-[#313C71]/60 group-hover:text-[#313C71]" />
-                <span className="text-sm text-[#313C71]/80 group-hover:text-[#313C71]">Settings</span>
-              </button>
-
-              <button
-                className="w-full px-4 py-3 text-left hover:bg-[#313C71]/10 transition-colors duration-200 flex items-center space-x-3 group"
-                onClick={() => handleMenuItemClick()}
-              >
-                <Bell className="w-5 h-5 text-[#67753A]/60 group-hover:text-[#67753A]" />
-                <span className="text-sm text-[#67753A]/80 group-hover:text-[#67753A]">Notifications</span>
-              </button>
-            </div> */}
 
             <div className="border-t border-[#313C71]/10 pt-2">
               <button
