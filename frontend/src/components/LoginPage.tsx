@@ -4,21 +4,37 @@ import Logo from "./cieLogo";
 import PESLogo from "./pesLogo";
 import axios from "axios";
 
+// interface defines the props expected by the login page component
 interface LoginPageProps {
-  onLogin: (user: { email: string; name: string; user_id: string }) => void;
+  // callback function when login is successful
+  //  receives user data with name, email ( labelled srn ) and user_id
+  onLogin: (user: { srn: string; name: string; user_id: string }) => void;
 }
 
 const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
+  // state for storing user's SRN ( email field )
   const [email, setEmail] = useState("");
+
+  // state for storing user's password
   const [password, setPassword] = useState("");
+
+  // state to hide/show user password
   const [showPassword, setShowPassword] = useState(false);
+
+  // state for storing form validation errors
+  // can contain email (srn), password or general messages
   const [errors, setErrors] = useState<{
     email?: string;
     password?: string;
     general?: string;
   }>({});
+
+  // track loading status
   const [isLoading, setIsLoading] = useState(false);
 
+  // login form validation
+  // srn must begin with "PES" and the total number of characters must be 13
+  // password must be greater than 6 characters
   const validateForm = () => {
     const newErrors: { email?: string; password?: string; general?: string } =
       {};
@@ -37,10 +53,18 @@ const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
       newErrors.password = "Password must be at least 6 characters";
     }
 
+    // update error state
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
+  // handle form submissions
+  /** prevents default form submissions
+   * validates form inputs
+   * makes api calls to login endpoints
+   * calls onLogin on callback success
+   * displays error messages on failure
+   */
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -50,6 +74,7 @@ const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
     setErrors({});
 
     try {
+      // make POST request to login api endpoint
       const response = await axios.post(
         "http://localhost:8500/login",
         {
@@ -63,19 +88,28 @@ const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
         }
       );
       console.log(onLogin, response.data);
-      onLogin(response.data); //the problem is here, the onLogin function is fucked up
+      // call the onLogin callback with user data from response
+      // TO FIX : might need to fix the onLogin function implementation as was noted in a prev comment
+      onLogin(response.data);
     } catch (error) {
+      // handle login errors
       let errorMessage = "Failed to login. Please check your SRN and password.";
+
+      // extract error message from API if available
       if (axios.isAxiosError(error)) {
         errorMessage = error.response?.data?.detail || errorMessage;
       }
+
+      // set general error messages
       setErrors({ general: errorMessage });
       console.error("Login error:", error);
     } finally {
+      // always reset the loading state
       setIsLoading(false);
     }
   };
 
+  // handling SRN input changes with validation
   const handleSrnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value.toUpperCase();
     if (value.length <= 13) {
@@ -96,6 +130,7 @@ const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
         </div>
       </div>
 
+      {/* main login form container */}
       <div className="w-full max-w-sm relative z-10">
         <div className="bg-white/90 backdrop-blur-sm rounded-2xl shadow-2xl p-6 border border-white/30 transform transition-all duration-500 hover:shadow-3xl">
           <div className="text-center mb-6">
@@ -107,6 +142,7 @@ const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
             </p>
           </div>
 
+          {/* general error message display */}
           {errors.general && (
             <div className="flex items-center mb-4 text-red-600 text-sm animate-slide-down">
               <AlertCircle className="w-4 h-4 mr-1.5" />
@@ -114,6 +150,7 @@ const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
             </div>
           )}
 
+          {/* login form  */}
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="space-y-1.5">
               <label
@@ -135,6 +172,8 @@ const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
                 }`}
                 placeholder="Enter your SRN"
               />
+
+              {/* srn validation error */}
               {errors.email && (
                 <div className="flex items-center mt-1.5 text-red-600 text-sm animate-slide-down">
                   <AlertCircle className="w-4 h-4 mr-1.5" />
@@ -168,6 +207,7 @@ const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
                   onClick={() => setShowPassword(!showPassword)}
                   className="absolute right-3 top-1/2 transform -translate-y-1/2 text-[#313c71]/60 hover:text-[#313c71] transition-colors duration-200 p-1"
                 >
+                  {/* visibility controls for password */}
                   {showPassword ? (
                     <EyeOff className="w-5 h-5" />
                   ) : (
@@ -175,6 +215,8 @@ const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
                   )}
                 </button>
               </div>
+
+              {/* password error */}
               {errors.password && (
                 <div className="flex items-center mt-1.5 text-red-600 text-sm animate-slide-down">
                   <AlertCircle className="w-4 h-4 mr-1.5" />
@@ -183,6 +225,7 @@ const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
               )}
             </div>
 
+            {/* login button */}
             <button
               type="submit"
               disabled={isLoading}
