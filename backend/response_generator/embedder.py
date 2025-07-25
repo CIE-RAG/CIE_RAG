@@ -1,4 +1,8 @@
-# response_generator/embedder.py
+# The following code defines our embedder, 
+# use this to change the embedding model when it comes to the LLM response
+# Observed behaviour showed using same embedding models for ingest and retrieval gave best results 
+# use the models from our VectorDb reports 
+
 from sentence_transformers import SentenceTransformer, CrossEncoder
 import torch
 
@@ -20,9 +24,9 @@ class EmbeddingModelLoader:
         self.reranker_model = CrossEncoder(self.reranker_model_name, device=self.device)
 
     def get_text_components(self):
-        # CrossEncoder doesn't need tokenizer separately
+        # CrossEncoder doesn't need tokenizer separately - make sure to check the corss encoder incase reranker is fiddled with
         return None, self.reranker_model
 
     def get_image_components(self):
-        # Optional: extend later for image captioning
+        # Optional: extend later for image/video captioning
         return None, None

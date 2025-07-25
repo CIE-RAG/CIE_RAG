@@ -1,8 +1,9 @@
-# response_generator/generator.py
+# this is the main file for response generation logic
+## It handles the integration of retriever, reranker, and LLMs to generate responses
 
 from response_generator.retriever import Retriever
 from response_generator.reranker import Reranker, loader
-from response_generator.llm import mistral_llm
+from backend.response_generator.llm import mistral_llm
 from ingestion.qdrant_database import QdrantManager
 from ingestion.faiss_database import setup_faiss_with_text_storage
 
@@ -19,12 +20,12 @@ class ResponseGenerator:
             self.qdrant_manager = QdrantManager(collection_name="docs")
             if self.qdrant_manager.client:
                 self.qdrant_available = True
-                print("✅ Qdrant is available and connected.")
+                print("✅ Qdrant is available and connected.") #college wifi blocks qdrant (use hotspot/ connect wiht IT team)
         except Exception as e:
-            print(f"⚠️ Qdrant connection failed, will fallback to FAISS: {str(e)}")
+            print(f"⚠️ Qdrant connection failed, will fallback to FAISS: {str(e)}") # we get this if ip for qdrant not allowed 
 
     def load_faiss(self, retriever):
-        self.faiss_retriever = retriever
+        self.faiss_retriever = retriever #check faiss fail-safe
 
     def search(self, query, top_k=5):
         results = []
@@ -37,7 +38,7 @@ class ResponseGenerator:
                     results.extend(q_results)
                     sources_used.append("qdrant")
             except Exception as e:
-                print(f"⚠️ Qdrant search failed: {str(e)}")
+                print(f"⚠️ Qdrant search failed: {str(e)}") # if vectors not found or connection issues
 
         if not results and self.faiss_retriever:
             try:
@@ -50,7 +51,7 @@ class ResponseGenerator:
                 } for r in f_results])
                 sources_used.append("faiss")
             except Exception as e:
-                print(f"⚠️ FAISS search failed: {str(e)}")
+                print(f"⚠️ FAISS search failed: {str(e)}") # if vectors not found
 
         results.sort(key=lambda x: x.get('score', 0), reverse=True)
         results = results[:top_k]
@@ -60,23 +61,10 @@ class ResponseGenerator:
 
         return results, sources_used
 
-    # def generate(self, query, top_k=5):
-    #     results, used = self.search(query, top_k)
-    #     if not results:
-    #         return {
-    #             "query": query,
-    #             "answer": "I couldn't find any relevant information to answer your question.",
-    #             "sources": [],
-    #             "used_sources": used
-    #         }
 
-    #     answer = mistral_llm.generate_response(query, results)
-    #     return {
-    #         "query": query,
-    #         "answer": answer,
-    #         "sources": results,
-    #         "used_sources": used
-    #     }
+# following method was tweaked so that for the first message in a session it doesnt use context (makes sure to flush out and chat history
+# thats not of that session )
+# the second part generates responses with the history, more on that in llm.py
 
     def generate(self, query, chat_history=None, top_k=5):
         results, used = self.search(query, top_k)
@@ -84,7 +72,7 @@ class ResponseGenerator:
         if not results:
             return {
                 "query": query,
-                "answer": "I couldn't find any relevant information to answer your question.",
+                "answer": "I couldn't find any relevant information to answer your question.", # must be removed if dynamic prompt employed
                 "sources": [],
                 "used_sources": used
             }

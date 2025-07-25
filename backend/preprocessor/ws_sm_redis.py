@@ -35,15 +35,15 @@ WEBSOCKET_TIMEOUT = float(os.getenv("WEBSOCKET_TIMEOUT", "3000"))
 SESSION_EXPIRY = int(os.getenv("SESSION_EXPIRY", "86400"))
 CHAT_HISTORY_FILE = "chat_history.json"
 
-"""
-For the backend to work, one must always keep the Redis server running and the Redis URL must be set properly in this code.
-To connect to the Redis server, you need Ubuntu WSL.
-In the WSL:
-    1. sudo service redis-server start
-    2. redis-cli
-    3. ping  --> If it returns "PONG", then the Redis server is running and connected successfully
-    4. To check the session ids use 'keys *' command in the redis-cli
-"""
+
+# For the backend to work, one must always keep the Redis server running and the Redis URL must be set properly in this code.
+# To connect to the Redis server, you need Ubuntu WSL.
+# In the WSL:
+#     1. sudo service redis-server start
+#     2. redis-cli
+#     3. ping  --> If it returns "PONG", then the Redis server is running and connected successfully
+#     4. To check the session ids use 'keys *' command in the redis-cli
+
 
 # Redis client
 redis_client = None

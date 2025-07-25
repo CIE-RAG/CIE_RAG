@@ -13,7 +13,7 @@ class MistralLLM:
     # Takes search results and generates contextual responses
    
     
-    def __init__(self, mistral_api_key: str = 'Cr3C7oNlA2W8olenBJ8JTjVeY6jz3Jbh', model_name: str = "mistral-small-latest"):
+    def __init__(self, mistral_api_key: str = 'Your mistral key', model_name: str = "mistral-small-latest"): # enter ur key or use a .env, mistral-small-latest was the free open source one
     
         # mistral_api_key: Mistral API key (if None, uses env variable)
  
@@ -29,13 +29,12 @@ class MistralLLM:
         }
 
     def format_context(self, search_results: List[Dict]) -> str:
-        """
-        Format search results into context string
-        Args:
-            search_results: List of search results from vector database
-        Returns:
-            Formatted context string
-        """
+        # Format search results into context string
+        # Args:
+        #     search_results: List of search results from vector database
+        # Returns:
+        #     Formatted context string
+
         if not search_results:
             return "No relevant context found."
         
@@ -80,7 +79,8 @@ class MistralLLM:
                 - if the user asks for suggestions for their startup/hackathon/team be helpful and suggest some ideas based on the context provided
                 - the idea is to correlate everything with the study material and the context provided, and not to go beyond it unless absolutely necessary
                 - DO NOT GIVE THE LOCATION OF TEXT/PAGE/PARAGRAPH only provide link to further topics or related content if necessary
-                - DO NOT ask te user to check out a page, only ask them to check out other topics from the content
+                - DO NOT ask the user to check out a page, only ask them to check out other topics from the content
+                
                 ANSWER STRICTLY IN A CLEAN PRETTY FORMAT
                 Answer:"""
         return prompt
@@ -91,15 +91,14 @@ class MistralLLM:
         Keeps recent conversation turns along with the current query.
         """
         history_str = ""
-        for msg in history[-6:]:  # Limit to last 6 turns
+        for msg in history[-6:]:  # Limit to last 6 chat-answer pairs
             role = msg['role'].capitalize()
             content = msg['content']
             history_str += f"{role}: {content}\n"
         
 
         # Course helper for PESU CIE EIE L1 and L2
-        #dont talk abt virat kohli 
-
+        #dont talk abt virat kohli :) lol 
 
         prompt = f"""You are a friendly AI PESU CIE EIE L1 and L2 Course helper for PESU CIE EIE L1 and L2 with a fun helpful personality that answers questions based on provided context. 
                       Use the context and content below to answer the user's question accurately and comprehensively.
@@ -123,23 +122,23 @@ class MistralLLM:
                 - if the user asks for suggestions for their startup/hackathon/team be helpful and suggest some ideas based on the context provided
                 - the idea is to correlate everything with the study material and the context provided, and not to go beyond it unless absolutely necessary
                 - DO NOT GIVE THE LOCATION OF TEXT/PAGE/PARAGRAPH only provide link to further topics or related content if necessary
-                - DO NOT ask te user to check out a page, only ask them to check out other topics from the content
+                - DO NOT ask the user to check out a page, only ask them to check out other topics from the content
 
             
                 ANSWER STRICTLY IN A CLEAN PRETTY FORMAT
                 Answer:"""
         return prompt.strip()
 
-    def call_api(self, prompt: str, max_tokens: int = 1000, temperature: float = 0.1) -> str:
-        """
-        Call Mistral API with the prompt
-        Args:
-            prompt: The formatted prompt
-            max_tokens: Maximum tokens in response
-            temperature: Creativity/randomness (0.0 to 1.0)
-        Returns:
-            LLM response text
-        """
+    def call_api(self, prompt: str, max_tokens: int = 1000, temperature: float = 0.1) -> str: #fiddle around with temp when implementing a dynamic personalized prompt
+
+        # Call Mistral API with the prompt
+        # Args:
+        #     prompt: The formatted prompt
+        #     max_tokens: Maximum tokens in response
+        #     temperature: Creativity/randomness (0.0 to 1.0)
+        # Returns:
+        #     LLM response text
+  
         try:
             payload = {
                 "model": self.model_name,
@@ -173,19 +172,20 @@ class MistralLLM:
 
     def generate_response(self, query: str, search_results: List[Dict], 
                          max_tokens: int = 1000, temperature: float = 0.1) -> str:
-        """
-        Generate response from query and search results
-        Args:
-            query: User's question
-            search_results: List of search results from vector database
-            max_tokens: Maximum tokens in LLM response
-            temperature: LLM temperature setting
-        Returns:
-            Generated response string
-        """
+        
+        # Generate response from query and search results
+        # Args:
+        #     query: User's question
+        #     search_results: List of search results from vector database
+        #     max_tokens: Maximum tokens in LLM response
+        #     temperature: LLM temperature setting
+        # Returns:
+        #     Generated response string
+       
         if not search_results:
             return "I couldn't find any relevant information to answer your question. Perhaps try rephrasing it or asking about a different topic."
-        
+        # the above messgae would get overshadowed by the one in generator.py we missed this redundancy 
+
         # Format context from search results
         context = self.format_context(search_results)
         
@@ -204,17 +204,18 @@ class MistralLLM:
     def generate_response_with_history(self, query: str, search_results: List[Dict], 
                                      chat_history: List[Dict], max_tokens: int = 1000, 
                                      temperature: float = 0.1) -> str:
-        """
-        Generate response with chat history context
-        Args:
-            query: User's current question
-            search_results: List of search results from vector database
-            chat_history: Previous conversation history
-            max_tokens: Maximum tokens in LLM response
-            temperature: LLM temperature setting
-        Returns:
-            Generated response string
-        """
+        
+        # Generate response with chat history context
+        # Args:
+        #     query: User's current question
+        #     search_results: List of search results from vector database
+        #     chat_history: Previous conversation history
+        #     max_tokens: Maximum tokens in LLM response
+        #     temperature: LLM temperature setting
+        # Returns:
+        #     Generated response string
+
+
         # Format context from search results
         context = self.format_context(search_results)
         
