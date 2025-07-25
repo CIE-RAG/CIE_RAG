@@ -5,32 +5,6 @@
 change pwd to backend - preferably work in a virtual env.
 Run - requirements.txt
 
-```
-fastapi
-uvicorn
-python-dotenv
-requests
-gdown
-PyMuPDF
-python-docx
-openpyxl
-python-pptx
-Pillow
-gradio
-moviepy
-transformers
-torch
-sentence-transformers
-qdrant-client
-faiss-cpu
-llama-index
-numpy
-pandas
-
-```
-
-Then run the following code
-
 `uvicorn api.app:app --reload --port 8000`
 
 ## frontend
