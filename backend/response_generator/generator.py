@@ -60,24 +60,6 @@ class ResponseGenerator:
 
         return results, sources_used
 
-    # def generate(self, query, top_k=5):
-    #     results, used = self.search(query, top_k)
-    #     if not results:
-    #         return {
-    #             "query": query,
-    #             "answer": "I couldn't find any relevant information to answer your question.",
-    #             "sources": [],
-    #             "used_sources": used
-    #         }
-
-    #     answer = mistral_llm.generate_response(query, results)
-    #     return {
-    #         "query": query,
-    #         "answer": answer,
-    #         "sources": results,
-    #         "used_sources": used
-    #     }
-
     def generate(self, query, chat_history=None, top_k=5):
         results, used = self.search(query, top_k)
 
