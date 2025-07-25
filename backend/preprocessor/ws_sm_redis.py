@@ -1,3 +1,4 @@
+
 import os
 import json
 import asyncio
@@ -30,9 +31,19 @@ app.add_middleware(
 
 # Constants
 REDIS_URL = os.getenv("REDIS_URL", "redis://localhost:6379")
-WEBSOCKET_TIMEOUT = float(os.getenv("WEBSOCKET_TIMEOUT", "300"))
+WEBSOCKET_TIMEOUT = float(os.getenv("WEBSOCKET_TIMEOUT", "3000"))
 SESSION_EXPIRY = int(os.getenv("SESSION_EXPIRY", "86400"))
 CHAT_HISTORY_FILE = "chat_history.json"
+
+"""
+For the backend to work, one must always keep the Redis server running and the Redis URL must be set properly in this code.
+To connect to the Redis server, you need Ubuntu WSL.
+In the WSL:
+    1. sudo service redis-server start
+    2. redis-cli
+    3. ping  --> If it returns "PONG", then the Redis server is running and connected successfully
+    4. To check the session ids use 'keys *' command in the redis-cli
+"""
 
 # Redis client
 redis_client = None
@@ -64,6 +75,9 @@ class SessionManager:
             with open(CHAT_HISTORY_FILE, 'w') as f:
                 json.dump({}, f)
 
+    # Creates a new session with a unique id from user_id and timestamp using the uuid format creates a session data structure
+    # Makes a new redis entry for the session and sets an expiry time 
+    # Also makes sure it connects the websocket 
     async def create_session(self, user_id: str, websocket: WebSocket = None):
         session_id = f"{user_id}_{uuid.uuid4()}"
         session_data = {
@@ -87,10 +101,12 @@ class SessionManager:
         logger.info(f"Created session: {session_id} for user: {user_id}")
         return session_id
 
+    # Retrieves session data from Redis
     async def get_session(self, session_id: str):
         session_data = await redis_client.hget(f"session:{session_id}", "data")
         return json.loads(session_data) if session_data else None
 
+    # Creates a new session for the user or retrieves an existing one if both user_id and password matches
     async def get_or_create_session(self, user_id: str, websocket: WebSocket = None):
         session_id = await redis_client.get(f"user_session:{user_id}")
         if session_id:
@@ -103,6 +119,7 @@ class SessionManager:
                 return session_id
         return await self.create_session(user_id, websocket)
 
+    # Updates every new query and response in the session under the session_id
     async def update_session(self, session_id: str, query: str, response: str):
         session_data = await redis_client.hget(f"session:{session_id}", "data")
         if not session_data:
@@ -120,6 +137,7 @@ class SessionManager:
         await redis_client.expire(f"session:{session_id}", SESSION_EXPIRY)
         await self.save_to_json(session_id, query, response)
 
+    # Saves chat history to a JSON file
     async def save_to_json(self, session_id: str, query: str, response: str):
         try:
             with open(CHAT_HISTORY_FILE, 'r') as f:
@@ -136,6 +154,7 @@ class SessionManager:
         with open(CHAT_HISTORY_FILE, 'w') as f:
             json.dump(history, f, indent=4)
 
+    # Deletes sessions when delete button in the ui is clicked and clears in-memory history
     async def delete_session(self, session_id: str):
         user_id = await redis_client.hget(f"session:{session_id}", "user_id")
         if user_id:
@@ -149,6 +168,7 @@ class SessionManager:
 
         logger.info(f"Deleted session: {session_id}")
 
+    # Cleans up inactive and old sessions; Disconnects websocket connections after timeout
     async def cleanup_sessions(self):
         while True:
             try:
@@ -169,7 +189,7 @@ class SessionManager:
 
 session_manager = SessionManager()
 
-# Redis connection initialization
+# Redis connection initialization- wsl->redis server connection is checked
 async def init_redis():
     global redis_client
     redis_client = redis.from_url(REDIS_URL, decode_responses=True)
@@ -180,7 +200,7 @@ async def init_redis():
         logger.error(f"Redis connection failed: {e}")
         raise
 
-# Health check
+# Health check for status and redis
 @app.get("/health")
 async def health_check():
     try:
@@ -189,7 +209,7 @@ async def health_check():
     except Exception as e:
         return {"status": "healthy", "message": "Backend is running", "redis": "disconnected", "error": str(e)}
 
-# HTTP chat endpoint
+# HTTP chat endpoint backup when websocket is not connecting
 @app.post("/chat", response_model=ChatResponse)
 async def chat(request: ChatRequest):
     user = request.username
@@ -226,6 +246,7 @@ async def websocket_endpoint(websocket: WebSocket, user_id: str):
             if not query:
                 await websocket.send_json({"error": "No query provided"})
                 continue
+            #checkpoint for profanity 
             if check_profanity(query):
                 await websocket.send_json({"response": "⚠️ Please avoid using offensive language."})
                 continue
@@ -237,6 +258,7 @@ async def websocket_endpoint(websocket: WebSocket, user_id: str):
                 "query": query,
                 "response": response
             })
+            #chat history added under session_id in json and redis
             chat_histories[user_id].append({"role": "user", "content": query})
             chat_histories[user_id].append({"role": "assistant", "content": response})
             chat_histories[user_id] = chat_histories[user_id][-20:]  # Limit memory use
