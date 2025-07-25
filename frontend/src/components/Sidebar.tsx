@@ -9,8 +9,11 @@ import {
   Trash2,
 } from "lucide-react";
 import axios from "axios";
-import { chatAPI } from "../services/api";
+import { chatAPI } from "../services/api"; // this import is currently not being called. while fixing title for chat, we might need it.
 
+/** conversation interface
+ * defines the structure of a conversation object
+ */
 interface Conversation {
   id: string;
   title: string;
@@ -18,6 +21,9 @@ interface Conversation {
   session_id?: string;
 }
 
+/** sidebar properties interface
+ * defines all the properties being used by sidebar
+ */
 interface SidebarProps {
   conversations: Conversation[];
   activeConversation: string | null;
@@ -30,6 +36,16 @@ interface SidebarProps {
   user_id: string;
 }
 
+/** sidebar component
+ *
+ * features :
+ * - conversation list with timestamp and message count
+ * - new chat creation feature
+ * - chat deletion with confirmation
+ * - collapsible interface for desktop
+ * - mobile friendly close function
+ * - real-time conversation switching
+ */
 const Sidebar: React.FC<SidebarProps> = ({
   conversations,
   activeConversation,
@@ -41,6 +57,7 @@ const Sidebar: React.FC<SidebarProps> = ({
   onDeleteConversation,
   user_id,
 }) => {
+  // timestamp formatting
   const formatConversationTime = (messages: any[]) => {
     if (messages.length === 0) return "";
     const lastMessage = messages[messages.length - 1];
@@ -63,6 +80,9 @@ const Sidebar: React.FC<SidebarProps> = ({
     }
   };
 
+  /** handler for conversation deletion
+   * includes confirmation and API cleanup
+   */
   const handleDelete = async (conversation: Conversation) => {
     // Show confirmation alert before proceeding
     const confirmMessage = `Are you sure you want to delete "${conversation.title}"?`;
@@ -92,6 +112,11 @@ const Sidebar: React.FC<SidebarProps> = ({
     }
   };
 
+  /** handler for new chat
+   *
+   * validates existence of user_id before creating a new chat
+   * logs process for easy debugging
+   */
   const handleNewChat = async () => {
     if (!user_id) {
       console.error("No user_id provided for new chat");

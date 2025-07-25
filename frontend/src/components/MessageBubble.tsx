@@ -13,9 +13,21 @@ import remarkGfm from "remark-gfm";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { oneDark } from "react-syntax-highlighter/dist/esm/styles/prism";
 
-// Custom markdown components
+/** custom markdown components configuration
+ * defines how different markdown elements must be rendered
+ * provides syntax highlighting for code blocks and consistent themeing
+ */
 const MarkdownComponents = {
-  // Code blocks
+  /** code block and inline code rendering
+   * includes :
+   * syntax highlighting for code blocks using prism
+   * copy to clipboard functionality for code blocks
+   * different styling for inline vs block code
+   *
+   * NOTE : this might not be useful with /purely/ the EIE content, however
+   * in the future, if we extend our application to other departments, it might
+   * turn out to be helpful
+   */
   code({ node, inline, className, children, ...props }: any) {
     const match = /language-(\w+)/.exec(className || "");
     const language = match ? match[1] : "";
@@ -60,7 +72,7 @@ const MarkdownComponents = {
     );
   },
 
-  // Headers
+  /** header elements with consistent style and hierarchy */
   h1: ({ children }: any) => (
     <h1 className="text-2xl font-bold text-gray-900 mb-4 mt-6 border-b border-gray-200 pb-2">
       {children}
@@ -75,12 +87,12 @@ const MarkdownComponents = {
     <h3 className="text-lg font-medium text-gray-900 mb-2 mt-4">{children}</h3>
   ),
 
-  // Paragraphs
+  /** paragraph styling with proper spacing */
   p: ({ children }: any) => (
     <p className="mb-4 leading-relaxed text-gray-800 last:mb-0">{children}</p>
   ),
 
-  // Lists
+  /** list styling with proper indentation and spacing */
   ul: ({ children }: any) => (
     <ul className="list-disc list-inside mb-4 space-y-1 text-gray-800">
       {children}
@@ -93,14 +105,14 @@ const MarkdownComponents = {
   ),
   li: ({ children }: any) => <li className="leading-relaxed">{children}</li>,
 
-  // Blockquotes
+  /** blockquote styling with left border and background */
   blockquote: ({ children }: any) => (
     <blockquote className="border-l-4 border-gray-300 pl-4 py-2 my-4 bg-gray-50 italic text-gray-700">
       {children}
     </blockquote>
   ),
 
-  // Tables
+  /** table styling with borders and hover effects */
   table: ({ children }: any) => (
     <div className="overflow-x-auto my-4">
       <table className="min-w-full border border-gray-200 rounded-lg">
@@ -122,7 +134,7 @@ const MarkdownComponents = {
     </td>
   ),
 
-  // Links
+  /** link styling with external link behavior */
   a: ({ children, href }: any) => (
     <a
       href={href}
@@ -134,7 +146,7 @@ const MarkdownComponents = {
     </a>
   ),
 
-  // Strong and emphasis
+  /** text emphasis styling */
   strong: ({ children }: any) => (
     <strong className="font-semibold text-gray-900">{children}</strong>
   ),
@@ -143,6 +155,9 @@ const MarkdownComponents = {
   ),
 };
 
+/** message interface
+ * defines the structure of message object
+ */
 interface Message {
   id: string;
   text: string;
@@ -151,17 +166,21 @@ interface Message {
   image?: string;
 }
 
+// message bubble properties interface
 interface MessageBubbleProps {
   message: Message;
   imageName?: string;
 }
 
-// Shared utilities
+// utility function to format timestamp for display
 const formatTime = (date: Date) => {
   return date.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
 };
 
-// User Avatar Component
+/** user avatar
+ *
+ * renders a circular avatar with user icon for user messages
+ */
 const UserAvatar: React.FC = () => (
   <div className="flex-shrink-0 ml-2">
     <div className="w-7 h-7 bg-[#313c71] rounded-full flex items-center justify-center">
@@ -170,7 +189,10 @@ const UserAvatar: React.FC = () => (
   </div>
 );
 
-// Bot Avatar Component
+/** bot avatar
+ *
+ * renders a circular avatar with bot icon for bot messages
+ */
 const BotAvatar: React.FC = () => (
   <div className="flex-shrink-0 mr-2">
     <div className="w-7 h-7 bg-[#313c71] rounded-full flex items-center justify-center">
@@ -179,7 +201,14 @@ const BotAvatar: React.FC = () => (
   </div>
 );
 
-// User Message Bubble Component
+/** user message bubble component
+ *
+ * renders the messages sent by the user with
+ * - right alignment
+ * - image display if necessary ( feature not available yet in message input, might have to add )
+ * - timestamp display
+ * - error display
+ */
 const UserMessageBubble: React.FC<{
   message: Message;
   imageUrl: string | null;
@@ -225,7 +254,15 @@ const UserMessageBubble: React.FC<{
   );
 };
 
-// Bot Message Bubble Component
+/** bot message bubble component
+ *
+ * renders messages sent by the bot with :
+ * - left alignment
+ * - full markdown rendering support
+ * - copy and download functions
+ * - image display capability ( NOTE : THIS NEEDS TO BE FIXED ON BACKEND SIDE )
+ * - interactive action buttons
+ */
 const BotMessageBubble: React.FC<{
   message: Message;
   imageUrl: string | null;
@@ -233,6 +270,9 @@ const BotMessageBubble: React.FC<{
   const [copied, setCopied] = useState(false);
   const [imageError, setImageError] = useState(false);
 
+  /** handler to copy bot message
+   * shows a tick mark on successful copy to clipboard
+   */
   const handleCopy = async () => {
     try {
       const textToCopy = message.text || "Image message";
@@ -244,6 +284,11 @@ const BotMessageBubble: React.FC<{
     }
   };
 
+  /** handler to download bot message
+   *
+   * for images : downloads image file
+   * for text : creates and downloads a .txt file with markdown
+   */
   const handleDownload = () => {
     if (message.image || imageUrl) {
       const link = document.createElement("a");
@@ -333,7 +378,12 @@ const BotMessageBubble: React.FC<{
   );
 };
 
-// Main MessageBubble Component
+/** main message bubble components
+ *
+ * entry point component that determines which bubble type to render ( user or bot )
+ * handles image url construction for server-hosted images
+ *
+ */
 const MessageBubble: React.FC<MessageBubbleProps> = ({
   message,
   imageName,
@@ -342,7 +392,7 @@ const MessageBubble: React.FC<MessageBubbleProps> = ({
     ? `http://localhost:8500/images/${imageName}`
     : null;
 
-  // Return appropriate component based on message type
+  // returns appropriate component based on message type
   if (message.isUser) {
     return <UserMessageBubble message={message} imageUrl={imageUrl} />;
   } else {
