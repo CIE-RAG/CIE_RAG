@@ -1,0 +1,22 @@
+query,context_relevance,context_precision,context_recall,answer_relevance,answer_correctness,ground_truth,RAG_pipeline_response
+Why might a startup choose to use a Convertible Note or SAFE Note in early funding rounds instead of traditional equity?,0.0,0.0,0.0,0.0,0.0,"Startups might choose Convertible Notes or SAFE Notes in early funding rounds because it's often difficult to determine a precise startup valuation at that stage [15, 16]. SAFE Notes, in particular, offer a quick and easy way to raise capital without immediate valuation and are not debt instruments, avoiding interest payments [16]. Convertible Notes also provide flexibility by starting as a loan that converts to equity later [15].","Sorry, I encountered an error while processing your request."
+What is 'Customer Value' and how can it vary?,0.0,0.0,0.0,0.0,0.0,"Customer Value is the usefulness of a product/service to a customer [57]. It is not limited to money and can vary from customer to customer, meaning the same product/service can have different value for different people [57].","Sorry, I encountered an error while processing your request."
+What is the minimum attendance requirement for the course?,0.0,0.0,0.0,0.0,0.0,"The minimum attendance requirement for the course is 75%+, which is the same as the university requirements.","Sorry, I encountered an error while processing your request."
+"Analyse how the Business Model Canvas comprehensively integrates 'desirability' (customer development), 'viability', and 'feasibility' aspects of a business idea within a single framework.",0.0,0.0,0.0,0.0,0.0,"The BMC integrates desirability (Is it wanted by customers?) through Customer Segments, Value Propositions, Customer Relationships, and Channels [20, 51]. Viability (Is it profitable?) is covered by Revenue Streams and Cost Structure [21]. Feasibility (Can we build it?) is addressed by Key Resources, Key Activities, and Key Partnerships [21, 91]. By visually connecting these nine blocks, the BMC provides a holistic view, ensuring the business idea is not only appealing to customers but also financially sustainable and operationally achievable [19, 51].","Sorry, I encountered an error while processing your request."
+Which international framework is mentioned as a reference?,0.0,0.0,0.0,0.0,0.0,The **European Union (EU) Entrepreneurship Competencies** (also referred to as the **EU Entrepreneur Competence Framework**) is mentioned as a reference.,"Sorry, I encountered an error while processing your request."
+What percentage range corresponds to an 'A' grade?,0.0,0.0,0.0,0.0,0.0,An 'A' grade corresponds to a percentage range of 80 – 89.,"Sorry, I encountered an error while processing your request."
+"If a business focuses on minimizing costs by offering no-frills products and automating services, which two core components of the Business Model Canvas are closely linked to this strategy?",0.0,0.0,0.0,0.0,0.0,"Cost-driven (under Cost Structure) and Automated Services (under Customer Relationships). [17, 47]","Sorry, I encountered an error while processing your request."
+"What are the ""key ingredients of a successful entrepreneur""?",0.0,0.0,0.0,0.0,0.0,"Based on the provided material, the ""key ingredients of a successful entrepreneur"" are:
+
+*   **Discipline**
+*   **Perseverance**
+*   **Commitment**","Sorry, I encountered an error while processing your request."
+"According to Paul Graham, what is a big mistake founders make regarding finances?",0.0,0.0,0.0,0.0,0.0,"Paul Graham states that 'The biggest mistake founders make is ignoring their finances, thinking they can focus on it later. By then, it’s often too late' [3].","Sorry, I encountered an error while processing your request."
+What is the main benefit of attending talks by startup founders and industry experts?,0.0,0.0,0.0,0.0,0.0,"Based on the provided material, the document states that the course ""Will include talks by Startup Founders, Industry Experts, PESU Faculty, etc."" However, it does not explicitly outline the *main benefit* of attending these specific talks.
+
+The talks are presented as a component of the course, which broadly aims to:
+*   Embrace an Innovation & Entrepreneurship (I&E) Mindset.
+*   Kick Start an I&E Journey.
+*   Understand Transformative Tech-led Changes.
+*   Develop Business Acumen.
+*   Prepare for Post-University Journey.","Sorry, I encountered an error while processing your request."

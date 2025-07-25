@@ -1,0 +1,16 @@
+[
+  {
+    "query": "What is a Startup?",
+    "ground_truth": null,
+    "llm_response": "Error: Failed to connect to Ollama server. Please check if Ollama is running at http://localhost:11446",
+    "contexts": [
+      "Mock context 1 for query: What is a Startup?...",
+      "Mock context 2 related to: What is a Startup?...",
+      "Mock context 3 discussing: What is a Startup?..."
+    ],
+    "scores": {
+      "context_relevance": 0.42223388528713723,
+      "answer_relevance": 0.0
+    }
+  }
+]
