@@ -1,3 +1,0 @@
-response dispatcher
-|_ docker file
-|_ respDispatcher.py

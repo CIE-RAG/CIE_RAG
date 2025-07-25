@@ -10,6 +10,10 @@ profanity.load_censor_words()
 def check_profanity(text):
     if profanity.contains_profanity(text):
         print("Profanity detected!")
-        print(profanity.censor(text))  # You are a **** fool.
+        print(profanity.censor(text))  # You are a **** fool. 
         return True
     return False
+
+
+#An extension of this would be to log these as well into chat hisotry so we can flag malicious users 
+# and then restrict them 
