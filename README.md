@@ -19,8 +19,8 @@ A **GenAI** powered **Course Companion** for CIE's Essentials of Innovation and 
 
 #### System Overview
 
-![Detailed Architecture Diagram](frontend\public\Deployment_diagram.png)
-![Architecture Diagram](frontend\public\AdyanshDiagram.jpeg)
+<img width="3840" height="3631" alt="Deployment_diagram" src="https://github.com/user-attachments/assets/a5f76995-9b29-47e0-9a6f-fd70cb9e9b44" />
+<img alt="Smaller Diagram" src="https://github.com/user-attachments/assets/9711d93e-9867-49e2-b1d8-fb93b8b2c478"/>
 
 #### Technology Stack
 
