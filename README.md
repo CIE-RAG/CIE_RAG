@@ -60,7 +60,7 @@ npm run dev</pre>
 
 <pre>
 1. Start Ubuntu
-2. sudo server redis-service start
+2. sudo service redis-server start
 3. redis-cli ping <i>this must return PONG, which indicates redis is working</i>
 </pre>
 
@@ -93,3 +93,4 @@ RAGAs system computes the following metrics using TF-IDF and cosine similarity t
 These metrics help quantify how well the retrieved contexts and the LLM response align with the original ground truth.
 
 _Note: The code for the RAGAs implementation currently exists, however we are yet to perform the benchmarking_
+
